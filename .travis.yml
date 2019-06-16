@@ -6,6 +6,7 @@ cache:
   apt: true
   directories:
     - node_modules # 緩存不經常更改的內容
+    - CNAME
 
 before_install:
   # - export TZ='Asia/Beijing' # 更改时区
@@ -24,14 +25,14 @@ before_script:
   - hexo g  # 生成
 
 
-# script:
-#   - echo 开始部署...
-#   - git init
-#   - git config --global user.name "${GH_username}"  #修改name
-#   - git config --global user.email "${GH_useremail}"  #修改email
-#   - git add .
-#   - git commit -m "ravis CI Auto Builder"
-#   - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master  #GH_TOKEN是在Travis中配置token的名称
+script:
+  - echo 开始部署...
+  - git init
+  - git config --global user.name "${GH_username}"  #修改name
+  - git config --global user.email "${GH_useremail}"  #修改email
+  - git add .
+  - git commit -m "ravis CI Auto Builder"
+  - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master  #GH_TOKEN是在Travis中配置token的名称
 
 # before_cache:
 # after_success:
@@ -41,17 +42,6 @@ before_script:
 # after_deploy:
 
 after_script:
-  - git clone https://${GH_REF} .deploy_git
-  - cd .deploy_git
-  - git checkout master
-  - cd ../
-  - mv .deploy_git/.git/ ./public/
-  - cd ./public
-  - git config user.name "yourname"
-  - git config user.email "your email"
-  - git add .
-  - git commit -m "Travis CI Auto Builder"
-  - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master
   - echo 部署完成！
 branches:
   only:
