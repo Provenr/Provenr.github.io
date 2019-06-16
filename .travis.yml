@@ -40,5 +40,5 @@ branches:
 env:
   global:
     - GH_REF: git@github.com:Provenr/Provenr.github.io.git     # 设置 github 项目仓库地址
-    - GH_username:  provenr                                          # 设置 github 用户名
+    - GH_username:  liuyangning                         # 设置 github 用名
     - GH_useremail: web_lyn@163.com
