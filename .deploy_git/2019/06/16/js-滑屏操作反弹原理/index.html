@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    js 滑屏操作反弹原理 | Provenr
+  </title>
+  <meta name="description" content="没有比脚更长的路，走过去，前面是春天！">
+  
+  <meta name="keywords" content="
+  javascript,touch
+  ">
+  
+  <meta name="author" content="Provenr">
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="theme-color" content="#1e2327">
+  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
+
+  <link rel="icon" type="image/x-icon" href="https://github.githubassets.com/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+  
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+</head>
+
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/archives">Archives</a></li>
+        
+        
+        <li><a href="/categories">Categories</a></li>
+        
+        
+        <li><a href="/tags">Tags</a></li>
+        
+        
+        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="/avatar/provenr.jpg"> <i class="fa fa-caret-down"></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/archives" class="header-toolbar-left"><i class="fa fa-file-text"></i> Posts </a>
+        <a href="/archives" class="header-toolbar-right"> 12 </a>
+      </li>
+      <li>
+        <a href="/tags" class="header-toolbar-left"><i class="fa fa-tags"></i> Tags </a>
+        <a href="/tags" class="header-toolbar-right"> 18 </a>
+      </li>
+      <li>
+        <a href="/categories" class="header-toolbar-left"><i class="fa fa-folder-open"></i> Categories </a>
+        <a href="/categories" class="header-toolbar-right"> 1 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/">Provenr</a>
+      
+      
+    </h2>
+  </div>
+
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
+
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    Provenr
+
+    <span class="post-date float-right" title="{{moment(1560700408000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      <i class="fa fa-pencil-square-o"></i>
+      {{moment(1560700408000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>js 滑屏操作反弹原理</h1>
+    <p>[toc]</p>
+<h2 id="移动端事件"><a href="#移动端事件" class="headerlink" title="移动端事件"></a>移动端事件</h2><ol>
+<li><strong>touchstart事件</strong>：当手指触摸屏幕时候触发，即使已经有一个手指放在屏幕上也会触发。</li>
+<li><strong>touchmove事件</strong>：当手指在屏幕上滑动的时候连续地触发。在这个事件发生期间，调用preventDefault()事件可以阻止滚动。</li>
+<li><strong>touchend事件</strong>：当手指从屏幕上离开的时候触发。</li>
+<li><strong>touchcancel事件</strong>：当系统停止跟踪触摸的时候触发。关于这个事件的确切出发时间，文档中并没有具体说明，咱们只能去猜测了。<h4 id="触摸事件的属性。"><a href="#触摸事件的属性。" class="headerlink" title="触摸事件的属性。"></a>触摸事件的属性。</h4></li>
+</ol>
+<ul>
+<li><p><strong>touches</strong>：表示当前跟踪的触摸操作的Touch对象的数组。(<strong>当前位于屏幕</strong>下的手指列表信息)</p>
+</li>
+<li><p><strong>targetTouches</strong>：特定于事件目标的Touch对象的数组。(当前位于<strong>当前元素</strong>下的手指列表信息)</p>
+</li>
+<li><p><strong>changeTouches</strong>：表示自上次触摸以来发生了什么改变的Touch对象的数组。(当前涉及到<strong>当前事件</strong>的手指列表)</p>
+<h3 id="每个Touch对象包含的属性"><a href="#每个Touch对象包含的属性" class="headerlink" title="每个Touch对象包含的属性"></a>每个Touch对象包含的属性</h3><ul>
+<li><strong>clientX</strong>：触摸目标在视口中的x坐标。</li>
+<li><strong>clientY</strong>：触摸目标在视口中的y坐标。</li>
+<li><strong>identifier</strong>：标识触摸的唯一ID。</li>
+<li><strong>pageX</strong>：触摸目标在页面中的x坐标。</li>
+<li><strong>pageY</strong>：触摸目标在页面中的y坐标。</li>
+<li><strong>screenX</strong>：触摸目标在屏幕中的x坐标。</li>
+<li><strong>screenY</strong>：触摸目标在屏幕中的y坐标。</li>
+<li><strong>target</strong>：触目的DOM节点目标。</li>
+</ul>
+</li>
+</ul>
+<h3 id="阻止默认事件"><a href="#阻止默认事件" class="headerlink" title="阻止默认事件"></a>阻止默认事件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">document.addEventListener(&apos;touchstart&apos;,function(e)&#123;</span><br><span class="line">   e.preventDefault();</span><br><span class="line"> &#125;,&#123;</span><br><span class="line">   passive:false</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Tips: 阻止所有点击<br>根据实际需要重新开启交互行为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a.ontouchstart = function()&#123;</span><br><span class="line">    window.location = this.href;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<ul>
+<li>能够阻止IOS10缩放：</li>
+<li>对于ISO10设置meta标签禁止缩放是没有作用的，上面的代码阻止了浏览器的默认行为。</li>
+<li>阻止IOS10下回弹效果</li>
+<li>去除系统滚动条</li>
+<li>禁止长按选中文字和图片：当然<strong>也同时阻止了input获取焦点的行为，这就需要使用单独为input添加一个阻止冒泡的行为。以免事件冒泡至顶层元素而被阻止交互行为</strong>。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">input.ontouchstart = function(ev)&#123;</span><br><span class="line">      ev.stopPropagation();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="事件监听addEventListener"><a href="#事件监听addEventListener" class="headerlink" title="事件监听addEventListener()"></a>事件监听<strong>addEventListener()</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">addEventListener(type, listener[, useCapture ])</span><br><span class="line">addEventListener(type, listener[, options ])</span><br></pre></td></tr></table></figure>
+<ul>
+<li>useCapture: 控制监听器是在捕获阶段执行还是在冒泡阶段执行的 useCapture 参数</li>
+<li><p>options 对象可用的属性有三个：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">addEventListener(type, listener, &#123;</span><br><span class="line">    capture: false,</span><br><span class="line">    passive: false,</span><br><span class="line">    once: false</span><br><span class="line">&#125;)</span><br><span class="line">三个属性都是布尔类型的开关，默认值都为 false</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>capture</strong> 属性等价于以前的 useCapture 参数</li>
+<li><strong>once</strong> 属性就是表明该监听器是一次性的，执行一次后就被自动 removeEventListener 掉，==还没有浏览器实现它==</li>
+<li><strong>passive</strong> 属性是本文的主角，Firefox 和 Chrome 已经实现</li>
+</ul>
+</li>
+</ul>
+<h4 id="passive"><a href="#passive" class="headerlink" title="==passive=="></a><strong>==passive==</strong></h4><p>==<strong>场景</strong>：== 移动端的页面都会监听 touchstart 等 touch 事件，由于 touchstart 事件对象的 cancelable 属性为 true, ==它的默认行为通常来说就是滚动当前页面（还可能是缩放页面）==</p>
+<p>==影响：== 如果它的默认行为被阻止了，页面就必须静止不动。但浏览器无法预先知道一个监听器会不会调用 preventDefault()，它能做的只有等监听器执行完后再去执行默认行为，而监听器执行是要耗时的，有些甚至耗时很明显，这样就会导致页面卡顿。视频里也说了，即便监听器是个空函数，也会产生一定的卡顿，毕竟空函数的执行也会耗时。</p>
+<blockquote>
+<p>passive 的意思是“顺从的”，表示它不会对事件的默认行为说 no，浏览器知道了一个监听器是 passive 的，它就可以在两个线程里同时执行监听器中的 JavaScript 代码和浏览器的默认行为了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">document.addEventListener(&quot;touchstart&quot;, function(e)&#123;</span><br><span class="line"> e.preventDefault() //通过 preventDefault() 方法阻止默认行为</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<hr>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p>【1】<a href="https://juejin.im/post/5a996388f265da2388" target="_blank" rel="noopener">移动端事件详解</a><br>【2】<a href="https://www.cnblogs.com/ziyunfei/p/5545439.html" target="_blank" rel="noopener">passive 解读</a></p>
+<h2 id="滑屏操作例子"><a href="#滑屏操作例子" class="headerlink" title="滑屏操作例子"></a>滑屏操作例子</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0, user-scalable=no&quot;&gt;</span><br><span class="line">  &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;</span><br><span class="line">  &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">  &lt;style&gt;</span><br><span class="line">  #view&#123;</span><br><span class="line">    position: fixed;</span><br><span class="line">    left: 0;</span><br><span class="line">    top: 0;</span><br><span class="line">    width: 100%;</span><br><span class="line">    height: 100%;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">  #list&#123;</span><br><span class="line">    position: absolute;</span><br><span class="line">    width: 2000px;</span><br><span class="line">    left: 0;top: 0;</span><br><span class="line">    margin: 0;padding: 0;</span><br><span class="line">  &#125;</span><br><span class="line">  #list li&#123;</span><br><span class="line">    float: left;</span><br><span class="line">    width: 100px;</span><br><span class="line">    height: 100%;</span><br><span class="line">    box-sizing: border-box;</span><br><span class="line">    border: 1px solid #123;</span><br><span class="line">    list-style: none;</span><br><span class="line">    font: 50px/200px &apos;宋体&apos;;</span><br><span class="line">    text-align: center;</span><br><span class="line">  &#125;</span><br><span class="line">  &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div id=&quot;view&quot;&gt;</span><br><span class="line">  &lt;ul id=&quot;list&quot;&gt;</span><br><span class="line"></span><br><span class="line">  &lt;/ul&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;script src=&quot;js/mTween.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  document.addEventListener(&apos;touchstart&apos;,function(e)&#123;</span><br><span class="line">    e.preventDefault();</span><br><span class="line">  &#125;,&#123;</span><br><span class="line">    passive:false</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">(function()&#123;</span><br><span class="line">  var list = document.querySelector(&apos;#list&apos;);</span><br><span class="line">  var inner = &apos;&apos;;</span><br><span class="line">  for( var i = 0; i &lt; 20; i++)&#123;</span><br><span class="line">    inner += `&lt;li&gt;$&#123;i&#125;&lt;/li&gt;`</span><br><span class="line">  &#125;</span><br><span class="line">  list.innerHTML = inner</span><br><span class="line"></span><br><span class="line">  var startPoint = 0;</span><br><span class="line">  var startPosition = 0;</span><br><span class="line">  var screenWidth = window.innerWidth; // 屏幕宽度</span><br><span class="line">  var listWidth = document.querySelector(&apos;#list&apos;).offsetWidth //列表宽度</span><br><span class="line">  list.addEventListener(&apos;touchstart&apos;, function(e)&#123;</span><br><span class="line">    startPoint = e.changedTouches[0].pageX;</span><br><span class="line">    startPosition = css(list,&apos;left&apos;)</span><br><span class="line">    console.log(startPoint)</span><br><span class="line">  &#125;)</span><br><span class="line">  list.addEventListener(&apos;touchmove&apos;, function(e)&#123;</span><br><span class="line">    var newPoint = e.changedTouches[0].pageX;</span><br><span class="line">    var dis = newPoint - startPoint; // 终止点与起始点距离</span><br><span class="line">    var moveDis = dis + startPosition // 列表移动距离</span><br><span class="line">    // 往右移动 超过半屏  移动距离设置为屏幕宽度一半</span><br><span class="line">    if(moveDis &gt; screenWidth / 2) &#123;</span><br><span class="line">      moveDis = screenWidth / 2</span><br><span class="line">    &#125;</span><br><span class="line">    // 往左移动 最多移动距离为 列表宽度 - 屏幕宽度</span><br><span class="line">    // 列表尾部 往左移动超过半屏  移动距离（绝对值）设置为 列表宽度 - 屏幕宽度 + 屏幕宽度一半</span><br><span class="line">    listWidth - screenWidth + screenWidth / 2</span><br><span class="line">    if(Math.abs(moveDis) &gt; Math.abs(listWidth - screenWidth + screenWidth / 2)) &#123;</span><br><span class="line">      moveDis = - (Math.abs(listWidth - screenWidth + screenWidth / 2)) // 设置为往左移动最大距离</span><br><span class="line">    &#125;</span><br><span class="line">    css(list,&apos;left&apos;,moveDis)</span><br><span class="line">  &#125;)</span><br><span class="line">  list.addEventListener(&apos;touchend&apos;, function(e)&#123;</span><br><span class="line">    var newPoint = e.changedTouches[0].pageX;</span><br><span class="line">    var dis = newPoint - startPoint; // 终止点与起始点距离</span><br><span class="line">    var moveDis = dis + startPosition // 列表移动距离</span><br><span class="line">    // 往右滑动临界值</span><br><span class="line">    if(moveDis &gt; 0)&#123;</span><br><span class="line">      mTween(&#123;</span><br><span class="line">          //运动元素</span><br><span class="line">          el:list,</span><br><span class="line">          //运动样式</span><br><span class="line">          attrs:&#123;</span><br><span class="line">              left:0,</span><br><span class="line">          &#125;,</span><br><span class="line">          duration:1000</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    // 往左滑动临界值</span><br><span class="line">    if(Math.abs(moveDis) &gt; Math.abs(listWidth - screenWidth))&#123;</span><br><span class="line">      mTween(&#123;</span><br><span class="line">          //运动元素</span><br><span class="line">          el:list,</span><br><span class="line">          //运动样式</span><br><span class="line">          attrs:&#123;</span><br><span class="line">              left:- Math.abs(listWidth - screenWidth),</span><br><span class="line">          &#125;,</span><br><span class="line">          duration:1000</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)()</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br></pre></td><td class="code"><pre><span class="line">var normalAttr = [</span><br><span class="line">  &apos;width&apos;,</span><br><span class="line">  &apos;height&apos;,</span><br><span class="line">  &apos;left&apos;,</span><br><span class="line">  &apos;top&apos;,</span><br><span class="line">  &apos;bottom&apos;,</span><br><span class="line">  &apos;right&apos;,</span><br><span class="line">  &apos;marginLeft&apos;,</span><br><span class="line">  &apos;marginTop&apos;,</span><br><span class="line">  &apos;marginBottom&apos;,</span><br><span class="line">  &apos;marginRight&apos;</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">var css3Attr = [</span><br><span class="line">  &apos;rotate&apos;,</span><br><span class="line">  &apos;rotateX&apos;,</span><br><span class="line">  &apos;rotateY&apos;,</span><br><span class="line">  &apos;skewX&apos;,</span><br><span class="line">  &apos;skewY&apos;,</span><br><span class="line">  &apos;translateX&apos;,</span><br><span class="line">  &apos;translateY&apos;,</span><br><span class="line">  &apos;translateZ&apos;,</span><br><span class="line">  &apos;scale&apos;,</span><br><span class="line">  &apos;scaleX&apos;,</span><br><span class="line">  &apos;scaleY&apos;</span><br><span class="line">];</span><br><span class="line">var Tween = &#123;</span><br><span class="line">	linear: function (t, b, c, d)&#123;  //匀速</span><br><span class="line">		return c*t/d + b;</span><br><span class="line">	&#125;,</span><br><span class="line">	easeIn: function(t, b, c, d)&#123;  //加速曲线</span><br><span class="line">		return c*(t/=d)*t + b;</span><br><span class="line">	&#125;,</span><br><span class="line">	easeOut: function(t, b, c, d)&#123;  //减速曲线</span><br><span class="line">		return -c *(t/=d)*(t-2) + b;</span><br><span class="line">	&#125;,</span><br><span class="line">	easeBoth: function(t, b, c, d)&#123;  //加速减速曲线</span><br><span class="line">		if ((t/=d/2) &lt; 1) &#123;</span><br><span class="line">			return c/2*t*t + b;</span><br><span class="line">		&#125;</span><br><span class="line">		return -c/2 * ((--t)*(t-2) - 1) + b;</span><br><span class="line">	&#125;,</span><br><span class="line">	easeInStrong: function(t, b, c, d)&#123;  //加加速曲线</span><br><span class="line">		return c*(t/=d)*t*t*t + b;</span><br><span class="line">	&#125;,</span><br><span class="line">	easeOutStrong: function(t, b, c, d)&#123;  //减减速曲线</span><br><span class="line">		return -c * ((t=t/d-1)*t*t*t - 1) + b;</span><br><span class="line">	&#125;,</span><br><span class="line">	easeBothStrong: function(t, b, c, d)&#123;  //加加速减减速曲线</span><br><span class="line">		if ((t/=d/2) &lt; 1) &#123;</span><br><span class="line">			return c/2*t*t*t*t + b;</span><br><span class="line">		&#125;</span><br><span class="line">		return -c/2 * ((t-=2)*t*t*t - 2) + b;</span><br><span class="line">	&#125;,</span><br><span class="line">	elasticIn: function(t, b, c, d, a, p)&#123;  //正弦衰减曲线（弹动渐入）</span><br><span class="line">		if (t === 0) &#123;</span><br><span class="line">			return b;</span><br><span class="line">		&#125;</span><br><span class="line">		if ( (t /= d) == 1 ) &#123;</span><br><span class="line">			return b+c;</span><br><span class="line">		&#125;</span><br><span class="line">		if (!p) &#123;</span><br><span class="line">			p=d*0.3;</span><br><span class="line">		&#125;</span><br><span class="line">		if (!a || a &lt; Math.abs(c)) &#123;</span><br><span class="line">			a = c;</span><br><span class="line">			var s = p/4;</span><br><span class="line">		&#125; else &#123;</span><br><span class="line">			var s = p/(2*Math.PI) * Math.asin (c/a);</span><br><span class="line">		&#125;</span><br><span class="line">		return -(a*Math.pow(2,10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )) + b;</span><br><span class="line">	&#125;,</span><br><span class="line">	elasticOut: function(t, b, c, d, a, p)&#123;    //*正弦增强曲线（弹动渐出）</span><br><span class="line">		if (t === 0) &#123;</span><br><span class="line">			return b;</span><br><span class="line">		&#125;</span><br><span class="line">		if ( (t /= d) == 1 ) &#123;</span><br><span class="line">			return b+c;</span><br><span class="line">		&#125;</span><br><span class="line">		if (!p) &#123;</span><br><span class="line">			p=d*0.3;</span><br><span class="line">		&#125;</span><br><span class="line">		if (!a || a &lt; Math.abs(c)) &#123;</span><br><span class="line">			a = c;</span><br><span class="line">			var s = p / 4;</span><br><span class="line">		&#125; else &#123;</span><br><span class="line">			var s = p/(2*Math.PI) * Math.asin (c/a);</span><br><span class="line">		&#125;</span><br><span class="line">		return a*Math.pow(2,-10*t) * Math.sin( (t*d-s)*(2*Math.PI)/p ) + c + b;</span><br><span class="line">	&#125;,</span><br><span class="line">	elasticBoth: function(t, b, c, d, a, p)&#123;</span><br><span class="line">		if (t === 0) &#123;</span><br><span class="line">			return b;</span><br><span class="line">		&#125;</span><br><span class="line">		if ( (t /= d/2) == 2 ) &#123;</span><br><span class="line">			return b+c;</span><br><span class="line">		&#125;</span><br><span class="line">		if (!p) &#123;</span><br><span class="line">			p = d*(0.3*1.5);</span><br><span class="line">		&#125;</span><br><span class="line">		if ( !a || a &lt; Math.abs(c) ) &#123;</span><br><span class="line">			a = c;</span><br><span class="line">			var s = p/4;</span><br><span class="line">		&#125;</span><br><span class="line">		else &#123;</span><br><span class="line">			var s = p/(2*Math.PI) * Math.asin (c/a);</span><br><span class="line">		&#125;</span><br><span class="line">		if (t &lt; 1) &#123;</span><br><span class="line">			return - 0.5*(a*Math.pow(2,10*(t-=1)) *</span><br><span class="line">					Math.sin( (t*d-s)*(2*Math.PI)/p )) + b;</span><br><span class="line">		&#125;</span><br><span class="line">		return a*Math.pow(2,-10*(t-=1)) *</span><br><span class="line">				Math.sin( (t*d-s)*(2*Math.PI)/p )*0.5 + c + b;</span><br><span class="line">	&#125;,</span><br><span class="line">	backIn: function(t, b, c, d, s)&#123;     //回退加速（回退渐入）</span><br><span class="line">		if (typeof s == &apos;undefined&apos;) &#123;</span><br><span class="line">		   s = 1.70158;</span><br><span class="line">		&#125;</span><br><span class="line">		return c*(t/=d)*t*((s+1)*t - s) + b;</span><br><span class="line">	&#125;,</span><br><span class="line">	backOut: function(t, b, c, d, s)&#123;</span><br><span class="line">		if (typeof s == &apos;undefined&apos;) &#123;</span><br><span class="line">			s = 1.70158;  //回缩的距离</span><br><span class="line">		&#125;</span><br><span class="line">		return c*((t=t/d-1)*t*((s+1)*t + s) + 1) + b;</span><br><span class="line">	&#125;,</span><br><span class="line">	backBoth: function(t, b, c, d, s)&#123;</span><br><span class="line">		if (typeof s == &apos;undefined&apos;) &#123;</span><br><span class="line">			s = 1.70158;</span><br><span class="line">		&#125;</span><br><span class="line">		if ((t /= d/2 ) &lt; 1) &#123;</span><br><span class="line">			return c/2*(t*t*(((s*=(1.525))+1)*t - s)) + b;</span><br><span class="line">		&#125;</span><br><span class="line">		return c/2*((t-=2)*t*(((s*=(1.525))+1)*t + s) + 2) + b;</span><br><span class="line">	&#125;,</span><br><span class="line">	bounceIn: function(t, b, c, d)&#123;    //弹球减振（弹球渐出）</span><br><span class="line">		return c - Tween[&apos;bounceOut&apos;](d-t, 0, c, d) + b;</span><br><span class="line">	&#125;,</span><br><span class="line">	bounceOut: function(t, b, c, d)&#123;//*</span><br><span class="line">		if ((t/=d) &lt; (1/2.75)) &#123;</span><br><span class="line">			return c*(7.5625*t*t) + b;</span><br><span class="line">		&#125; else if (t &lt; (2/2.75)) &#123;</span><br><span class="line">			return c*(7.5625*(t-=(1.5/2.75))*t + 0.75) + b;</span><br><span class="line">		&#125; else if (t &lt; (2.5/2.75)) &#123;</span><br><span class="line">			return c*(7.5625*(t-=(2.25/2.75))*t + 0.9375) + b;</span><br><span class="line">		&#125;</span><br><span class="line">		return c*(7.5625*(t-=(2.625/2.75))*t + 0.984375) + b;</span><br><span class="line">	&#125;,</span><br><span class="line">	bounceBoth: function(t, b, c, d)&#123;</span><br><span class="line">		if (t &lt; d/2) &#123;</span><br><span class="line">			return Tween[&apos;bounceIn&apos;](t*2, 0, c, d) * 0.5 + b;</span><br><span class="line">		&#125;</span><br><span class="line">		return Tween[&apos;bounceOut&apos;](t*2-d, 0, c, d) * 0.5 + c*0.5 + b;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">function css(ele, attr, val)&#123;</span><br><span class="line">  if(typeof attr === &apos;string&apos; &amp;&amp; typeof val === &apos;undefined&apos;)&#123;</span><br><span class="line">    if(css3Attr.indexOf(attr) !== -1)&#123;</span><br><span class="line">      return transform(ele, attr);</span><br><span class="line">    &#125;</span><br><span class="line">    var ret = getComputedStyle(ele)[attr];</span><br><span class="line">    return normalAttr.indexOf(attr) !== -1 ? parseFloat(ret) : ret * 1 === ret * 1 ? ret*1 : ret;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function setAttr(attr, val)&#123;</span><br><span class="line">    if(css3Attr.indexOf(attr) !== -1)&#123;</span><br><span class="line">      return transform(ele, attr, val);</span><br><span class="line">    &#125;</span><br><span class="line">    if(normalAttr.indexOf(attr) !== -1)&#123;</span><br><span class="line">      ele.style[attr] = val ? val + &apos;px&apos; : val;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">      ele.style[attr] = val;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  // 批量设置</span><br><span class="line">  if(typeof attr === &apos;object&apos;)&#123;</span><br><span class="line">    for(var key in attr)&#123;</span><br><span class="line">      setAttr(key, attr[key]);</span><br><span class="line">    &#125;</span><br><span class="line">    return;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  setAttr(attr, val);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function transform(el, attr, val)&#123;</span><br><span class="line">  el._transform = el._transform || &#123;&#125;;</span><br><span class="line"></span><br><span class="line">  if(typeof val === &apos;undefined&apos;)&#123;</span><br><span class="line">    return el._transform[attr];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  el._transform[attr] = val;</span><br><span class="line"></span><br><span class="line">  var str = &apos;&apos;;</span><br><span class="line"></span><br><span class="line">  for(var key in el._transform)&#123;</span><br><span class="line">    var value = el._transform[key];</span><br><span class="line">    switch (key) &#123;</span><br><span class="line">      case &apos;translateX&apos;:</span><br><span class="line">      case &apos;translateY&apos;:</span><br><span class="line">			case &apos;translateZ&apos;:</span><br><span class="line">        str += `$&#123;key&#125;($&#123;value&#125;px) `;</span><br><span class="line">        break;</span><br><span class="line">      case &apos;rotate&apos;:</span><br><span class="line">      case &apos;rotateX&apos;:</span><br><span class="line">      case &apos;rotateY&apos;:</span><br><span class="line">      case &apos;skewX&apos;:</span><br><span class="line">      case &apos;skewY&apos;:</span><br><span class="line">        str += `$&#123;key&#125;($&#123;value&#125;deg) `;</span><br><span class="line">        break;</span><br><span class="line">      default:</span><br><span class="line">        str += `$&#123;key&#125;($&#123;value&#125;) `;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  el.style.transform = str.trim();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function mTween(props)&#123;</span><br><span class="line">  var el = props.el;</span><br><span class="line">	if(el.mTween) return;</span><br><span class="line">  var duration = props.duration || 400,</span><br><span class="line">      fx = props.fx || &apos;easeOut&apos;,</span><br><span class="line">      cb = props.cb,</span><br><span class="line">			attrs = props.attrs || &#123;&#125;;</span><br><span class="line">			s = props.s</span><br><span class="line">  var beginData = &#123;&#125;, changeData = &#123;&#125;;</span><br><span class="line">	var maxDis = 0;</span><br><span class="line">  for(var key in attrs)&#123;</span><br><span class="line">    beginData[key] = css(el, key);</span><br><span class="line">		changeData[key] = attrs[key] - beginData[key];</span><br><span class="line">		maxDis = Math.max(Math.abs(changeData[key]),maxDis);</span><br><span class="line">	&#125;</span><br><span class="line">	if(typeof duration == &quot;object&quot;)&#123;</span><br><span class="line">		durationPorps = duration;</span><br><span class="line">		duration = durationPorps.multiple!==undefined?maxDis*durationPorps.multiple:maxDis*1.2;</span><br><span class="line">		if(durationPorps.min !== undefined)&#123;</span><br><span class="line">			duration = duration &lt; durationPorps.min?durationPorps.min:duration;</span><br><span class="line">		&#125;</span><br><span class="line">		if(durationPorps.max !== undefined)&#123;</span><br><span class="line">			duration = duration &gt; durationPorps.max?durationPorps.max:duration;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">  var startTime = Date.now();</span><br><span class="line"></span><br><span class="line">  (function startMove()&#123;</span><br><span class="line">    el.mTween = window.requestAnimationFrame(startMove);</span><br><span class="line">    var time = Date.now() - startTime;</span><br><span class="line">    if(time &gt; duration)&#123;</span><br><span class="line">      time = duration;</span><br><span class="line">      window.cancelAnimationFrame(el.mTween);</span><br><span class="line">      el.mTween = null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    for(var key in attrs)&#123;</span><br><span class="line">      var currentPos = Tween[fx](time, beginData[key], changeData[key], duration,s);</span><br><span class="line">      css(el, key, currentPos);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if(time === duration &amp;&amp; typeof cb === &apos;function&apos;)&#123;</span><br><span class="line">      cb.call(el);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">mTween.stop = function (el)&#123;</span><br><span class="line">  window.cancelAnimationFrame(el.mTween);</span><br><span class="line">  el.mTween = null;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+  </article>
+</div>
+
+
+    
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <div class="clearfix">
+    <a href="http://yoursite.com" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2019 Provenr</li>
+      <li><a href="http://yoursite.com">Home</a></li>
+      
+      <li><a href="https://github.com/Provenr">Github</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+    </div>
+    
+  </footer>
+</div>
+
+
+
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>
