@@ -1,0 +1,74 @@
+# left-side user profile
+avatar: /avatar/provenr.jpg
+location: BeiJing,China
+email: web_lyn@163.com
+social:
+  github: https://provenr.github.io/
+  weibo:
+  linkedin:
+
+# navbar menu
+menu:
+ archives: true
+ tags: true
+ categories: true
+
+rss_dir: atom.xml
+
+# widget
+ga: # google analytics tracking code UA-XXXXXXX-X
+baidutongji: # baidutongji tracking code
+duoshuo: # duoshuo username
+gsc: # google custom search code
+
+# gitalk
+gitalk:
+  enable: true
+  repo: Provenr.github.io  # 例：asdfv1929.github.io
+  client_id: 54545d495653a2bf71ae
+  client_secret: 02224148cafb8f2bc3ee8c8ffd7986df7e5bec8b
+  owner: Provenr
+  admin: Provenr
+  labels: 'gitalk' #GitHub issues的标签
+
+# flagcounter
+flagcounter_href: # https://info.flagcounter.com/xxxx
+flagcounter_img_src: # https://s01.flagcounter.com/xxxx
+
+# ========== newly increased ==========#
+# ========== Search ========== #
+algolia_search:
+  enable: true
+  hits:
+    per_page: 10
+  labels:
+    input_placeholder: Search for Posts
+    hits_empty: "We did not find any results for the search: ${query}"
+    hits_stats: "${hits} results found in ${time} ms"
+
+# ========== Comment ========== #
+# Fill in the field to enable the corresponding comment plugin
+# If you want to add other comment plugin, edit in "custom.ejs"
+comment:
+  # Livere  site: https://livere.com/
+  livere_uid:
+  # Disqus  site: https://disqus.com/
+  disqus_shortname:
+  # Gitment  site: https://github.com/imsun/gitment
+  gitment_owner:
+  gitment_repo:
+  gitment_client_id:
+  gitment_client_secret:
+  # Youyan  site: http://www.uyan.cc/
+  youyan_uid:
+  # Valine  site: https://valine.js.org/
+  valine_appId:
+  valine_appKey:
+  valine_placeHolder:
+# ========== Analytics ========== #
+# enable Busuanzi analytics
+busuanzi: true
+# fill in pv or uv
+busuanzi_pv_or_uv: 'pv'
+# custom analytic slogan, '${count}' is the analytic number, DO NOT modify it.
+busuanzi_slug: 'PV: ${count} :)'
