@@ -3,9 +3,10 @@ title: Js正则表达式
 date: 2019-05-10 17:21:10
 tags: javascript
 ---
-[doc]
 
-----
+[TOC]
+
+---
 
 # JavaScript 正则表达式
 
@@ -17,8 +18,7 @@ tags: javascript
 
 ### 基础
 
-- ####  创建一个正则表达式
-
+- #### 创建一个正则表达式
 
 ```javascript
 // 使用一个正则表达式字面量，其由包含在斜杠之间的模式组成，
@@ -35,49 +35,49 @@ var regex = new RegExp(pattern,modifiers);
 
   1. **正则表达式中的特殊字符**
 
-     - 边界匹配 —— ^ and $
+     - 边界匹配  —— ^ and \$
 
      | 表达式 | 描述                                    |
      | ------ | --------------------------------------- |
-     | n$     | 匹配任何结尾为 n 的字符串。             |
+     | n\$    | 匹配任何结尾为 n 的字符串。             |
      | ^n     | 匹配任何开头为 n 的字符串。             |
-     | ^n m$  | 匹配任何开头为 n 结尾为 m 的的 字符串。 |
+     | ^n m\$ | 匹配任何开头为 n 结尾为 m 的的 字符串。 |
 
      - 方括号——查找某个范围内的字符
 
-     | 表达式             | 描述                               | 例                                                           |
-     | :----------------- | :--------------------------------- | ------------------------------------------------------------ |
+     | 表达式             | 描述                               | 例                                                             |
+     | :----------------- | :--------------------------------- | -------------------------------------------------------------- |
      | [abc]              | 查找方括号之间的任何字符。         | [例子](https://www.runoob.com/jsref/jsref-regexp-charset.html) |
-     | [^abc]             | 查找任何不在方括号之间的字符。     |                                                              |
-     | [0-9]              | 查找任何从 0 至 9 的数字。         |                                                              |
-     | [a-z]              | 查找任何从小写 a 到小写 z 的字符。 |                                                              |
-     | [A-Z]              | 查找任何从大写 A 到大写 Z 的字符。 |                                                              |
-     | [A-z]              | 查找任何从大写 A 到小写 z 的字符。 |                                                              |
-     | (red\|blue\|green) | 查找任何指定的选项。               |                                                              |
+     | [^abc]             | 查找任何不在方括号之间的字符。     |                                                                |
+     | [0-9]              | 查找任何从 0 至 9 的数字。         |                                                                |
+     | [a-z]              | 查找任何从小写 a 到小写 z 的字符。 |                                                                |
+     | [A-Z]              | 查找任何从大写 A 到大写 Z 的字符。 |                                                                |
+     | [A-z]              | 查找任何从大写 A 到小写 z 的字符。 |                                                                |
+     | (red\|blue\|green) | 查找任何指定的选项。               |                                                                |
 
-     -  量词——* + ? and {}
+     - 量词——\* + ? and {}
 
-     | 量词  | **描述**         |              |
-     | ----- | ---------------- | ------------ |
-     | *     | 重复零次或更多次 | 等价于`{0,}` |
-     | +     | 重复一次或更多次 | 等价于`{1,}` |
-     | ?     | 重复零次或一次   | 等价于{0,1}  |
-     | {n}   | 重复n次          |              |
-     | {n,}  | 重复n次或更多次  |              |
-     | {n,m} | 重复n到m次       |              |
+     | 量词  | **描述**          |              |
+     | ----- | ----------------- | ------------ |
+     | \*    | 重复零次或更多次  | 等价于`{0,}` |
+     | +     | 重复一次或更多次  | 等价于`{1,}` |
+     | ?     | 重复零次或一次    | 等价于{0,1}  |
+     | {n}   | 重复 n 次         |              |
+     | {n,}  | 重复 n 次或更多次 |              |
+     | {n,m} | 重复 n 到 m 次    |              |
 
      - 常用元字符（Metacharacter）
 
-     | 元字符                                                       | 描述                                                         |
-     | :----------------------------------------------------------- | :----------------------------------------------------------- |
-     | [.](https://www.runoob.com/jsref/jsref-regexp-dot.html)      | 查找单个字符，除了换行和行结束符。                           |
-     | [\w](https://www.runoob.com/jsref/jsref-regexp-wordchar.html) | 查找单词字符。（a-z、A-Z、0-9，以及下划线, 包含 _ (下划线) 字符。） |
-     | \s                                                           | 匹配任意的空白符(包括tabs、换行)                             |
-     | \d                                                           | 匹配数字                                                     |
-     | [\b](https://www.runoob.com/jsref/jsref-regexp-begin.html)   | 匹配单词边界。                                               |
-     | [\n](https://www.runoob.com/jsref/jsref-regexp-newline.html) | 查找换行符。                                                 |
-     | \t                                                           | 查找制表符。                                                 |
-     | \r                                                           | 查找回车符。                                                 |
+     | 元字符                                                        | 描述                                                                 |
+     | :------------------------------------------------------------ | :------------------------------------------------------------------- |
+     | [.](https://www.runoob.com/jsref/jsref-regexp-dot.html)       | 查找单个字符，除了换行和行结束符。                                   |
+     | [\w](https://www.runoob.com/jsref/jsref-regexp-wordchar.html) | 查找单词字符。（a-z、A-Z、0-9，以及下划线, 包含 \_ (下划线) 字符。） |
+     | \s                                                            | 匹配任意的空白符(包括 tabs、换行)                                    |
+     | \d                                                            | 匹配数字                                                             |
+     | [\b](https://www.runoob.com/jsref/jsref-regexp-begin.html)    | 匹配单词边界。                                                       |
+     | [\n](https://www.runoob.com/jsref/jsref-regexp-newline.html)  | 查找换行符。                                                         |
+     | \t                                                            | 查找制表符。                                                         |
+     | \r                                                            | 查找回车符。                                                         |
 
   2. | 代码/语法 | 说明(代表反义)                             |
      | --------- | ------------------------------------------ |
@@ -85,65 +85,66 @@ var regex = new RegExp(pattern,modifiers);
      | \S        | 匹配任意不是空白符的字符                   |
      | \D        | 匹配任意非数字的字符                       |
      | \B        | 匹配不是单词开头或结束的位置               |
-     | [^x]      | 匹配除了x以外的任意字符                    |
-     | [^aeiou]  | 匹配除了aeiou这几个字母以外的任意字符      |
+     | [^x]      | 匹配除了 x 以外的任意字符                  |
+     | [^aeiou]  | 匹配除了 aeiou 这几个字母以外的任意字符    |
 
      **修正符**（modifiers）
 
-     | **修饰符** | **描述**                                                 |      |
-     | ---------- | -------------------------------------------------------- | ---- |
-     | i          | 执行对大小写不敏感的匹配。                               |      |
-     | g          | 执行全局匹配（查找所有匹配而非在找到第一个匹配后停止）。 |      |
-     | m          | 执行多行匹配。                                           |      |
+     | **修饰符** | **描述**                                                 |     |
+     | ---------- | -------------------------------------------------------- | --- |
+     | i          | 执行对大小写不敏感的匹配。                               |     |
+     | g          | 执行全局匹配（查找所有匹配而非在找到第一个匹配后停止）。 |     |
+     | m          | 执行多行匹配。                                           |     |
 
   3. **正则表达式中的方法**
 
-     - **test()**：在字符串中查找符合正则的内容(**布尔值**)，若查**找到返回true**,反之返回false.
+     - **test()**：在字符串中查找符合正则的内容(**布尔值**)，若查**找到返回 true**,反之返回 false.
 
      ```javascript
-     var str = '123456789';
-     var re = /\d/;      //  \d代表数字
-     if( re.test(str) ){   // 返回true,代表在字符串中找到了非数字。
-         alert('不全是数字');
-     }else{
-         alert('全是数字');
+     var str = "123456789";
+     var re = /\d/; //  \d代表数字
+     if (re.test(str)) {
+       // 返回true,代表在字符串中找到了非数字。
+       alert("不全是数字");
+     } else {
+       alert("全是数字");
      }
      ```
 
-     -  **search()**：在字符串搜索符合正则的内容，搜索到就返回**出现的位置**（从0开始，如果匹配的不只是一个字母，那只会返回第一个字母的位置）， 如果搜索失败就返回 -1
+     - **search()**：在字符串搜索符合正则的内容，搜索到就返回**出现的位置**（从 0 开始，如果匹配的不只是一个字母，那只会返回第一个字母的位置）， 如果搜索失败就返回 -1
 
      ```javascript
-     var str="Visit Runooob";
-     var patt1=/\bvi/gi; // 全局匹配 vi开头的单词 不区分大小写
+     var str = "Visit Runooob";
+     var patt1 = /\bvi/gi; // 全局匹配 vi开头的单词 不区分大小写
      document.write(str.search(patt1)); // 0
 
-     var patt2=/\bru/gi; // 全局匹配 ru开头的单词 不区分大小写
+     var patt2 = /\bru/gi; // 全局匹配 ru开头的单词 不区分大小写
      document.write(str.search(patt2)); // 6
 
-     var patt3=/\b/gi; // 全局匹配 单词 不区分大小写
+     var patt3 = /\b/gi; // 全局匹配 单词 不区分大小写
      document.write(str.search(patt3)); // 0
 
-     var patt4=/\bi/gi; // 全局匹配 i开头的单词 不区分大小写
+     var patt4 = /\bi/gi; // 全局匹配 i开头的单词 不区分大小写
      document.write(str.search(patt4)); // -1
      ```
 
-     - **match()**： 在字符串中搜索复合规则的内容，搜索成功就返回内容，格式为**数组**，失败就返回null。
+     - **match()**： 在字符串中搜索复合规则的内容，搜索成功就返回内容，格式为**数组**，失败就返回 null。
 
      ```javascript
-     var str = 'asdfw723sdk54hask33dasdwd889';
-     var regex1 =  /\d/g
+     var str = "asdfw723sdk54hask33dasdwd889";
+     var regex1 = /\d/g;
      document.write(str.match(regex1)); // 7,2,3,5,4,3,3,8,8,9
 
-     var str = 'asdfw723sdk54hask33dasdwd889';
-     var regex2 =  /\d+/g
+     var str = "asdfw723sdk54hask33dasdwd889";
+     var regex2 = /\d+/g;
      document.write(str.match(regex2)); // 723,54,33,889
 
-     var str = 'asdfw723sdk54hask33dasdwd889';
-     var regex3 =  /\d{1,2}/g
+     var str = "asdfw723sdk54hask33dasdwd889";
+     var regex3 = /\d{1,2}/g;
      document.write(str.match(regex3)); // 72,3,54,33,88,9
 
-     var str = 'asdfw723sdk54hask33dasdwd889';
-     var regex4 =  /\d{2}/g
+     var str = "asdfw723sdk54hask33dasdwd889";
+     var regex4 = /\d{2}/g;
      document.write(str.match(regex4)); // 72,54,33,88
 
      // 贪婪匹配和惰性匹配
@@ -151,15 +152,16 @@ var regex = new RegExp(pattern,modifiers);
      // 贪婪匹配
      var regex = /\d{2,5}/g; // 数字连续出现2到5次。会匹配2位、3位、4位、5位连续数字
      var string = "123 1234 12345 123456";
-     document.write( string.match(regex) );
+     document.write(string.match(regex));
      // => ["123", "1234", "12345", "12345"]  尽可能多的匹配 需要2至5个字符 ，’123‘ 字符只有3个 匹配3个； ’123456‘字符有6个 我最多只需要5个，只匹配5个， 只要在2-5范围内，越多越好
 
      // 惰性匹配，就是尽可能少的匹配 （量词后面加个问号）
 
      var regex = /\d{2,5}?/g;
      var string = "123 1234 12345 123456";
-     console.log( string.match(regex) );
+     console.log(string.match(regex));
      // => ["12", "12", "34", "12", "34", "12", "34", "56"] 需要的范围在2-5内，惰性匹配 尽可能少的匹配，满足2个字符的条件，就不再往下匹配 '123'大于两个字符 匹配12 之后就不匹配123
+     ```
 
 
      ```
@@ -241,56 +243,53 @@ var regex = new RegExp(pattern,modifiers);
      document.write( regex.test("\1\2\3\4") );  //匹配第一个分组没有 ，用'\1' 本身去匹配"\1\2\3\4"// true
      ```
 
+4. **运算符的优先级\*\***
 
+   正则表达式从左到右进行计算，并遵循优先级顺序，**相同优先级**的**从左到右**进行运算，**不同优先级**的运算**先高后低**
 
-  4. **运算符的优先级****
+   从最高到最低优先级顺序：
 
-     正则表达式从左到右进行计算，并遵循优先级顺序，**相同优先级**的**从左到右**进行运算，**不同优先级**的运算**先高后低**
+   | 运算符                       | 描述                                                                                                                                               |
+   | :--------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------- |
+   | \                            | 转义符                                                                                                                                             |
+   | (), (?:), (?=), []           | 圆括号和方括号                                                                                                                                     |
+   | \*, +, ?, {n}, {n,}, {n,m}   | 限定符                                                                                                                                             |
+   | ^, \$, \任何元字符、任何字符 | 定位点和序列（即：位置和顺序）                                                                                                                     |
+   | \|                           | 替换，"或"操作 字符具有高于替换运算符的优先级，使得"m\|food"匹配"m"或"food"。若要匹配"mood"或"food"，请使用括号创建子表达式，从而产生"(m\|f)ood"。 |
 
-     从最高到最低优先级顺序：
+5. **前瞻和后瞻**
 
-     | 运算符                      | 描述                                                         |
-     | :-------------------------- | :----------------------------------------------------------- |
-     | \                           | 转义符                                                       |
-     | (), (?:), (?=), []          | 圆括号和方括号                                               |
-     | *, +, ?, {n}, {n,}, {n,m}   | 限定符                                                       |
-     | ^, $, \任何元字符、任何字符 | 定位点和序列（即：位置和顺序）                               |
-     | \|                          | 替换，"或"操作 字符具有高于替换运算符的优先级，使得"m\|food"匹配"m"或"food"。若要匹配"mood"或"food"，请使用括号创建子表达式，从而产生"(m\|f)ood"。 |
+   ```javascript
+   前瞻：
+   exp1(?=exp2) 查找exp2前面的exp1
+   var regex = /\w{2}(?=_)/g;
+   document.write( "12d12_5hs_".match(regex)); // 12,hs
 
-  5. **前瞻和后瞻**
+   后顾：
+   (?<=exp2)exp1 查找exp2后面的exp1
+   var regex = /(?<=_)\w{2}/g;
+   document.write( "12d12_5hs_asdf".match(regex)); // 5h,as
 
-     ```javascript
-     前瞻：
-     exp1(?=exp2) 查找exp2前面的exp1
-     var regex = /\w{2}(?=_)/g;
-     document.write( "12d12_5hs_".match(regex)); // 12,hs
-
-     后顾：
-     (?<=exp2)exp1 查找exp2后面的exp1
-     var regex = /(?<=_)\w{2}/g;
-     document.write( "12d12_5hs_asdf".match(regex)); // 5h,as
-
-     负前瞻：
-     exp1(?!exp2) 查找后面不是exp2的exp1
-     var regex = /_(?!5h)/g; //
-     document.write( "12d12_5h".match(regex));  // null
-     负后顾：(没有理解)
-     (?<!=exp2)exp1 查找前面不是exp2的exp1
-     var regex = /(?<!='_5h)2/g;
-     // 按理解应该打印 null 实际打印2
-     document.write( "_5h2".match(regex));  // 2
-     ```
-
-
+   负前瞻：
+   exp1(?!exp2) 查找后面不是exp2的exp1
+   var regex = /_(?!5h)/g; //
+   document.write( "12d12_5h".match(regex));  // null
+   负后顾：(没有理解)
+   (?<!=exp2)exp1 查找前面不是exp2的exp1
+   var regex = /(?<!='_5h)2/g;
+   // 按理解应该打印 null 实际打印2
+   document.write( "_5h2".match(regex));  // 2
+   ```
 
 ### 正则表达式在线测试工具
 
-- #### Windows测试工具Regexbuddy
-	- ##### 工具获取：[正则表达式测试工具RegexBuddy v4.5.0](http://www.zjmainstay.cn/download/category/4-regexp?download=26%3aregexbuddy-v4-5-0)
+- #### Windows 测试工具 Regexbuddy
 
-	- ##### 工具教程：[正则表达式工具RegexBuddy使用教程](http://zjmainstay.cn/regex-tool-regexbuddy)
+      	- ##### 工具获取：[正则表达式测试工具RegexBuddy v4.5.0](http://www.zjmainstay.cn/download/category/4-regexp?download=26%3aregexbuddy-v4-5-0)
 
-- #### Mac测试工具[Regex101](https://regex101.com/)
+      	- ##### 工具教程：[正则表达式工具RegexBuddy使用教程](http://zjmainstay.cn/regex-tool-regexbuddy)
+
+- #### Mac 测试工具[Regex101](https://regex101.com/)
 
   ![](https://note.youdao.com/yws/public/resource/80719707d48b241ad1ae34ab7e29ff67/xmlnote/WEBRESOURCE39cebe3cdb8fe6b9bdda8d7606fbba6b/2289)
 
@@ -298,7 +297,7 @@ var regex = new RegExp(pattern,modifiers);
 
 【1】[MDN Web doc](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions)
 
-【2】[过目不忘的js正则表达式](http://www.cnblogs.com/moqing/p/5665126.html)
+【2】[过目不忘的 js 正则表达式](http://www.cnblogs.com/moqing/p/5665126.html)
 
 【3】[JavaScript 正则表达式迷你书](https://juejin.im/post/5965943ff265da6c30653879)
 
