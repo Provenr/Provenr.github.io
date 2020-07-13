@@ -21,15 +21,11 @@ baidutongji: # baidutongji tracking code
 duoshuo: # duoshuo username
 gsc: # google custom search code
 
-# gitalk
-gitalk:
+## Disqus
+disqus:
   enable: true
-  repo: Provenr.github.io  # 例：asdfv1929.github.io
-  client_id: 54545d495653a2bf71ae
-  client_secret: 02224148cafb8f2bc3ee8c8ffd7986df7e5bec8b
-  owner: Provenr
-  admin: Provenr
-  labels: 'gitalk' #GitHub issues的标签
+  shortname: blog-provenr-cn    #your name
+  count: true
 
 # flagcounter
 flagcounter_href: # https://info.flagcounter.com/xxxx
@@ -49,11 +45,14 @@ algolia_search:
 # ========== Comment ========== #
 # Fill in the field to enable the corresponding comment plugin
 # If you want to add other comment plugin, edit in "custom.ejs"
+
 comment:
   # Livere  site: https://livere.com/
   livere_uid:
-  # Disqus  site: https://disqus.com/
+
+#  Disqus  site: https://disqus.com/
   disqus_shortname:
+
   # Gitment  site: https://github.com/imsun/gitment
   gitment_owner:
   gitment_repo:
