@@ -1,8 +1,8 @@
 ---
-title: vscode 下载安装 git安装
+title: vscode 安装 与 插件配置
 date: 2018-10-20 00:34:19
 tags: [vscode, git, sourceTree]
-description: Mac 安装vscode git sourceTreen
+description: 
 ---
 
 
