@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    flex &amp;&amp; grid 布局 | Provenr
+  </title>
+  <meta name="description" content="没有比脚更长的路，走过去，前面是春天！">
+  
+  <meta name="keywords" content="
+  flex,grid
+  ">
+  
+  <meta name="author" content="Provenr">
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="theme-color" content="#1e2327">
+  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
+
+  <link rel="icon" type="image/x-icon" href="http://www.provenr.cn/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+  
+<script>
+  var _hmt = _hmt || [];
+  (function(){var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?e56a1706ae9d773852a4a03368b51f86";
+    var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script>
+
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+</head>
+
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/archives">Archives</a></li>
+        
+        
+        <li><a href="/categories">Categories</a></li>
+        
+        
+        <li><a href="/tags">Tags</a></li>
+        
+        
+        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="/avatar/provenr.jpg"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/archives" class="header-toolbar-left"><i
+                  class="fa fa-file-text"></i> Posts </a>
+        <a href="/archives"
+           class="header-toolbar-right"> 26 </a>
+      </li>
+      <li>
+        <a href="/tags" class="header-toolbar-left"><i
+                  class="fa fa-tags"></i> Tags </a>
+        <a href="/tags"
+           class="header-toolbar-right"> 36 </a>
+      </li>
+      <li>
+        <a href="/categories" class="header-toolbar-left"><i
+                  class="fa fa-folder-open"></i> Categories </a>
+        <a href="/categories"
+           class="header-toolbar-right"> 13 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/">Provenr</a>
+      
+      
+    </h2>
+  </div>
+
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
+
+<aside class="side-container desktop-only">
+    
+        <div id="toc">
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#引言"><span class="toc-text">引言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#概述"><span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#flex-局限性"><span class="toc-text">flex 局限性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#举个例子："><span class="toc-text">举个例子：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-使用flex画出上面的页面结构"><span class="toc-text">1.使用flex画出上面的页面结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-grid-布局"><span class="toc-text">2.grid 布局</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如果上面设计图变更为下面图所示"><span class="toc-text">如果上面设计图变更为下面图所示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Grid带来的响应式便利"><span class="toc-text">Grid带来的响应式便利</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#补充"><span class="toc-text">补充</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-CSS-justify-content属性如何分配顺着父容器主轴的弹性元素之间及其周围的空间。"><span class="toc-text">1. CSS justify-content属性如何分配顺着父容器主轴的弹性元素之间及其周围的空间。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Grid兼容性"><span class="toc-text">2. Grid兼容性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-在-Grid-语法中只需要用-css-grid-generator拖拖拽拽即可自动生成布局代码"><span class="toc-text">3. 在 Grid 语法中只需要用  css grid generator拖拖拽拽即可自动生成布局代码</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文档"><span class="toc-text">参考文档</span></a></li></ol></li></ol>
+        </div>
+    
+</aside>
+
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    Provenr
+
+    <span class="post-date float-right" title="{{moment(1569369600000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      <i class="fa fa-pencil-square-o"></i>
+<!--      {{moment(1569369600000).fromNow()}}-->
+      last modified: {{moment(1569369600000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>flex &amp;&amp; grid 布局</h1>
+    <p><img src="https://note.youdao.com/yws/public/resource/80719707d48b241ad1ae34ab7e29ff67/xmlnote/1FA696763A6A4622B6F59B6B86862EED/4534" alt></p>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>Flex 是一维布局方式，我们需要不断嵌套 Div 才能形成复杂结构，一旦布局产生了变化时难以维护，代码就需要重构，Grid是二维布局，即便布局方式做了翻天覆地的调整，也仅需少量修改就能适配。详细理解参考后面例子</p>
+<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h3 id="flex-局限性"><a href="#flex-局限性" class="headerlink" title="flex 局限性"></a>flex 局限性</h3><ol>
+<li><p>Flex 在复杂页面时的Div层级复杂，而一旦布局产生了变化时难以维护，代码就需要重构</p>
+</li>
+<li><p>Flex 布局有一些不受控制的智能设定,宽度 50% 的子元素会被同级元素挤到 50% 以下,由于没有提供像 Grid 的 minmax 之类的 API，所以定制型不足</p>
+</li>
+<li><p>详细flex使用方法参考<a href="https://juejin.im/post/58e3a5a0a0bb9f0069fc16bb" target="_blank" rel="noopener">flex布局</a></p>
+</li>
+</ol>
+<h2 id="举个例子："><a href="#举个例子：" class="headerlink" title="举个例子："></a>举个例子：</h2><p><img src="https://note.youdao.com/yws/public/resource/80719707d48b241ad1ae34ab7e29ff67/xmlnote/0B30BEE593DC4EF58E82E0F0E88B9B59/4566" alt></p>
+<h4 id="1-使用flex画出上面的页面结构"><a href="#1-使用flex画出上面的页面结构" class="headerlink" title="1.使用flex画出上面的页面结构"></a>1.使用flex画出上面的页面结构</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;card&quot;&gt;</span><br><span class="line">  &lt;div class=&quot;profile-sidebar&quot;&gt;</span><br><span class="line">    &lt;img src=&quot;https://i.pravatar.cc/125?image=3&quot; alt=&quot;&quot; class=&quot;profile-img&quot;&gt;</span><br><span class="line">    &lt;ul class=&quot;social-list&quot;&gt;</span><br><span class="line">      &lt;li&gt;&lt;a href=&quot;#&quot; class=&quot;social-link&quot;&gt;&lt;i class=&quot;fab fa-dribbble-square&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">      &lt;li&gt;&lt;a href=&quot;#&quot; class=&quot;social-link&quot;&gt;&lt;i class=&quot;fab fa-facebook-square&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">      &lt;li&gt;&lt;a href=&quot;#&quot; class=&quot;social-link&quot;&gt;&lt;i class=&quot;fab fa-twitter-square&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;div class=&quot;profile-body&quot;&gt;</span><br><span class="line">    &lt;h2 class=&quot;profile-name&quot;&gt;Ramsey Harper&lt;/h2&gt;</span><br><span class="line">    &lt;p class=&quot;profile-position&quot;&gt;Graphic Designer&lt;/p&gt;</span><br><span class="line">    &lt;p class=&quot;profile-info&quot;&gt;Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere a tempore, dignissimos odit accusantium repellat quidem, sit molestias dolorum placeat quas debitis ipsum esse rerum?&lt;/p&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>样式使用了响应式，在页面最小宽度大于等于450px事，才呈现和例子一样的效果</p>
+</blockquote>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.card</span> &#123;</span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">20px</span> rgba(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,.<span class="number">2</span>);</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">80%</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">flex-direction</span>: column;</span><br><span class="line">    <span class="attribute">max-width</span>: <span class="number">600px</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#005E9B</span>;</span><br><span class="line">    <span class="attribute">flex-basis</span>: <span class="number">250px</span>;</span><br><span class="line">    <span class="attribute">color</span>: white;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">2em</span>;</span><br><span class="line">    <span class="attribute">text-align</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.profile-info</span> &#123;</span><br><span class="line">    <span class="attribute">font-weight</span>: <span class="number">300</span>;</span><br><span class="line">    <span class="attribute">opacity</span>: .<span class="number">7</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.profile-sidebar</span> &#123;</span><br><span class="line">    <span class="attribute">margin-right</span>: <span class="number">2em</span>;</span><br><span class="line">    <span class="attribute">text-align</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.profile-name</span> &#123;</span><br><span class="line">    <span class="attribute">letter-spacing</span>: <span class="number">1px</span>;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">2rem</span>;</span><br><span class="line">    <span class="attribute">margin</span>: .<span class="number">75em</span> <span class="number">0</span> <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.profile-name</span>::after &#123;</span><br><span class="line">    <span class="attribute">content</span>: <span class="string">''</span>;</span><br><span class="line">    <span class="attribute">display</span>: block;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">2em</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">1px</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#5bcbf0</span>;</span><br><span class="line">    <span class="attribute">margin</span>: .<span class="number">5em</span> auto .<span class="number">65em</span>;</span><br><span class="line">    <span class="attribute">opacity</span>: .<span class="number">25</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.profile-position</span> &#123;</span><br><span class="line">    <span class="attribute">text-transform</span>: uppercase;</span><br><span class="line">    <span class="attribute">font-size</span>: .<span class="number">875rem</span>;</span><br><span class="line">    <span class="attribute">letter-spacing</span>: <span class="number">3px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">2em</span>;</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">1</span>;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#5bcbf0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.profile-img</span> &#123;</span><br><span class="line">    <span class="attribute">max-width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">2px</span> solid white;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.social-list</span> &#123;</span><br><span class="line">    <span class="attribute">list-style</span>: none;</span><br><span class="line">    <span class="attribute">justify-content</span>: space-evenly;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">min-width</span>: <span class="number">125px</span>;</span><br><span class="line">    <span class="attribute">max-width</span>: <span class="number">175px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.social-link</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#5bcbf0</span>;</span><br><span class="line">    <span class="attribute">opacity</span>: .<span class="number">5</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.social-link</span>:hover,</span><br><span class="line"><span class="selector-class">.social-link</span>:focus &#123;</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line">        </span><br><span class="line">@<span class="keyword">media</span> (min-width: 450px) &#123;</span><br><span class="line">    <span class="selector-class">.card</span> &#123;</span><br><span class="line">        <span class="attribute">flex-direction</span>: row;</span><br><span class="line">        <span class="attribute">text-align</span>: left;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-class">.profile-name</span>::after &#123;</span><br><span class="line">        <span class="attribute">margin-left</span>: <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在使用flex 布局时 需要自己创建内容列（图中所示的黄色和橘黄色圈起来的部分），需要额外的Div标记，使得DOM结构变得复杂</p>
+<h4 id="2-grid-布局"><a href="#2-grid-布局" class="headerlink" title="2.grid 布局"></a>2.grid 布局</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;card&quot;&gt;</span><br><span class="line">    &lt;img src=&quot;https://i.pravatar.cc/125?image=3&quot; alt=&quot;&quot; class=&quot;profile-img&quot;&gt;</span><br><span class="line">    &lt;ul class=&quot;social-list&quot;&gt;</span><br><span class="line">        &lt;li&gt;&lt;a href=&quot;#&quot; class=&quot;social-link&quot;&gt;&lt;i class=&quot;fab fa-dribbble-square&quot;&gt;AA&lt;/i&gt;&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;&lt;a href=&quot;#&quot; class=&quot;social-link&quot;&gt;&lt;i class=&quot;fab fa-facebook-square&quot;&gt;BB&lt;/i&gt;&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;&lt;a href=&quot;#&quot; class=&quot;social-link&quot;&gt;&lt;i class=&quot;fab fa-twitter-square&quot;&gt;CC&lt;/i&gt;&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line">    &lt;h2 class=&quot;profile-name&quot;&gt;Ramsey Harper&lt;/h2&gt;</span><br><span class="line">    &lt;p class=&quot;profile-position&quot;&gt;Graphic Designer&lt;/p&gt;</span><br><span class="line">    &lt;p class=&quot;profile-info&quot;&gt;Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere a tempore, dignissimos odit accusantium repellat quidem, sit molestias dolorum placeat quas debitis ipsum esse rerum?&lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>css 只有核心grid样式，其他辅助样式参考上面flex布局的</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"> <span class="selector-class">.card</span> &#123;</span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">20px</span> rgba(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,.<span class="number">2</span>);</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">80%</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br><span class="line">    <span class="attribute">max-width</span>: <span class="number">600px</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#005E9B</span>;</span><br><span class="line">    <span class="attribute">color</span>: white;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">2em</span>;</span><br><span class="line">    <span class="attribute">text-align</span>: left;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">display</span>: grid;</span><br><span class="line">    grid-template-<span class="attribute">columns</span>: <span class="number">1</span>fr <span class="number">3</span>fr;</span><br><span class="line">    grid-<span class="attribute">column-gap</span>: <span class="number">2em</span>;</span><br><span class="line">    grid-template-areas:</span><br><span class="line">            <span class="string">"image name"</span></span><br><span class="line">            <span class="string">"image position"</span></span><br><span class="line">            <span class="string">"social description"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.profile-name</span>     &#123; grid-<span class="selector-tag">area</span>: name; &#125;</span><br><span class="line"><span class="selector-class">.profile-position</span> &#123; grid-<span class="selector-tag">area</span>: position; &#125;</span><br><span class="line"><span class="selector-class">.profile-info</span>     &#123; grid-<span class="selector-tag">area</span>: description; &#125;</span><br><span class="line"><span class="selector-class">.profile-img</span>      &#123; grid-<span class="selector-tag">area</span>: image; &#125;</span><br><span class="line"><span class="selector-class">.social-list</span>      &#123; grid-<span class="selector-tag">area</span>: social; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为grid是二维的，这意味着它允许我们同时创建行和列，我们的网格容器可以完全控制其内部布局。提供一种更直观的描述 UI 的方式<br>grid-template-areas将dom抽象的表示在二维网格中，这种描述方式适配不同分辨率下（响应式布局）也具有优势</p>
+<h3 id="如果上面设计图变更为下面图所示"><a href="#如果上面设计图变更为下面图所示" class="headerlink" title="如果上面设计图变更为下面图所示"></a>如果上面设计图变更为下面图所示</h3><p><img src="https://note.youdao.com/yws/public/resource/80719707d48b241ad1ae34ab7e29ff67/xmlnote/C8B2BE3F41064954A55777B4FF58320D/4669" alt><br>使用flex布局，不更改DOM结构就无法做到上面设计稿的布局<br>使用Grid布局只需要将网格模板区域修改为以下内容，就能轻松搞定</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.card&#123;</span><br><span class="line">    grid-template-areas:</span><br><span class="line">      &quot;image name&quot;</span><br><span class="line">      &quot;image position&quot;</span><br><span class="line">      &quot;image social&quot;</span><br><span class="line">      &quot;. description&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Grid带来的响应式便利"><a href="#Grid带来的响应式便利" class="headerlink" title="Grid带来的响应式便利"></a>Grid带来的响应式便利</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br></pre></td><td class="code"><pre><span class="line">&lt;!doctype html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot;</span><br><span class="line">          content=&quot;width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">        * &#123;</span><br><span class="line">            box-sizing: border-box;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        body &#123;</span><br><span class="line">            font-family: &apos;Fira Sans&apos;, sans-serif;</span><br><span class="line">            line-height: 1.6;</span><br><span class="line">            min-height: 100vh;</span><br><span class="line">            display: grid;</span><br><span class="line">            place-items: center;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        .card &#123;</span><br><span class="line">        // box-shadow: 0 0 20px rgba(0,0,0,.2);</span><br><span class="line">            width: 80%;</span><br><span class="line">            margin: 0 auto;</span><br><span class="line">            display: flex;</span><br><span class="line">            flex-direction: column;</span><br><span class="line">            max-width: 600px;</span><br><span class="line">            background: #005E9B;</span><br><span class="line">            flex-basis: 250px;</span><br><span class="line">            color: white;</span><br><span class="line">            padding: 2em;</span><br><span class="line">            text-align: center;</span><br><span class="line"></span><br><span class="line">            display: grid;</span><br><span class="line">            grid-template-columns: 1fr;</span><br><span class="line">            grid-column-gap: 2em;</span><br><span class="line">            grid-template-areas:</span><br><span class="line">                    &quot;name&quot;</span><br><span class="line">                    &quot;image&quot;</span><br><span class="line">                    &quot;social&quot;</span><br><span class="line">                    &quot;position&quot;</span><br><span class="line">                    &quot;description&quot;;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        .profile-name     &#123; grid-area: name; &#125;</span><br><span class="line">        .profile-position &#123; grid-area: position; &#125;</span><br><span class="line">        .profile-info     &#123; grid-area: description; &#125;</span><br><span class="line">        .profile-img      &#123; grid-area: image; &#125;</span><br><span class="line">        .social-list      &#123; grid-area: social; &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        .profile-info &#123;</span><br><span class="line">            font-weight: 300;</span><br><span class="line">            opacity: .7;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        .profile-name &#123;</span><br><span class="line">            letter-spacing: 1px;</span><br><span class="line">            font-size: 2rem;</span><br><span class="line">            margin: .75em 0 0;</span><br><span class="line">            line-height: 1;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        .profile-name::after &#123;</span><br><span class="line">            content: &apos;&apos;;</span><br><span class="line">            display: block;</span><br><span class="line">            width: 2em;</span><br><span class="line">            height: 1px;</span><br><span class="line">            background: #5bcbf0;</span><br><span class="line">            margin: .5em auto .65em;</span><br><span class="line">            opacity: .25;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        .profile-position &#123;</span><br><span class="line">            text-transform: uppercase;</span><br><span class="line">            font-size: .875rem;</span><br><span class="line">            letter-spacing: 3px;</span><br><span class="line">            margin: 0 0 .5em;</span><br><span class="line">            line-height: 1;</span><br><span class="line">            color: #5bcbf0;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        .profile-img &#123;</span><br><span class="line">            justify-self: center;</span><br><span class="line">            max-width: 100%;</span><br><span class="line">            border-radius: 50%;</span><br><span class="line">            border: 2px solid white;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        .social-list &#123;</span><br><span class="line">            justify-self: center;</span><br><span class="line">            display: flex;</span><br><span class="line">            list-style: none;</span><br><span class="line">            justify-content: space-between;</span><br><span class="line">            width: 75px;</span><br><span class="line">            margin: .5em 0 0;</span><br><span class="line">            padding: 0;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        .social-link &#123;</span><br><span class="line">            color: #5bcbf0;</span><br><span class="line">            opacity: .5;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        .social-link:hover,</span><br><span class="line">        .social-link:focus &#123;</span><br><span class="line">            opacity: 1;</span><br><span class="line">        &#125;</span><br><span class="line">        @media (min-width: 600px) &#123;</span><br><span class="line">            .card &#123;</span><br><span class="line">                text-align: left;</span><br><span class="line">                grid-template-columns: 1fr 3fr;</span><br><span class="line">                grid-template-areas:</span><br><span class="line">                        &quot;image name&quot;</span><br><span class="line">                        &quot;image position&quot;</span><br><span class="line">                        &quot;social description&quot;;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            .profile-name::after &#123;</span><br><span class="line">                margin-left: 0;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line"></span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div class=&quot;card&quot;&gt;</span><br><span class="line">    &lt;img src=&quot;https://i.pravatar.cc/125?image=3&quot; alt=&quot;&quot; class=&quot;profile-img&quot;&gt;</span><br><span class="line">    &lt;ul class=&quot;social-list&quot;&gt;</span><br><span class="line">        &lt;li&gt;&lt;a href=&quot;#&quot; class=&quot;social-link&quot;&gt;&lt;i class=&quot;fab fa-dribbble-square&quot;&gt;AA&lt;/i&gt;&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;&lt;a href=&quot;#&quot; class=&quot;social-link&quot;&gt;&lt;i class=&quot;fab fa-facebook-square&quot;&gt;BB&lt;/i&gt;&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;&lt;a href=&quot;#&quot; class=&quot;social-link&quot;&gt;&lt;i class=&quot;fab fa-twitter-square&quot;&gt;BB&lt;/i&gt;&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line">    &lt;h2 class=&quot;profile-name&quot;&gt;Ramsey Harper&lt;/h2&gt;</span><br><span class="line">    &lt;p class=&quot;profile-position&quot;&gt;Graphic Designer&lt;/p&gt;</span><br><span class="line">    &lt;p class=&quot;profile-info&quot;&gt;Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere a tempore, dignissimos odit accusantium repellat quidem, sit molestias dolorum placeat quas debitis ipsum esse rerum?&lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://codepen.io/provenr/pen/BaapVGW" target="_blank" rel="noopener">在线查看</a></p>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><h4 id="1-CSS-justify-content属性如何分配顺着父容器主轴的弹性元素之间及其周围的空间。"><a href="#1-CSS-justify-content属性如何分配顺着父容器主轴的弹性元素之间及其周围的空间。" class="headerlink" title="1. CSS justify-content属性如何分配顺着父容器主轴的弹性元素之间及其周围的空间。"></a>1. CSS <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/justify-content" target="_blank" rel="noopener">justify-content属性</a>如何分配顺着父容器主轴的弹性元素之间及其周围的空间。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- justify-content: space-between;  /* 均匀排列每个元素</span><br><span class="line">- justify-content:space-around; // 每行第一个元素到行首的距离和每行最后一个元素到行尾的距离将会是相邻元素之间距离的一半</span><br><span class="line">- justify-content: space-evenly; //均匀排列每个元素每个元素之间的间隔相等</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-Grid兼容性"><a href="#2-Grid兼容性" class="headerlink" title="2. Grid兼容性"></a>2. Grid兼容性</h4><p><img src="https://note.youdao.com/yws/public/resource/80719707d48b241ad1ae34ab7e29ff67/xmlnote/F21786626F68441B9CEF10810A107582/4531" alt></p>
+<h4 id="3-在-Grid-语法中只需要用-css-grid-generator拖拖拽拽即可自动生成布局代码"><a href="#3-在-Grid-语法中只需要用-css-grid-generator拖拖拽拽即可自动生成布局代码" class="headerlink" title="3. 在 Grid 语法中只需要用  css grid generator拖拖拽拽即可自动生成布局代码"></a>3. 在 Grid 语法中只需要用 <a href="https://cssgrid-generator.netlify.com/" target="_blank" rel="noopener"> css grid generator</a>拖拖拽拽即可自动生成布局代码</h4><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>flexbox在创建布局方面给我们带来了非常奇妙的体验，grid有许多新的属性和值，比flexbox复杂，但是它为我们提供了更多的控制权。Flex 依然有使用场景，即简单的一维结构，或者 space-between 等 Flex 独有语法的情况。因此推荐整体、复杂的二维布局采用 Grid，一维的简单布局采用 Flex。</p>
+<p>==grid-template-columns== ==grid-template-rows== 组合起来使用比 grid-template-areas 更强大，但是纯代码方式描述没有 <strong>grid-template-areas更直观</strong></p>
+<p>理解了这些也就理解了布局未来的发展方向，Grid让==布局与 Dom 分离== 一直是前端的一个梦想，开发 UI 部分时，==只需关心页面由哪些模块组成==，去实现这些模块就行了，==而不需要关心模块之间应该如何组合==。在描述组合时，可以通过可视化或比较抽象的字符串描述布局的结构，并对应到写好的模块上，这样的代码维护性远高于用 DIV 描述结构的方案</p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p>【1】<a href="https://www.freecodecamp.org/news/css-grid-changes-how-we-can-think-about-structuring-our-content/" target="_blank" rel="noopener">CSS网格如何改变布局方式</a><br>【2】<a href="https://caniuse.com/#search=grid-template-areas" target="_blank" rel="noopener">兼容性检测</a><br>【3】<a href="https://juejin.im/post/58e3a5a0a0bb9f0069fc16bb" target="_blank" rel="noopener">flex布局</a><br>【4】<a href="https://juejin.im/post/5da3cb19518825164d2cd91d" target="_blank" rel="noopener">精读《用 css grid 重新思考布局》</a></p>
+
+  </article>
+</div>
+
+
+    
+<div class="container disqus-container">
+  <div id="disqus_thread"></div>
+</div>
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://github.provenr.cn/2019/09/25/css/Flex &amp;&amp; Grid/";
+    this.page.identifier = 1569369600;
+  };
+
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://blog-provenr-cn.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <div class="clearfix">
+    <a href="http://github.provenr.cn" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2019 Provenr</li>
+      <li><a href="http://github.provenr.cn">Home</a></li>
+      
+      <li><a href="https://provenr.github.io/">Github</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+    </div>
+    
+  </footer>
+</div>
+
+
+
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>

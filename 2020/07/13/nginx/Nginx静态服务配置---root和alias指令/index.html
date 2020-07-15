@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    Nginx 静态服务配置---root和alias指令 | Provenr
+  </title>
+  <meta name="description" content="没有比脚更长的路，走过去，前面是春天！">
+  
+  <meta name="keywords" content="
+  root指令,alias指令
+  ">
+  
+  <meta name="author" content="Provenr">
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="theme-color" content="#1e2327">
+  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
+
+  <link rel="icon" type="image/x-icon" href="http://www.provenr.cn/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+  
+<script>
+  var _hmt = _hmt || [];
+  (function(){var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?e56a1706ae9d773852a4a03368b51f86";
+    var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script>
+
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+</head>
+
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/archives">Archives</a></li>
+        
+        
+        <li><a href="/categories">Categories</a></li>
+        
+        
+        <li><a href="/tags">Tags</a></li>
+        
+        
+        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="/avatar/provenr.jpg"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/archives" class="header-toolbar-left"><i
+                  class="fa fa-file-text"></i> Posts </a>
+        <a href="/archives"
+           class="header-toolbar-right"> 26 </a>
+      </li>
+      <li>
+        <a href="/tags" class="header-toolbar-left"><i
+                  class="fa fa-tags"></i> Tags </a>
+        <a href="/tags"
+           class="header-toolbar-right"> 36 </a>
+      </li>
+      <li>
+        <a href="/categories" class="header-toolbar-left"><i
+                  class="fa fa-folder-open"></i> Categories </a>
+        <a href="/categories"
+           class="header-toolbar-right"> 13 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/">Provenr</a>
+      
+      
+    </h2>
+  </div>
+
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
+
+<aside class="side-container desktop-only">
+    
+        <div id="toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#root-指令"><span class="toc-text">root 指令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#alias-指令"><span class="toc-text">alias 指令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、-alias指令路径加上斜杠"><span class="toc-text">1、 alias指令路径加上斜杠</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、-location-指令路径加上斜杠"><span class="toc-text">2、 location 指令路径加上斜杠</span></a></li></ol></li></ol></li></ol>
+        </div>
+    
+</aside>
+
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    Provenr
+
+    <span class="post-date float-right" title="{{moment(1594657301000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      <i class="fa fa-pencil-square-o"></i>
+<!--      {{moment(1594657301000).fromNow()}}-->
+      last modified: {{moment(1594657301000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>Nginx 静态服务配置---root和alias指令</h1>
+    <h2 id="root-指令"><a href="#root-指令" class="headerlink" title="root 指令"></a>root 指令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">    root   /root/provenr-local/nginx;</span><br><span class="line">    index  index.html index.htm;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>对于匹配后的url地址，将匹配的location中的root路径替换访问url的host即得到文件的真实地址。（多个斜杠其实等价于一个斜杠）</li>
+<li>如果不匹配location，则寻找更外层的root做替换。</li>
+<li>root指令最后的斜杠可加可不加。</li>
+</ul>
+<h2 id="alias-指令"><a href="#alias-指令" class="headerlink" title="alias 指令"></a>alias 指令</h2><p>alias这个词在计算机里很常用，字面意思是“别名”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location /blog &#123;</span><br><span class="line">    alias  /root/provenr-local/blog;</span><br><span class="line">    index  index.html index.htm;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>访问 <a href="https://www.provenr.cn/blog/test.html" target="_blank" rel="noopener">https://www.provenr.cn/blog/test.html</a> 时:<br>在服务器 /root/provenr-local/blog 目录下 寻找 test.html 文件</p>
+<p>/blog 是 目录（/root/provenr-local/blog）的别名</p>
+<p>⚠️：注意 多斜杠的情况</p>
+<h4 id="1、-alias指令路径加上斜杠"><a href="#1、-alias指令路径加上斜杠" class="headerlink" title="1、 alias指令路径加上斜杠"></a>1、 alias指令路径加上斜杠</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">location /blog &#123;</span><br><span class="line">    alias  /root/provenr-local/blog/;</span><br><span class="line">    index  index.html index.htm;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">==&gt;</span><br><span class="line"></span><br><span class="line">/root/provenr-local/blog/ + /test.html</span><br></pre></td></tr></table></figure>
+
+<p>这里多的斜杠是合法的。等价于一个斜杠的情况。</p>
+<h4 id="2、-location-指令路径加上斜杠"><a href="#2、-location-指令路径加上斜杠" class="headerlink" title="2、 location 指令路径加上斜杠"></a>2、 location 指令路径加上斜杠</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">location /blog/ &#123;</span><br><span class="line">    alias  /root/provenr-local/blog;</span><br><span class="line">    index  index.html index.htm;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">==&gt;</span><br><span class="line"></span><br><span class="line">/root/provenr-local/blog + test.html</span><br></pre></td></tr></table></figure>
+
+<p>这里把url 拆分为 ==/blog/ + test.html==<br>替换后的uri 为 ==/root/provenr-local/blogtest.html==， 这是非法的</p>
+
+  </article>
+</div>
+
+
+    
+<div class="container disqus-container">
+  <div id="disqus_thread"></div>
+</div>
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://github.provenr.cn/2020/07/13/nginx/Nginx静态服务配置---root和alias指令/";
+    this.page.identifier = 1594657301;
+  };
+
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://blog-provenr-cn.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <div class="clearfix">
+    <a href="http://github.provenr.cn" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2019 Provenr</li>
+      <li><a href="http://github.provenr.cn">Home</a></li>
+      
+      <li><a href="https://provenr.github.io/">Github</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+    </div>
+    
+  </footer>
+</div>
+
+
+
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>

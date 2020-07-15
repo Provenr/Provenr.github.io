@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    git切换分支保存修改的代码的方法 | Provenr
+  </title>
+  <meta name="description" content="没有比脚更长的路，走过去，前面是春天！">
+  
+  <meta name="keywords" content="
+  git,git stash
+  ">
+  
+  <meta name="author" content="Provenr">
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="theme-color" content="#1e2327">
+  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
+
+  <link rel="icon" type="image/x-icon" href="http://www.provenr.cn/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+  
+<script>
+  var _hmt = _hmt || [];
+  (function(){var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?e56a1706ae9d773852a4a03368b51f86";
+    var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script>
+
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+</head>
+
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/archives">Archives</a></li>
+        
+        
+        <li><a href="/categories">Categories</a></li>
+        
+        
+        <li><a href="/tags">Tags</a></li>
+        
+        
+        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="/avatar/provenr.jpg"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/archives" class="header-toolbar-left"><i
+                  class="fa fa-file-text"></i> Posts </a>
+        <a href="/archives"
+           class="header-toolbar-right"> 26 </a>
+      </li>
+      <li>
+        <a href="/tags" class="header-toolbar-left"><i
+                  class="fa fa-tags"></i> Tags </a>
+        <a href="/tags"
+           class="header-toolbar-right"> 36 </a>
+      </li>
+      <li>
+        <a href="/categories" class="header-toolbar-left"><i
+                  class="fa fa-folder-open"></i> Categories </a>
+        <a href="/categories"
+           class="header-toolbar-right"> 13 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/">Provenr</a>
+      
+      
+    </h2>
+  </div>
+
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
+
+<aside class="side-container desktop-only">
+    
+        <div id="toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-及时commit代码"><span class="toc-text">1. 及时commit代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-使用git-stash"><span class="toc-text">2. 使用git stash</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Fork-I-use-most-commonly"><span class="toc-text">3. Fork(I use most commonly)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-用IDE工具的shelve的功能"><span class="toc-text">4. 用IDE工具的shelve的功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-text">参考</span></a></li></ol>
+        </div>
+    
+</aside>
+
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    Provenr
+
+    <span class="post-date float-right" title="{{moment(1557952166000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      <i class="fa fa-pencil-square-o"></i>
+<!--      {{moment(1557952166000).fromNow()}}-->
+      last modified: {{moment(1557952166000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>git切换分支保存修改的代码的方法</h1>
+    <p><img src="https://i.loli.net/2019/05/15/5cdbfb32ba9fc79837.png" alt="image"></p>
+<p>最近在一个原有的项目上做一次非常大的改版，底层的数据库做了很大的变化，跟现在的版本无法兼容。现在的工作除了开发最新的版本之外还要对原来的版本做例行的维护，修修补补。于是有了在两个分支之间游走切换的问题，最新改版的代码在分支new上，旧版本的代码在分支old上，我在new上开发了一半，忽然有人给了我一个改进的需求，于是我要切换回old去修改代码。在这个场景下，我摸索了四种方法：</p>
+<h2 id="1-及时commit代码"><a href="#1-及时commit代码" class="headerlink" title="1. 及时commit代码"></a>1. 及时commit代码</h2><p>在new分支上把已经开发完成的部分代码commit掉，不push，然后切换到old分支修改代码，做完了commit，所有分支互不影响，这是一个理想的方法。</p>
+<h2 id="2-使用git-stash"><a href="#2-使用git-stash" class="headerlink" title="2. 使用git stash"></a>2. 使用git stash</h2><p>有时候写了一半的JAVA代码，都还不能编译通过的，就被叫去改另一个分支的bug了。</p>
+<p>在new分支上的时候在命令行输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash</span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash save &quot;修改的信息&quot;</span><br></pre></td></tr></table></figure>
+
+<p>这样以后你的代码就回到自己上一个<code>commit</code>了，直接<code>git stash</code>的话git stash的栈会直接给你一个<code>hash值</code>作为版本的说明，如果用<code>git stash save “修改的信息”</code>，git stash的栈会把你填写的“修改的信息”作为版本的说明。</p>
+<p>接下来你回到<code>old分支</code>修改代码完成，你又再回到<code>new分支</code>，输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash pop</span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash list</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash list</span><br></pre></td></tr></table></figure>
+
+<p>就可以回到保存的版本了。<code>git stash pop</code>的作用是将git stash栈中最后一个版本取出来，<code>git stash apply stash@{0}</code>的作用是可以指定栈中的一个版本，通过<code>git stash list</code>可以看到所有的版本信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stash@&#123;0&#125;: On develop/2019515: yangyong&apos;s stashing</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stash@&#123;1&#125;: On develop/2019515: yangyong&apos;s stashing2</span><br></pre></td></tr></table></figure>
+
+<p>然后你可以选择一个你需要的版本执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash apply stash@&#123;0&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这时候你搁置的代码就回来了。</p>
+<h2 id="3-Fork-I-use-most-commonly"><a href="#3-Fork-I-use-most-commonly" class="headerlink" title="3. Fork(I use most commonly)"></a>3. Fork(I use most commonly)</h2><ul>
+<li>Save Stash</li>
+</ul>
+<p><img src="https://i.loli.net/2019/05/15/5cdc06e62604a58644.png" alt="image"></p>
+<ul>
+<li>Save by a instructions</li>
+</ul>
+<p><img src="https://i.loli.net/2019/05/15/5cdc0719c3ce985204.png" alt="image"></p>
+<ul>
+<li>Saved the changes</li>
+</ul>
+<p>modified files already saved in this stash<code>(yangyong&#39;s stash)</code>. you can take back them anytime.<br><img src="https://i.loli.net/2019/05/15/5cdc098e9a0ad28310.png" alt="image"></p>
+<ul>
+<li><strong>Then change branch or do something that you need to do</strong></li>
+<li>Apply the stash</li>
+</ul>
+<p><img src="https://i.loli.net/2019/05/15/5cdc0762cdde894049.png" alt="image"></p>
+<ul>
+<li>Applied the stash (changes back)</li>
+</ul>
+<p><img src="https://i.loli.net/2019/05/15/5cdc07929a4cc25349.png" alt="image"></p>
+<ul>
+<li>Delete the stash</li>
+</ul>
+<p><img src="https://i.loli.net/2019/05/15/5cdc07b76da9c48692.png" alt="image"></p>
+<h2 id="4-用IDE工具的shelve的功能"><a href="#4-用IDE工具的shelve的功能" class="headerlink" title="4. 用IDE工具的shelve的功能"></a>4. 用IDE工具的shelve的功能</h2><p>有一些IDE工具提供了shelve的功能，shelve的意思是“将…搁在一边”，即把还没写完的代码先搁在一边。我开发都是使用jetbrains公司的IDEA和PhpStorm，它们就提供了shelve的功能，方法：</p>
+<p>首先在IDE的底部找到“Changes”，点开会有local的选项卡，选中你要搁置的代码，点击右键，选择“Shelve Changes”，在提交的输入框中输入你的注释，以便回来的时候识别你需要的版本，点击“Shelve Changes”键即可。这时选项卡上会多一个“Shelf”的选项卡，里面就有你搁置的代码。</p>
+<p>这时候你可以去old分支修改代码，改完了之后回到new分支，到“Shelf”选项卡下选择你要恢复的代码或者版本，点击右键选择“Unshelve Changes”，你的搁置的代码就回来了。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a href="https://git-scm.com/book/zh/v1/Git-%E5%B7%A5%E5%85%B7-%E5%82%A8%E8%97%8F%EF%BC%88Stashing%EF%BC%89" target="_blank" rel="noopener">Git 工具 - 储藏（Stashing）</a></li>
+<li><a href="http://www.tonitech.com/2344.html" target="_blank" rel="noopener">git切换分支保存修改的代码的方法</a></li>
+</ol>
+
+  </article>
+</div>
+
+
+    
+<div class="container disqus-container">
+  <div id="disqus_thread"></div>
+</div>
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://github.provenr.cn/2019/05/15/git/git切换分支保存修改的代码的方法/";
+    this.page.identifier = 1557952166;
+  };
+
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://blog-provenr-cn.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <div class="clearfix">
+    <a href="http://github.provenr.cn" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2019 Provenr</li>
+      <li><a href="http://github.provenr.cn">Home</a></li>
+      
+      <li><a href="https://provenr.github.io/">Github</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+    </div>
+    
+  </footer>
+</div>
+
+
+
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>

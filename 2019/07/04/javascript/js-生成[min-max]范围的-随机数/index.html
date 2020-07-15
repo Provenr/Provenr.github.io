@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    js 生成[min,max]范围的 随机数 | Provenr
+  </title>
+  <meta name="description" content="没有比脚更长的路，走过去，前面是春天！">
+  
+  <meta name="keywords" content="
+  随机数,javaScript
+  ">
+  
+  <meta name="author" content="Provenr">
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="theme-color" content="#1e2327">
+  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
+
+  <link rel="icon" type="image/x-icon" href="http://www.provenr.cn/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+  
+<script>
+  var _hmt = _hmt || [];
+  (function(){var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?e56a1706ae9d773852a4a03368b51f86";
+    var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script>
+
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+</head>
+
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/archives">Archives</a></li>
+        
+        
+        <li><a href="/categories">Categories</a></li>
+        
+        
+        <li><a href="/tags">Tags</a></li>
+        
+        
+        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="/avatar/provenr.jpg"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/archives" class="header-toolbar-left"><i
+                  class="fa fa-file-text"></i> Posts </a>
+        <a href="/archives"
+           class="header-toolbar-right"> 26 </a>
+      </li>
+      <li>
+        <a href="/tags" class="header-toolbar-left"><i
+                  class="fa fa-tags"></i> Tags </a>
+        <a href="/tags"
+           class="header-toolbar-right"> 36 </a>
+      </li>
+      <li>
+        <a href="/categories" class="header-toolbar-left"><i
+                  class="fa fa-folder-open"></i> Categories </a>
+        <a href="/categories"
+           class="header-toolbar-right"> 13 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/">Provenr</a>
+      
+      
+    </h2>
+  </div>
+
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
+
+<aside class="side-container desktop-only">
+    
+        <div id="toc">
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#预备知识"><span class="toc-text">预备知识</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#生成-min-max-的随机数"><span class="toc-text">生成[min,max]的随机数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#过程分析"><span class="toc-text">过程分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#所以生成-1-max-的随机数，公式如下："><span class="toc-text">所以生成[1,max]的随机数，公式如下：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#所以生成-1-max-的随机数，公式如下：-1"><span class="toc-text">所以生成[1,max]的随机数，公式如下：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#所以希望生成-min-max-的随机数，公式如下："><span class="toc-text">所以希望生成[min,max]的随机数，公式如下：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#参考链接"><span class="toc-text">参考链接</span></a></li></ol></li></ol></li></ol>
+        </div>
+    
+</aside>
+
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    Provenr
+
+    <span class="post-date float-right" title="{{moment(1562283739000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      <i class="fa fa-pencil-square-o"></i>
+<!--      {{moment(1562283739000).fromNow()}}-->
+      last modified: {{moment(1562283739000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>js 生成[min,max]范围的 随机数</h1>
+    <p>[TOC]</p>
+<h1 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h1><blockquote>
+<p>随机数生成 利用 Math.random()</p>
+</blockquote>
+<ol>
+<li><p>Math.random();  //0.0 ~ 1.0 之间的一个伪随机数。【包含0不包含1】</p>
+</li>
+<li><p>Math.ceil();  //向上取整。</p>
+</li>
+<li><p>Math.floor();  //向下取整。</p>
+</li>
+<li><p>Math.round();  //四舍五入。</p>
+</li>
+</ol>
+<p>获取 [1, 10]的随机数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Math.ceil(Math.random()*10);      // 获取从1到10的随机整数 ，取0的概率极小。</span><br><span class="line"></span><br><span class="line">Math.round(Math.random());   //可均衡获取0到1的随机整数。</span><br><span class="line"></span><br><span class="line">Math.floor(Math.random()*10);  //可均衡获取0到9的随机整数。</span><br><span class="line"></span><br><span class="line">Math.round(Math.random()*10);  //基本均衡获取0到10的随机整数，其中获取最小值0和最大值10的几率少一半。</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>==使用math.round()，其中获取最小值0和最大值10的几率少一半。因为结果在0~0.4 为0，0.5到1.4为1…8.5到9.4为9，9.5到9.9为10。所以头尾的分布区间只有其他数字的一半。==</p>
+</blockquote>
+<h1 id="生成-min-max-的随机数"><a href="#生成-min-max-的随机数" class="headerlink" title="生成[min,max]的随机数"></a>生成[min,max]的随机数</h1><h2 id="过程分析"><a href="#过程分析" class="headerlink" title="过程分析"></a>过程分析</h2><blockquote>
+<p>Math.random()生成[0,1)的数，所以<br>Math.random()*5生成{0,5)的数。</p>
+<p>通常期望得到整数，所以要对得到的结果处理一下。</p>
+<p>parseInt()，Math.floor()，Math.ceil()和Math.round()都可得到整数。</p>
+<p>parseInt()和Math.floor()结果都是向下取整。</p>
+<p>所以Math.random()*5生成的都是[0,4] 的随机整数。</p>
+</blockquote>
+<h2 id="所以生成-1-max-的随机数，公式如下："><a href="#所以生成-1-max-的随机数，公式如下：" class="headerlink" title="所以生成[1,max]的随机数，公式如下："></a>所以生成[1,max]的随机数，公式如下：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Math.floor(Math.random() * max) + 1</span><br></pre></td></tr></table></figure>
+
+<h2 id="所以生成-1-max-的随机数，公式如下：-1"><a href="#所以生成-1-max-的随机数，公式如下：-1" class="headerlink" title="所以生成[1,max]的随机数，公式如下："></a>所以生成[1,max]的随机数，公式如下：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Math.floor(Math.random()*(max+1));</span><br></pre></td></tr></table></figure>
+
+<h2 id="所以希望生成-min-max-的随机数，公式如下："><a href="#所以希望生成-min-max-的随机数，公式如下：" class="headerlink" title="所以希望生成[min,max]的随机数，公式如下："></a>所以希望生成[min,max]的随机数，公式如下：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Math.floor(Math.random()*(max-min+1)+min);</span><br></pre></td></tr></table></figure>
+
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p>【1】<a href="https://www.cnblogs.com/starof/p/4988516.html" target="_blank" rel="noopener">生成[min,max]范围的 随机数</a></p>
+
+  </article>
+</div>
+
+
+    
+<div class="container disqus-container">
+  <div id="disqus_thread"></div>
+</div>
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://github.provenr.cn/2019/07/04/javascript/js-生成[min-max]范围的-随机数/";
+    this.page.identifier = 1562283739;
+  };
+
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://blog-provenr-cn.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <div class="clearfix">
+    <a href="http://github.provenr.cn" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2019 Provenr</li>
+      <li><a href="http://github.provenr.cn">Home</a></li>
+      
+      <li><a href="https://provenr.github.io/">Github</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+    </div>
+    
+  </footer>
+</div>
+
+
+
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    JS来获取鼠标坐标详解 | Provenr
+  </title>
+  <meta name="description" content="没有比脚更长的路，走过去，前面是春天！">
+  
+  <meta name="keywords" content="
+  javascript
+  ">
+  
+  <meta name="author" content="Provenr">
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="theme-color" content="#1e2327">
+  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
+
+  <link rel="icon" type="image/x-icon" href="http://www.provenr.cn/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+  
+<script>
+  var _hmt = _hmt || [];
+  (function(){var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?e56a1706ae9d773852a4a03368b51f86";
+    var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script>
+
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+</head>
+
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/archives">Archives</a></li>
+        
+        
+        <li><a href="/categories">Categories</a></li>
+        
+        
+        <li><a href="/tags">Tags</a></li>
+        
+        
+        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="/avatar/provenr.jpg"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/archives" class="header-toolbar-left"><i
+                  class="fa fa-file-text"></i> Posts </a>
+        <a href="/archives"
+           class="header-toolbar-right"> 26 </a>
+      </li>
+      <li>
+        <a href="/tags" class="header-toolbar-left"><i
+                  class="fa fa-tags"></i> Tags </a>
+        <a href="/tags"
+           class="header-toolbar-right"> 36 </a>
+      </li>
+      <li>
+        <a href="/categories" class="header-toolbar-left"><i
+                  class="fa fa-folder-open"></i> Categories </a>
+        <a href="/categories"
+           class="header-toolbar-right"> 13 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/">Provenr</a>
+      
+      
+    </h2>
+  </div>
+
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
+
+<aside class="side-container desktop-only">
+    
+        <div id="toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#js-获取鼠标坐标方法："><span class="toc-text">js 获取鼠标坐标方法：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#参考链接"><span class="toc-text">参考链接</span></a></li></ol></li></ol>
+        </div>
+    
+</aside>
+
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    Provenr
+
+    <span class="post-date float-right" title="{{moment(1560708737000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      <i class="fa fa-pencil-square-o"></i>
+<!--      {{moment(1560708737000).fromNow()}}-->
+      last modified: {{moment(1560708737000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>JS来获取鼠标坐标详解</h1>
+    <h2 id="js-获取鼠标坐标方法："><a href="#js-获取鼠标坐标方法：" class="headerlink" title="js 获取鼠标坐标方法："></a>js 获取鼠标坐标方法：</h2><ul>
+<li><p>e.clientX/Y</p>
+</li>
+<li><p>e.pageX/Y</p>
+</li>
+<li><p>e.offsetX/Y</p>
+</li>
+<li><p>e.layerX/Y</p>
+</li>
+<li><p>e.screenX/Y</p>
+</li>
+<li><p><strong>clientX/clientY</strong></p>
+<p>  获取到的是触发点相对浏览器可视区域左上角距离，不随页面滚动而改变(不包含<strong>==工具栏==、==导航栏==</strong>等等）</p>
+<p>  兼容性：所有浏览器均支持</p>
+</li>
+<li><p><strong>screenX screenY</strong></p>
+<p>  是用来获取鼠标点击位置到屏幕显示器的距离，距离的最大值需根据<strong>屏幕分辨率的尺寸</strong>来计算。不随页面滚动而改变</p>
+<p>  兼容性：所有游览器都支持此属性。</p>
+</li>
+<li><p><strong>pageX pageY</strong></p>
+<blockquote>
+<p>page 和 client 类似，原点在屏幕左上角，client之浏览器显示区域，文档类容一屏装不下时，会出现滚动条，此时<br>  pageY = clientY + document.documentElement.scrollTop(滚动条高度);</p>
+</blockquote>
+<p>  鼠标距离页面初始page原点的长度。</p>
+</li>
+<li><p><strong>offsetX/offsetY</strong></p>
+<p>  获取到是==触发点相对被触发dom的左上角距离==，不过左上角基准点在不同浏览器中有区别，其中在IE中以内容区左上角为基准点不包括边框，如果触发点在边框上会返回负值，而chrome中以边框左上角为基准点</p>
+<p>  兼容性：IE所有版本，chrome，Safari均完美支持，Firefox不支持</p>
+</li>
+<li><p><strong>layerX/layerY</strong></p>
+<p>  获取到的是==触发点相对被触发dom左上角的距离==，数值与offsetX/Y相同，这个变量就是==firefox用来替代offsetX/Y的==，基准点为边框左上角，但是有个条件就是，==被触发的dom需要设置为position:relative或者position:absolute==，否则会返回相对html文档区域左上角的距离。</p>
+<p>  兼容性：IE6/7/8不支持，opera不支持，IE9/10和Chrome、Safari均支持</p>
+</li>
+</ul>
+<p><img src="https://note.youdao.com/yws/public/resource/80719707d48b241ad1ae34ab7e29ff67/xmlnote/A216DC35B5CB4E709DBC0CEF57931594/2354" alt></p>
+<p>黑色div设置position:relative, margin:100px,<br>对蓝色div绑定事件，宽高50px</p>
+<blockquote>
+<p>screenX: 取值范围【200px ～ 250px】</p>
+<p>screenY: 取值范围【150px ～ 200px】+ 浏览器顶部导航高度</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>clientX: 取值范围【200px ～ 250px】</p>
+<p>clientY: 取值范围【150px ～ 200px】</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>page 和client 类似 ，垂直方向多了滚动条<br>pageX: 取值范围【200px ～ 250px】</p>
+<p>==不存在滚动条时：== pageY: 取值范围【50px ～ 100px 和client 一样</p>
+<p>==存在滚动条时：== pageY: 取值范围【50px ～ 100px】+ document.documentElement.scrollTop(滚动条高度)</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>被触发dom的左上角距离蓝色盒子左上角为原点（0，0）<br>offsetX: 取值范围【0px ～ 50px】</p>
+<p>offsetY: 取值范围【0px ～ 50px】</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>layer 黑色盒子设置相对行为position:relative，layer 取值相对黑色盒子<br>layerX: 取值范围【100px ～ 150px】</p>
+<p>layerY: 取值范围【50px ～ 100px】</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">测试数据</span><br><span class="line">screenX:229 —— screenY:313</span><br><span class="line">clientX:229 —— clientY:179</span><br><span class="line">layerX:129 —— layerY:79</span><br><span class="line">offsetX:30 —— offsetY:29</span><br><span class="line">pageX:229 —— pageY:179</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>==Tips:== 外界一个显示器使用两个显示器时，当把浏览器在左边副显示器时上，screenX为负值， 相对于右边的主显示器左上角为原点</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">  &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;</span><br><span class="line">  &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">  &lt;style&gt;</span><br><span class="line">    *&#123;</span><br><span class="line">      margin: 0;</span><br><span class="line">    &#125;</span><br><span class="line">    body&#123;</span><br><span class="line">      height: 1900px;</span><br><span class="line">    &#125;</span><br><span class="line">    .box&#123;</span><br><span class="line">      margin-top: 8px;</span><br><span class="line">      margin-left: 8px;</span><br><span class="line">      width: 400px;</span><br><span class="line">      height: 200px;</span><br><span class="line">      background: #123;</span><br><span class="line">      position: relative;</span><br><span class="line">    &#125;</span><br><span class="line">    .i&#123;</span><br><span class="line">      width: 20px;</span><br><span class="line">      height: 20px;</span><br><span class="line">      margin-left: 100px;</span><br><span class="line">      background: rgb(11, 127, 243);</span><br><span class="line">    &#125;</span><br><span class="line">  &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;div class=&quot;box&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;i&quot;&gt;&lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  let element = document.querySelector(&apos;.i&apos;)</span><br><span class="line">  element.addEventListener(&apos;mousedown&apos;, (e) =&gt; &#123;</span><br><span class="line">      console.log(&apos;screenX:&apos; + e.screenX + &apos; —— &apos; + &apos;screenY:&apos; + e.screenY)</span><br><span class="line">      console.log(&apos;clientX:&apos; + e.clientX + &apos; —— &apos; + &apos;clientY:&apos; + e.clientY)</span><br><span class="line">      console.log(&apos;layerX:&apos; + e.layerX + &apos; —— &apos; + &apos;layerY:&apos; + e.layerY)</span><br><span class="line">      console.log(&apos;offsetX:&apos; + e.offsetX + &apos; —— &apos; + &apos;offsetY:&apos; + e.offsetY)</span><br><span class="line">      console.log(&apos;pageX:&apos; + e.pageX + &apos; —— &apos; + &apos;pageY:&apos; + e.pageY)</span><br><span class="line">      console.log(&apos;——————————————————&apos;)</span><br><span class="line">    &#125;)</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p><a href="https://segmentfault.com/a/1190000002405897" target="_blank" rel="noopener">1. https://segmentfault.com/a/1190000002405897</a></p>
+
+  </article>
+</div>
+
+
+    
+<div class="container disqus-container">
+  <div id="disqus_thread"></div>
+</div>
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://github.provenr.cn/2019/06/16/javascript/js-获取鼠标坐标详解/";
+    this.page.identifier = 1560708737;
+  };
+
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://blog-provenr-cn.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <div class="clearfix">
+    <a href="http://github.provenr.cn" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2019 Provenr</li>
+      <li><a href="http://github.provenr.cn">Home</a></li>
+      
+      <li><a href="https://provenr.github.io/">Github</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+    </div>
+    
+  </footer>
+</div>
+
+
+
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>

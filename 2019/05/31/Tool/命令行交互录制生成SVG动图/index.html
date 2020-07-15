@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    命令行交互录制生成SVG动图 | Provenr
+  </title>
+  <meta name="description" content="没有比脚更长的路，走过去，前面是春天！">
+  
+  <meta name="keywords" content="
+  asciinema,命令行录制
+  ">
+  
+  <meta name="author" content="Provenr">
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="theme-color" content="#1e2327">
+  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
+
+  <link rel="icon" type="image/x-icon" href="http://www.provenr.cn/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+  
+<script>
+  var _hmt = _hmt || [];
+  (function(){var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?e56a1706ae9d773852a4a03368b51f86";
+    var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script>
+
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+</head>
+
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/archives">Archives</a></li>
+        
+        
+        <li><a href="/categories">Categories</a></li>
+        
+        
+        <li><a href="/tags">Tags</a></li>
+        
+        
+        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="/avatar/provenr.jpg"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/archives" class="header-toolbar-left"><i
+                  class="fa fa-file-text"></i> Posts </a>
+        <a href="/archives"
+           class="header-toolbar-right"> 26 </a>
+      </li>
+      <li>
+        <a href="/tags" class="header-toolbar-left"><i
+                  class="fa fa-tags"></i> Tags </a>
+        <a href="/tags"
+           class="header-toolbar-right"> 36 </a>
+      </li>
+      <li>
+        <a href="/categories" class="header-toolbar-left"><i
+                  class="fa fa-folder-open"></i> Categories </a>
+        <a href="/categories"
+           class="header-toolbar-right"> 13 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/">Provenr</a>
+      
+      
+    </h2>
+  </div>
+
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
+
+<aside class="side-container desktop-only">
+    
+        <div id="toc">
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-asciinema的使用"><span class="toc-text">1.  asciinema的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#asciinema的安装"><span class="toc-text">asciinema的安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#asciinema使用"><span class="toc-text">asciinema使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#rec-filename"><span class="toc-text">rec [filename]</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#play-filename"><span class="toc-text">play [filename]</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#cat"><span class="toc-text">cat </span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结束录制"><span class="toc-text">结束录制</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-数据转SVG"><span class="toc-text">2. 数据转SVG</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#svg-term-cli"><span class="toc-text">svg-term-cli</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#已经存在-录制好到json-文件-可以下面命令生成svg"><span class="toc-text">已经存在 录制好到json 文件 可以下面命令生成svg</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考链接"><span class="toc-text">参考链接</span></a></li></ol></li></ol></li></ol>
+        </div>
+    
+</aside>
+
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    Provenr
+
+    <span class="post-date float-right" title="{{moment(1559318746000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      <i class="fa fa-pencil-square-o"></i>
+<!--      {{moment(1559318746000).fromNow()}}-->
+      last modified: {{moment(1559318746000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>命令行交互录制生成SVG动图</h1>
+    <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>配置服务器时，操作命令比较多，复杂，为了完整记录你在终端中执行的操作，将其保存以供后续参考学习，发现一个神器<a href="https://github.com/asciinema/asciinema" target="_blank" rel="noopener">asciinema</a><br>将终端会话录制成 SVG 动画</p>
+<h2 id="1-asciinema的使用"><a href="#1-asciinema的使用" class="headerlink" title="1.  asciinema的使用"></a>1.  asciinema的使用</h2><h3 id="asciinema的安装"><a href="#asciinema的安装" class="headerlink" title="asciinema的安装"></a>asciinema的安装</h3><p>因为使用的Mac系统 安装使用brew，安装命令如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">brew install asciinema</span><br></pre></td></tr></table></figure>
+
+<h3 id="asciinema使用"><a href="#asciinema使用" class="headerlink" title="asciinema使用"></a>asciinema使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> asciinema rec XXXX/XX.json</span><br><span class="line"></span><br><span class="line"># 录制屏幕数据放在 Desktop目录下的 centos.json文件中</span><br><span class="line"> asciinema rec Desktop/centos.json</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> #  (choose from &apos;rec&apos;, &apos;play&apos;, &apos;cat&apos;, &apos;upload&apos;, &apos;auth&apos;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><h4 id="rec-filename"><a href="#rec-filename" class="headerlink" title="rec [filename]"></a>rec [filename]</h4><blockquote>
+<p> 记录终端会话</p>
+</blockquote>
+</li>
+<li><h4 id="play-filename"><a href="#play-filename" class="headerlink" title="play [filename]"></a>play [filename]</h4><blockquote>
+<p> 回放记录asciicast终端</p>
+</blockquote>
+</li>
+</ul>
+<ol>
+<li><p>开启记录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">asciinema rec</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>结束记录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;ctrl-d&gt; 结束记录</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>3.结束记录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;enter&gt; 上传到 asciinema.org,</span><br><span class="line">&lt;ctrl-c&gt; 存到本地，如果上传 生成一个链接 URL</span><br></pre></td></tr></table></figure>
+
+<p>4.回放记录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">asciinema play &lt;URL&gt;</span><br><span class="line"></span><br><span class="line"># 回放记录操作</span><br><span class="line"></span><br><span class="line">#  Space（空格） - 暂停/播放</span><br><span class="line">#  &lt;.&gt; 点操作 - 暂停时 可以步进</span><br><span class="line">#  &lt;Ctrl+C&gt; - 退出.</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><h4 id="cat"><a href="#cat" class="headerlink" title="cat "></a>cat <filename></filename></h4><blockquote>
+<p> 打印完整记录asciicast的输出终端。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="结束录制"><a href="#结束录制" class="headerlink" title="结束录制"></a>结束录制</h3><p>Ctrl + D 结束录制，XX.json文件就保存了我们的命令行交互记录。</p>
+<h2 id="2-数据转SVG"><a href="#2-数据转SVG" class="headerlink" title="2. 数据转SVG"></a>2. 数据转SVG</h2><h3 id="svg-term-cli"><a href="#svg-term-cli" class="headerlink" title="svg-term-cli"></a><a href="https://www.npmjs.com/package/svg-term-cli" target="_blank" rel="noopener">svg-term-cli</a></h3><p>用于转换 XX.json文件中数据转化为 svg 格式动图</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">npm install -g svg-term-cli</span><br><span class="line"></span><br><span class="line"> 将命令转为svg 图片</span><br><span class="line">cat Desktop/centos.json | svg-term --height=40 --out=Desktop/centos.svg --window</span><br></pre></td></tr></table></figure>
+
+<h3 id="已经存在-录制好到json-文件-可以下面命令生成svg"><a href="#已经存在-录制好到json-文件-可以下面命令生成svg" class="headerlink" title="已经存在 录制好到json 文件 可以下面命令生成svg"></a>已经存在 录制好到json 文件 可以下面命令生成svg</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svg-term --in Desktop/local.json --out Desktop/1.svg --height=50 --window</span><br></pre></td></tr></table></figure>
+
+<p>–in        json file to use as input<br>–width     列宽 [number]<br>–height    height  [number]<br>–window    用窗口渲染</p>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p>【1】<a href="https://blog.csdn.net/u014628388/article/details/81085635" target="_blank" rel="noopener">https://blog.csdn.net/u014628388/article/details/81085635</a><br>【2】<a href="https://github.com/asciinema/asciinema" target="_blank" rel="noopener">https://github.com/asciinema/asciinema</a></p>
+
+  </article>
+</div>
+
+
+    
+<div class="container disqus-container">
+  <div id="disqus_thread"></div>
+</div>
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://github.provenr.cn/2019/05/31/Tool/命令行交互录制生成SVG动图/";
+    this.page.identifier = 1559318746;
+  };
+
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://blog-provenr-cn.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <div class="clearfix">
+    <a href="http://github.provenr.cn" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2019 Provenr</li>
+      <li><a href="http://github.provenr.cn">Home</a></li>
+      
+      <li><a href="https://provenr.github.io/">Github</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+    </div>
+    
+  </footer>
+</div>
+
+
+
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>

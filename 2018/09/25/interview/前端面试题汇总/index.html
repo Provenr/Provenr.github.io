@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    前端面试题汇总 | Provenr
+  </title>
+  <meta name="description" content="没有比脚更长的路，走过去，前面是春天！">
+  
+  <meta name="keywords" content="
+  
+  ">
+  
+  <meta name="author" content="Provenr">
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="theme-color" content="#1e2327">
+  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
+
+  <link rel="icon" type="image/x-icon" href="http://www.provenr.cn/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+  
+<script>
+  var _hmt = _hmt || [];
+  (function(){var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?e56a1706ae9d773852a4a03368b51f86";
+    var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script>
+
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+</head>
+
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/archives">Archives</a></li>
+        
+        
+        <li><a href="/categories">Categories</a></li>
+        
+        
+        <li><a href="/tags">Tags</a></li>
+        
+        
+        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="/avatar/provenr.jpg"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/archives" class="header-toolbar-left"><i
+                  class="fa fa-file-text"></i> Posts </a>
+        <a href="/archives"
+           class="header-toolbar-right"> 26 </a>
+      </li>
+      <li>
+        <a href="/tags" class="header-toolbar-left"><i
+                  class="fa fa-tags"></i> Tags </a>
+        <a href="/tags"
+           class="header-toolbar-right"> 36 </a>
+      </li>
+      <li>
+        <a href="/categories" class="header-toolbar-left"><i
+                  class="fa fa-folder-open"></i> Categories </a>
+        <a href="/categories"
+           class="header-toolbar-right"> 13 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/">Provenr</a>
+      
+      
+    </h2>
+  </div>
+
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
+
+<aside class="side-container desktop-only">
+    
+        <div id="toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#样式类"><span class="toc-text">样式类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#过长文本处理"><span class="toc-text">过长文本处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于-position"><span class="toc-text">关于 position</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#float-有什么值-如何清除"><span class="toc-text">float 有什么值 ? 如何清除 ?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是盒子模型？"><span class="toc-text">什么是盒子模型？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用不同的盒模型"><span class="toc-text">使用不同的盒模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是-margin-折叠-外边距折叠"><span class="toc-text">什么是 margin 折叠 (外边距折叠) ?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#display-有什么值"><span class="toc-text">display 有什么值 ?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是-flex-布局"><span class="toc-text">什么是 flex 布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#描述一下-z-index-的规则"><span class="toc-text">描述一下 z-index 的规则 ?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#简单布局题目"><span class="toc-text">简单布局题目</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Javascript"><span class="toc-text">Javascript</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#列举-Javascript-的基本类型"><span class="toc-text">列举 Javascript 的基本类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#列举Javascript的引用类型"><span class="toc-text">列举Javascript的引用类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#递归将树型结构扁平化-遍历"><span class="toc-text">递归将树型结构扁平化 (遍历)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#repeat-方法"><span class="toc-text">repeat 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#typeof-和-instanceof-的区别"><span class="toc-text">typeof 和 instanceof 的区别 ?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是闭包-优缺点是什么"><span class="toc-text">什么是闭包, 优缺点是什么 ?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#作用域链"><span class="toc-text">作用域链</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#继承"><span class="toc-text">继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#new-Object-、-、Object-create的区别"><span class="toc-text">new Object() 、{} 、Object.create的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ES6-语言特性"><span class="toc-text">ES6 语言特性 ?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#箭头函数和普通函数的区别是什么"><span class="toc-text">箭头函数和普通函数的区别是什么 ?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Array-相关"><span class="toc-text">Array 相关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#请简述-call-apply的区别"><span class="toc-text">请简述 call, apply的区别 ?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#严格模式？"><span class="toc-text">严格模式？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对Promise的理解"><span class="toc-text">对Promise的理解 ?</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网络类"><span class="toc-text">网络类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常用的请求方法有什么"><span class="toc-text">常用的请求方法有什么 ?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#简述常见的http状态码"><span class="toc-text">简述常见的http状态码 ?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#请求头中包含哪些字段，及其意义"><span class="toc-text">请求头中包含哪些字段，及其意义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#http缓存"><span class="toc-text">http缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是跨域"><span class="toc-text">什么是跨域 ?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一个页面从输入-URL-到页面加载显示完成，这个过程中都发生了什么？"><span class="toc-text">一个页面从输入 URL 到页面加载显示完成，这个过程中都发生了什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ajax原理及过程"><span class="toc-text">ajax原理及过程?</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTML"><span class="toc-text">HTML</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是事件代理，它的实现原理是什么？"><span class="toc-text">什么是事件代理，它的实现原理是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#window-onload-和-window-onDomReady-的区别"><span class="toc-text">window.onload 和 window.onDomReady 的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTML-语义化标签举例"><span class="toc-text">HTML 语义化标签举例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTML-语义化的意义"><span class="toc-text">HTML 语义化的意义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解释一下冒泡和捕获-w3c的标准模型是什么"><span class="toc-text">解释一下冒泡和捕获, w3c的标准模型是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#不用-jQuery-有哪些-API-可以用来选择DOM-节点"><span class="toc-text">不用 jQuery, 有哪些 API 可以用来选择DOM 节点 ?</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#移动端"><span class="toc-text">移动端</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#移动端事件"><span class="toc-text">移动端事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何实现一个移动端”tap”事件"><span class="toc-text">如何实现一个移动端”tap”事件?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动端适配"><span class="toc-text">移动端适配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是点透"><span class="toc-text">什么是点透?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调试"><span class="toc-text">调试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#抓包"><span class="toc-text">抓包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#性能优化"><span class="toc-text">性能优化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#设计思路"><span class="toc-text">设计思路</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#表格"><span class="toc-text">表格</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Suggestion"><span class="toc-text">Suggestion</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模态窗"><span class="toc-text">模态窗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拖拽"><span class="toc-text">拖拽</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#版本管理工具"><span class="toc-text">版本管理工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#团队协作"><span class="toc-text">团队协作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#框架相关"><span class="toc-text">框架相关</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#用过哪些框架，介绍下你最熟悉的框架，为什么用它"><span class="toc-text">用过哪些框架，介绍下你最熟悉的框架，为什么用它?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AngularJS"><span class="toc-text">AngularJS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ReactJS"><span class="toc-text">ReactJS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vue"><span class="toc-text">Vue</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#virtual-DOM"><span class="toc-text">virtual DOM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#webpack"><span class="toc-text">webpack</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#项目经验"><span class="toc-text">项目经验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#性能优化-1"><span class="toc-text">性能优化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#算法相关"><span class="toc-text">算法相关</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数字显示屏"><span class="toc-text">数字显示屏</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#学习方法-amp-自驱力"><span class="toc-text">学习方法 &amp; 自驱力</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#平时遇到问题的解决步骤"><span class="toc-text">平时遇到问题的解决步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对前端领域之外的知识了解"><span class="toc-text">对前端领域之外的知识了解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#平时如何给自己充电"><span class="toc-text">平时如何给自己充电?</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考题目"><span class="toc-text">参考题目</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#原型链-amp-amp-闭包"><span class="toc-text">原型链 &amp;&amp; 闭包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hasOwnProperty-NaN"><span class="toc-text">hasOwnProperty</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#promise-相关"><span class="toc-text">promise 相关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#继承-1"><span class="toc-text">继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#循环周期-amp-amp-event-loop"><span class="toc-text">循环周期 &amp;&amp; event loop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#事件委托"><span class="toc-text">事件委托</span></a></li></ol></li></ol>
+        </div>
+    
+</aside>
+
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    Provenr
+
+    <span class="post-date float-right" title="{{moment(1537892976000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      <i class="fa fa-pencil-square-o"></i>
+<!--      {{moment(1537892976000).fromNow()}}-->
+      last modified: {{moment(1537892976000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>前端面试题汇总</h1>
+    <h2 id="样式类"><a href="#样式类" class="headerlink" title="样式类"></a>样式类</h2><h3 id="过长文本处理"><a href="#过长文本处理" class="headerlink" title="过长文本处理"></a>过长文本处理</h3><ul>
+<li><p><strong>Quesiton:</strong> 何实现文本截断 (过长时的省略)? 实现时, 有没有什么需要考虑的点 ?</p>
+<p><strong>Tips:</strong> <code>overflow: hidden;</code> <code>text-overflow: ellipsis;</code> <code>white-space: nowrap;</code></p>
+<ul>
+<li><p><strong>Q:</strong> 用户需要看完整文本, 怎么办?</p>
+<p><strong>T:</strong> <code>title</code> <code>tooltip</code></p>
+</li>
+<li><p><strong>Q:</strong> 用户需要复制文本</p>
+<p><strong>T:</strong> <code>tooltip</code> <code>程序实现文本全选功能</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><strong>Quesiton:</strong> 如何实现多行省略</p>
+<p><strong>Tips:</strong><br><code>1. 使用javascript进行数据字符串切割，并在末尾增加...</code><br><code>2. 创建一个 &lt;div&gt;...&lt;/div&gt;, 使用CSS相对位置，浮动，定位等方式固定在文本区域末端</code><br><code>3. 使用webkit提供的方法（存在兼容性问题）</code> 参考 : <a href="https://angusyang9.github.io/2018/09/25/用css写一个多行文本省略/" target="_blank" rel="noopener">使用CSS实现省略的具体代码配webkit的方法 定位问题</a></p>
+</li>
+</ul>
+<h3 id="关于-position"><a href="#关于-position" class="headerlink" title="关于 position"></a>关于 position</h3><ul>
+<li><p><strong>Quesiton:</strong> position 有什么值</p>
+<p>  <strong>Tips:</strong> <code>static</code> <code>absolute</code> <code>relative</code> <code>fixed</code> <code>默认 static</code></p>
+<ul>
+<li><p><strong>Q:</strong> 什么区别 ?</p>
+<p><strong>T:</strong><br><code>1. static, relative 在 dom 流中, absolute, fixed 脱离文档流</code><br><code>2. relative, absolute, fixed 内部, absolute 的位置计算变成相对</code><br><code>3. relative 相对于自身, absolute 相对于父级容器, fixed 相对于屏幕</code></p>
+</li>
+</ul>
+<ul>
+<li><strong>Q:</strong> 对sticky有了解吗?</li>
+</ul>
+</li>
+</ul>
+<h3 id="float-有什么值-如何清除"><a href="#float-有什么值-如何清除" class="headerlink" title="float 有什么值 ? 如何清除 ?"></a>float 有什么值 ? 如何清除 ?</h3><ul>
+<li><p><strong>Quesiton:</strong> float 有什么值 ? 如何清除 ?</p>
+<p><strong>Tips:</strong> <code>right</code> <code>left</code></p>
+<ul>
+<li><p><strong>Q:</strong> 清除浮动</p>
+<p>  <strong>T:</strong><br>  <code>1. 空标签, clear:both</code><br>  <code>2. 给包含浮动元素的父标签添加属性 overflow:auto; zoom:1(用于兼容IE6)</code><br>  <code>3. 使用after伪对象（只适用于非IE浏览器；必须为需要清除浮动元素的伪对象中设置 height:0）</code></p>
+</li>
+<li><p><strong>Q:</strong> clear</p>
+<p>  <strong>Q:</strong> 有什么值 ?<br>  <strong>T:</strong> <code>left</code> <code>right</code> <code>both</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="什么是盒子模型？"><a href="#什么是盒子模型？" class="headerlink" title="什么是盒子模型？"></a>什么是盒子模型？</h3><p>  <code>1. 每个元素表示为一个矩形盒子</code><br>  <code>2. 盒子的四个要素 : 外边距, 边框, 内填充, 内容</code><br>  <code>3. 用于做 dom 流中, 元素定位的依据</code><br> <code>4. 标准盒模型和非标准模型的区别</code><br>  参考：<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Box_Model/Introduction_to_the_CSS_box_model" target="_blank" rel="noopener">盒子模型详解</a></p>
+<h3 id="使用不同的盒模型"><a href="#使用不同的盒模型" class="headerlink" title="使用不同的盒模型"></a>使用不同的盒模型</h3><p>  <code>主要用来控制元素的盒模型的解析模式</code></p>
+<ul>
+<li><p><strong>Quesiton:</strong> box-sizing, 有什么值?</p>
+<p>  <strong>Tips:</strong><br>  <code>1. content-box 默认值 宽度和高度分别应用到元素的内容框, 在宽度和高度之外绘制元素的内边距和边框</code><br>  <code>2. border-box 为元素设定的宽度和高度决定了元素的边框盒, 为元素指定的任何内边距和边框都将在已设定的宽度和高度内进行绘制</code></p>
+</li>
+</ul>
+<h3 id="什么是-margin-折叠-外边距折叠"><a href="#什么是-margin-折叠-外边距折叠" class="headerlink" title="什么是 margin 折叠 (外边距折叠) ?"></a>什么是 margin 折叠 (外边距折叠) ?</h3><p>  <code>1. 两个相邻元素, margin 会取最大的为结果</code><br>  <code>2. 可能的场景: 相邻元素, 父级元素与第一个或最后一个子元素, 空盒子元素 (自身的上下 margin)</code><br>  <code>3. BFC相关内容</code><br>  参考：<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing" target="_blank" rel="noopener">margin collapsing</a></p>
+<h3 id="display-有什么值"><a href="#display-有什么值" class="headerlink" title="display 有什么值 ?"></a>display 有什么值 ?</h3><p>  <code>inline, block, inline-block</code> </p>
+<ul>
+<li><p><strong>Quesiton:</strong> 还有什么值?</p>
+<p>  <strong>Tips:</strong> <code>ist-item, table, table-row, table-cell,flow, flex等</code></p>
+<ul>
+<li><p><strong>Q:</strong> inline 元素中能否加入 block 元素 ?<br><strong>T:</strong> <code>不能, 不是正确的格式。</code>参考： <a href="https://stackoverflow.com/questions/1371307/displayblock-inside-displayinline" target="_blank" rel="noopener">https://stackoverflow.com/questions/1371307/displayblock-inside-displayinline</a></p>
+</li>
+<li><p><strong>Q:</strong> inline-block 呢?<br><strong>T:</strong> <code>能</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="什么是-flex-布局"><a href="#什么是-flex-布局" class="headerlink" title="什么是 flex 布局"></a>什么是 flex 布局</h3><p>  <code>1. flex - flexible box 的缩写</code><br>  <code>2. 弹性布局</code><br>  <code>3. 为解决传统布局方案的不足 (如垂直居中)</code><br>  <code>4. 常用的容器属性: flex-direction, flex-wrap, flex-flow, justify-content, align-items, align-content</code></p>
+<ul>
+<li><p><strong>Quesiton:</strong> 会有什么问题?</p>
+<p>   <strong>Tips:</strong><br>   <code>1. 兼容性 如 IE10+</code><br>   <code>2. 旧代码改造成本</code></p>
+<p>参考：<a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html</a></p>
+</li>
+</ul>
+<h3 id="描述一下-z-index-的规则"><a href="#描述一下-z-index-的规则" class="headerlink" title="描述一下 z-index 的规则 ?"></a>描述一下 z-index 的规则 ?</h3><p>  <code>1. 无设置 z-index 或 相等的非static 元素, 后面元素覆盖前面元素</code><br>  <code>2. 同一堆叠上下文 z-index stack context 的元素, z-index 较大者覆盖较小者</code><br>  <code>3. 不同堆叠上下文, 以同级的那个层级的父级元素, 按照第二规则进行判断</code><br>  参考： <a href="http://www.cnblogs.com/xiaohuochai/p/5304619.html" target="_blank" rel="noopener">http://www.cnblogs.com/xiaohuochai/p/5304619.html</a></p>
+<h3 id="简单布局题目"><a href="#简单布局题目" class="headerlink" title="简单布局题目"></a>简单布局题目</h3><ul>
+<li><strong>Question：</strong> <ul>
+<li>左右三栏布局，左右贴边， 中间自适应</li>
+<li>上下三栏布局，上边贴边，中间自适应</li>
+<li>垂直居中</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="Javascript"><a href="#Javascript" class="headerlink" title="Javascript"></a>Javascript</h2><h3 id="列举-Javascript-的基本类型"><a href="#列举-Javascript-的基本类型" class="headerlink" title="列举 Javascript 的基本类型"></a>列举 Javascript 的基本类型</h3><p>  <code>1. null, undefined, number, boolean, string</code><br>  <code>2. ES6 Symbol</code></p>
+<h3 id="列举Javascript的引用类型"><a href="#列举Javascript的引用类型" class="headerlink" title="列举Javascript的引用类型"></a>列举Javascript的引用类型</h3><p>  <code>Object, Array, Function, Date, RegExp</code></p>
+<h3 id="递归将树型结构扁平化-遍历"><a href="#递归将树型结构扁平化-遍历" class="headerlink" title="递归将树型结构扁平化 (遍历)"></a>递归将树型结构扁平化 (遍历)</h3>  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123; <span class="comment">/* 0 或 N 个 Node 节点 children: [] */</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> treeRoot = <span class="keyword">new</span> Node(); <span class="comment">/* 构造 tree root 的代码省略 *、</span></span><br><span class="line"><span class="comment">/* 任务要求, 写函数将树节点扁平化为一个 Array  [要求, 父级节点优先遍历] */</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>Question:</strong> 是否能写出递归遍历的方法</li>
+</ul>
+<h3 id="repeat-方法"><a href="#repeat-方法" class="headerlink" title="repeat 方法"></a>repeat 方法</h3><ul>
+<li><p><strong>Question:</strong> 题目</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> repeat = <span class="function"><span class="keyword">function</span> (<span class="params">str, count</span>) </span>&#123;</span><br><span class="line"><span class="comment">/* 将 str 重复 count 次, 并返回 */</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(repeat(<span class="string">'abc'</span>, <span class="number">3</span>)); <span class="comment">/* 输出 abcabcabc */</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Result:</strong><br><code>1. 是否能用迭代写出简单版本</code><br><code>2. 是否除了字符串拼接外, 能知道用 [].push [].join( ) 的方法</code><br><code>3. 是否能写出 new Array(count + 1).join(str)</code></p>
+</li>
+<li><p><strong>Answer(1):</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">repeat</span> (<span class="params">str, count</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(str != <span class="literal">undefined</span> &amp;&amp; count!= <span class="literal">undefined</span> &amp;&amp; count&gt;<span class="number">0</span> &amp;&amp; !<span class="built_in">isNaN</span>(count)) &#123;</span><br><span class="line">        <span class="comment">/* 1 */</span></span><br><span class="line">        <span class="keyword">var</span> s =<span class="string">''</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;count;i++)&#123;</span><br><span class="line">            s+=str;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* 2 */</span></span><br><span class="line">        <span class="keyword">var</span> arr = <span class="keyword">new</span> <span class="built_in">Array</span>(count + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> arr.join(str);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Answer(2) 递归:</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">repeat</span>(<span class="params">str ,count</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> s = <span class="string">''</span>;</span><br><span class="line">    rep(str,count);</span><br><span class="line">    <span class="keyword">return</span> s;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">rep</span>(<span class="params">str,count</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(count&lt;=<span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">        s+=str;</span><br><span class="line">        <span class="built_in">arguments</span>.callee(str,--count);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 存在全局变量 's' */</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<ul>
+<li><strong>Answer(3) Best:</strong><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">repeat</span>(<span class="params">str ,count</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> rep(<span class="string">''</span>,str,count);</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">rep</span>(<span class="params">s,str,count</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(count&lt;=<span class="number">0</span>) <span class="keyword">return</span> str;</span><br><span class="line">        s+=str;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">arguments</span>.callee(s,str,--count);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="typeof-和-instanceof-的区别"><a href="#typeof-和-instanceof-的区别" class="headerlink" title="typeof 和 instanceof 的区别 ?"></a>typeof 和 instanceof 的区别 ?</h3><p>  <code>相同点： 检测变量类型</code></p>
+<ul>
+<li><p><strong>typeof:</strong><br><code>1. 操作符</code><br><code>2. 监测一个变量是不是基本数据类型的变量</code><br><code>3. 语法: typeof variable</code><br><code>4. 返回值为字符串</code></p>
+</li>
+<li><p><strong>instanceof:</strong><br><code>1.检测引用类型</code><br><code>2.语法: variable instanceof constructor</code><br><code>3.返回值为bool值</code></p>
+</li>
+</ul>
+<p>  <strong>最好查看相应题目</strong></p>
+<h3 id="什么是闭包-优缺点是什么"><a href="#什么是闭包-优缺点是什么" class="headerlink" title="什么是闭包, 优缺点是什么 ?"></a>什么是闭包, 优缺点是什么 ?</h3><p>  <code>1. 定义在一个函数内部的函数</code><br>  <code>2. 能够读取其他函数内部变量的函数</code></p>
+<ul>
+<li><p><strong>优点:</strong><br><code>1. 可以读取函数内部的变量</code><br><code>2. 让这些变量的值始终保持在内存中</code><br><code>3. 实现JS私有属性和私有方法, 保护变量的安全</code></p>
+</li>
+<li><p><strong>缺点:</strong><br><code>1. 内存消耗很大, 滥用会造成网页的性能问题</code><br><code>2. 在IE中可能导致内存泄露</code><br><code>3. 在退出函数之前，将不使用的局部变量全部删除</code><br><code>4. 会在父函数外部，改变父函数内部变量的值</code></p>
+</li>
+</ul>
+<h3 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a>作用域链</h3><ul>
+<li><p><strong>Questios:</strong></p>
+<ul>
+<li><p>[[props]]</p>
+<p><strong>Tips:</strong> <code>指向</code></p>
+</li>
+<li><p>prototype</p>
+</li>
+<li><p>继承链的尽头</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><h3 id="new-Object-、-、Object-create的区别"><a href="#new-Object-、-、Object-create的区别" class="headerlink" title="new Object() 、{} 、Object.create的区别"></a>new Object() 、{} 、Object.create的区别</h3><h3 id="ES6-语言特性"><a href="#ES6-语言特性" class="headerlink" title="ES6 语言特性 ?"></a>ES6 语言特性 ?</h3><ul>
+<li><p>let, const</p>
+<ul>
+<li><strong>Q:</strong> </li>
+</ul>
+<ol>
+<li><p>区别？</p>
+</li>
+<li><p>与var区别？</p>
+<ul>
+<li><p><strong>T:</strong></p>
+<p><code>1. 不能重复申明</code><br><code>2. 不能变量提升</code><br><code>3. 暂时性死区</code><br><code>4. 有块级作用域</code></p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>解构赋值</p>
+</li>
+<li><p>默认参数, rest参数</p>
+<ul>
+<li><strong>Q:</strong> 应用？</li>
+</ul>
+</li>
+<li><p>多行字符串</p>
+<ul>
+<li><p><strong>T:</strong> </p>
+<p><code>模板对象, 如 $ {NAME}</code></p>
+</li>
+</ul>
+</li>
+<li><p>Map &amp; Set</p>
+<ul>
+<li><strong>Q:</strong></li>
+</ul>
+<ol>
+<li>异同</li>
+<li>数组去重</li>
+</ol>
+</li>
+<li><p>增强的对象字面量</p>
+</li>
+<li><p>箭头函数</p>
+<ul>
+<li><strong>Q:</strong></li>
+</ul>
+<ol>
+<li>与普通函数的区别</li>
+<li>this及修改this指向</li>
+</ol>
+</li>
+<li><p>decorator</p>
+<ul>
+<li><strong>Q:</strong> 原理？</li>
+</ul>
+</li>
+<li><p>generator</p>
+</li>
+<li><p>Promises</p>
+</li>
+<li><p>async, await</p>
+</li>
+<li><p>Class</p>
+</li>
+<li><p>其他</p>
+</li>
+</ul>
+<h3 id="箭头函数和普通函数的区别是什么"><a href="#箭头函数和普通函数的区别是什么" class="headerlink" title="箭头函数和普通函数的区别是什么 ?"></a>箭头函数和普通函数的区别是什么 ?</h3><p>  <code>写法</code></p>
+<ul>
+<li><p><strong>箭头函数：</strong></p>
+<p><code>1. 没有自己的this, 内部的this指向外部的this</code><br><code>2. 没有自己的this, 内部的this指向外部的this, 函数体内的this对象，就是定义时所在的对象，而不是使用时所在的对象</code><br><code>3. 不可以当作构造函数，不可以使用new命令</code><br><code>4. arguments对象不存在, 可使用rest参数</code><br><code>5. 不能用作Generator函数</code></p>
+</li>
+</ul>
+<h3 id="Array-相关"><a href="#Array-相关" class="headerlink" title="Array 相关"></a>Array 相关</h3><ul>
+<li><p><strong>Q:</strong> 说明 .every .some .forEach .map, .filter 的区别 ?   </p>
+</li>
+<li><p><strong>T:</strong> </p>
+<p><code>1. .every, .some 返回bool值</code><br><code>2. 检测数组中的元素是否满足指定条件（函数提供）</code><br><code>3. .map, .filter返回新数组</code><br><code>4. .forEach没有返回值</code><br><code>5. .every .some .map .filter不会改变原始数组</code><br><code>6. 都不会对空数组进行检测</code></p>
+</li>
+<li><p><strong>Q:</strong> 解释一下 .reduce ?</p>
+</li>
+<li><p><strong>T:</strong></p>
+<p><code>1. 方法接收一个函数作为累加器，数组中的每个值（从左到右）开始缩减，最终计算为一个值</code><br><code>2. 对于空数组是不会执行回调函数的</code></p>
+</li>
+</ul>
+<h3 id="请简述-call-apply的区别"><a href="#请简述-call-apply的区别" class="headerlink" title="请简述 call, apply的区别 ?"></a>请简述 call, apply的区别 ?</h3><ul>
+<li><p>相同点：<br><code>1. 动态改变 this指向</code><br><code>2. this指向第一个参数对象</code><br><code>3. 立即执行这个函数</code></p>
+</li>
+<li><p>call：<br><code>参数按顺序传递</code></p>
+</li>
+<li><p>apply:<br><code>参数放在数组里</code></p>
+</li>
+<li><p>bind 呢?<br><code>1. 创建一个新函数，称为绑定函数</code><br><code>2. 也可以改变函数体内 this 的指向</code><br><code>3. 函数调用时执行</code><br><code>4. 参数可以执行的时候再次添加</code></p>
+</li>
+</ul>
+<h3 id="严格模式？"><a href="#严格模式？" class="headerlink" title="严格模式？"></a>严格模式？</h3><ul>
+<li><p><strong>Q:</strong> 使用严格模式</p>
+</li>
+<li><p><strong>T:</strong> </p>
+<p><code>use strict;</code>  </p>
+</li>
+<li><p><strong>Q:</strong> 有哪些限制?</p>
+</li>
+<li><p><strong>T:</strong></p>
+<p><code>1. 变量必须声明后再使用</code><br><code>2. 函数的参数不能有同名属性，否则报错</code><br><code>3. 不能使用with语句</code><br><code>4. 不能使用前缀0表示八进制数，否则报错</code><br><code>5. 不能删除不可删除的属性，否则报错</code><br><code>6. 不能删除变量delete prop，会报错，只能删除属性delete global[prop]</code><br><code>7. eval不会在它的外层作用域引入变量</code><br><code>8. eval和arguments不能被重新赋值</code><br><code>9. arguments不会自动反映函数参数的变化</code><br><code>10. 不能使用arguments.callee, arguments.caller</code><br><code>11. 禁止this指向全局对象</code><br><code>12. 不能使用fn.caller和fn.arguments获取函数调用的堆栈</code><br><code>13. 增加了保留字（比如protected、static和interface）</code></p>
+</li>
+<li><p><strong>Q:</strong> 目的?</p>
+</li>
+<li><p><strong>T:</strong></p>
+<p>  <code>1. 消除Javascript语法的一些不合理、不严谨之处，减少一些怪异行为;</code><br>  <code>2. 消除代码运行的一些不安全之处，保证代码运行的安全；</code><br>  <code>3. 提高编译器效率，增加运行速度；</code><br>  <code>4. 为未来新版本的Javascript做好铺垫。</code></p>
+</li>
+</ul>
+<h3 id="对Promise的理解"><a href="#对Promise的理解" class="headerlink" title="对Promise的理解 ?"></a>对Promise的理解 ?</h3><p>   <code>1. 等待态（Pending）</code><br>   <code>2. 完成态（Fulfilled）</code><br>   <code>3. 拒绝态（Rejected）</code></p>
+<ul>
+<li><p><strong>Then 方法：</strong></p>
+<p><code>1. promise.then(onFulfilled, onRejected)</code><br><code>2. 返回一个promise对象</code><br><code>3. 可以链式调用，promise.then().then().then()</code></p>
+</li>
+</ul>
+<hr>
+<h2 id="网络类"><a href="#网络类" class="headerlink" title="网络类"></a>网络类</h2><h3 id="常用的请求方法有什么"><a href="#常用的请求方法有什么" class="headerlink" title="常用的请求方法有什么 ?"></a>常用的请求方法有什么 ?</h3><p>  <code>get, post, delete, put</code>  </p>
+<ul>
+<li><p><strong>Q:</strong> 有什么语义 ?</p>
+</li>
+<li><p><strong>T:</strong> </p>
+<p><code>增 put, 删 delete, 改 post, 查 get</code></p>
+</li>
+<li><p><strong>Q:</strong> get 和 post 的区别 ?</p>
+</li>
+<li><p><strong>T:</strong> </p>
+<p><code>1. 数据量大小 : get 嵌入 url, 数据量小</code><br><code>2. 安全性</code><br><code>3. 缓存问题</code><br><code>4. 后端获取数据时的处理, post 的不同的 body 格式</code></p>
+</li>
+<li><p><strong>Q:</strong> head, connect, options</p>
+</li>
+</ul>
+<h3 id="简述常见的http状态码"><a href="#简述常见的http状态码" class="headerlink" title="简述常见的http状态码 ?"></a>简述常见的http状态码 ?</h3><p>  <code>1. 正常: 200, 转发: 302, 未修改: 304, 未找到: 404, 服务器错误: 500</code><br>  <code>2. 4xx 客户端错误, 5xx 服务器端错误, 3xx 重定向, 2xx 成功</code><br>  参考 : <a href="https://zh.wikipedia.org/zh-hans/HTTP状态码" target="_blank" rel="noopener">https://zh.wikipedia.org/zh-hans/HTTP状态码</a></p>
+<h3 id="请求头中包含哪些字段，及其意义"><a href="#请求头中包含哪些字段，及其意义" class="headerlink" title="请求头中包含哪些字段，及其意义"></a>请求头中包含哪些字段，及其意义</h3><p>  <code>1. Accept</code><br>  <code>2. Accept-Language</code><br>  <code>3. Content-Type</code><br>  <code>4. Cache-Control</code><br>  <code>5. Referer</code><br>  <code>6. Pragma</code></p>
+<p>  <img src="https://angusyang9.github.io/css/images/interview/http-header.png" alt="对照表"></p>
+<p>  <code>其他...</code><br>  参考资料: <a href="http://tools.jb51.net/table/http_header" target="_blank" rel="noopener">http://tools.jb51.net/table/http_header</a> <a href="http://www.ruanyifeng.com/blog/2016/04/cors.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2016/04/cors.html</a></p>
+<h3 id="http缓存"><a href="#http缓存" class="headerlink" title="http缓存"></a>http缓存</h3><h3 id="什么是跨域"><a href="#什么是跨域" class="headerlink" title="什么是跨域 ?"></a>什么是跨域 ?</h3><p>  参考: <a href="https://segmentfault.com/a/1190000000718840" target="_blank" rel="noopener">https://segmentfault.com/a/1190000000718840</a><br>  <code>1. 跨域资源共享</code><br>  <code>2. 同源策略</code><br>  <code>3. 只要协议、域名、端口有任何一个不同，都被当作是不同的域</code></p>
+<ul>
+<li><p><strong>Q:</strong> 跨域的解决方案有什么 ?</p>
+</li>
+<li><p><strong>T:</strong></p>
+<p><code>1. iframe</code><br><code>2. jsonp</code> [具体实现？]<br><code>3. window.name</code><br><code>4. postMessage</code><br><code>5. CORS</code> 参考<a href="http://www.ruanyifeng.com/blog/2016/04/cors.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2016/04/cors.html</a><br><code>6. 其他</code><br>参考: <a href="http://www.cnblogs.com/JChen666/p/3399951.html" target="_blank" rel="noopener">http://www.cnblogs.com/JChen666/p/3399951.html</a></p>
+</li>
+</ul>
+<h3 id="一个页面从输入-URL-到页面加载显示完成，这个过程中都发生了什么？"><a href="#一个页面从输入-URL-到页面加载显示完成，这个过程中都发生了什么？" class="headerlink" title="一个页面从输入 URL 到页面加载显示完成，这个过程中都发生了什么？"></a>一个页面从输入 URL 到页面加载显示完成，这个过程中都发生了什么？</h3><p>  <code>1. 当发送一个URL请求时，浏览器开启一个线程来处理这个请求，同时在远程DNS服务器上启动一个DNS查询, 以获得请求对应的IP地址</code><br>  <code>2. 浏览器与远程Web服务器通过TCP三次握手协商来建立一个TCP/IP连接。</code> [三次握手？ 四次挥手]<br>  <code>3. TCP/IP连接建立后，浏览器通过该连接向远程服务器发送HTTP请求, 服务器找到资源并使用HTTP响应返回该资源</code><br>  <code>4. 客户端开始下载资源</code><br>  <code>5. 进入前端模块</code></p>
+<ul>
+<li><p><strong>Q:</strong> 页面渲染</p>
+</li>
+<li><p><strong>T:</strong> </p>
+<p><code>1. 浏览器解析HTML生成DOM Tree</code><br><code>2. 根据CSS生成CSS Rule Tree</code><br><code>3. 重排</code></p>
+<ul>
+<li><p><strong>Q:</strong> 怎么减少重排?</p>
+</li>
+<li><p><strong>T:</strong>  </p>
+<p><code>javascript可以根据DOM API操作DOM</code></p>
+</li>
+</ul>
+<p><code>4. 重绘</code></p>
+</li>
+</ul>
+<h3 id="ajax原理及过程"><a href="#ajax原理及过程" class="headerlink" title="ajax原理及过程?"></a>ajax原理及过程?</h3><p>  <code>1. 创建XMLHttpRequest对象, 即创建一个异步调用对象</code><br>  <code>2. 调用该对象的open方法</code><br>  <code>3. 调用setRequestHeader(“Content-Type”, “application/x-www-form-urlencoded”) (post方法)</code><br>  <code>4. 设置回调函数onreadystatechange = callback</code><br>  <code>5. send</code><br>  <code>6. 从服务器获得数据</code></p>
+<ul>
+<li><p><strong>Q:</strong> readyState</p>
+</li>
+<li><p><strong>T:</strong></p>
+<p><code>0 : (未初始化) 对象已建立，但是尚未初始化（尚未调用open方法）</code><br><code>1 : (初始化) 对象已建立，尚未调用send方法</code><br><code>2 : (发送数据) send方法已调用，但是当前的状态及http头未知</code><br><code>3 : (数据传送中) 已接收部分数据，因为响应及http头不全，这时通过responseBody和responseText获取部分数据会出现错误</code><br><code>4 : (完成) 数据接收完毕,此时可以通过通过responseXml和responseText获取完整的回应数据</code></p>
+</li>
+</ul>
+<hr>
+<h2 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h2><h3 id="什么是事件代理，它的实现原理是什么？"><a href="#什么是事件代理，它的实现原理是什么？" class="headerlink" title="什么是事件代理，它的实现原理是什么？"></a>什么是事件代理，它的实现原理是什么？</h3><p>  <code>1. 即事件委托</code><br>  <code>2. 利用事件冒泡, 只指定一个事件处理程序,就可以管理某一类型的所有事件</code><br>  <code>3. 如需要给很多类似的元素添加相同的事件，可以通过将事件添加到他们共同的父元素上来触发处理函数</code></p>
+<ul>
+<li><p>优点：</p>
+<p><code>1. 减少事件注册</code><br><code>2. 节省内存占用</code><br><code>3. 对元素进行增加或删除操作时，不需要对元素再次进行事件绑定</code></p>
+</li>
+</ul>
+<h3 id="window-onload-和-window-onDomReady-的区别"><a href="#window-onload-和-window-onDomReady-的区别" class="headerlink" title="window.onload 和 window.onDomReady 的区别"></a>window.onload 和 window.onDomReady 的区别</h3><ul>
+<li><p>window.onload：</p>
+<p><code>1. 网页内所有的元素全部加载完毕之后才会触发</code><br><code>2. 包括图片、Flash 等富媒体元素</code></p>
+</li>
+<li><p>window.onDomReady：</p>
+<p><code>1. $(document).ready()</code><br><code>2. 判断页面内所有的DOM节点是否已经全部生成</code><br><code>3. 不关心节点的内容是否加载完成</code><br><code>4. 比window.onload更快</code></p>
+</li>
+</ul>
+<h3 id="HTML-语义化标签举例"><a href="#HTML-语义化标签举例" class="headerlink" title="HTML 语义化标签举例"></a>HTML 语义化标签举例</h3><p>  参考 <a href="http://justineo.github.io/slideshows/semantic-html/#/" target="_blank" rel="noopener">http://justineo.github.io/slideshows/semantic-html/#/</a><br>  <code>例如 article, header, footer, section, aside, nav 等</code></p>
+<h3 id="HTML-语义化的意义"><a href="#HTML-语义化的意义" class="headerlink" title="HTML 语义化的意义"></a>HTML 语义化的意义</h3><p>  <code>1. 便于对浏览器、搜索引擎解析</code><br>  <code>2. 在没有样式CCS情况下也以一种文档格式显示，并且是容易阅读的。</code><br>  <code>3. 搜索引擎的爬虫依赖于标记来确定上下文和各个关键字的权重，利于 SEO</code></p>
+<h3 id="解释一下冒泡和捕获-w3c的标准模型是什么"><a href="#解释一下冒泡和捕获-w3c的标准模型是什么" class="headerlink" title="解释一下冒泡和捕获, w3c的标准模型是什么"></a>解释一下冒泡和捕获, w3c的标准模型是什么</h3><ul>
+<li><p><strong>Q:</strong> 是否能说出 冒泡, 捕获 在 父子节点的先后顺序的不同?</p>
+</li>
+<li><p><strong>T:</strong></p>
+<ul>
+<li>冒泡: <code>先子, 后父</code></li>
+<li>捕获: <code>先父, 后子</code></li>
+</ul>
+<p><code>w3c 触发顺序是先捕获, 再冒泡</code><br><code>可以根据 addEventListener 的 useCapture 来指定要在哪个阶段触发事件</code> 参考：<a href="https://www.quirksmode.org/js/events_order.html#link4" target="_blank" rel="noopener">https://www.quirksmode.org/js/events_order.html#link4</a></p>
+</li>
+<li><p><strong>Q:</strong> IE中的事件机制 ?</p>
+</li>
+<li><p><strong>T:</strong> </p>
+<p><code>事件冒泡</code></p>
+</li>
+</ul>
+<h3 id="不用-jQuery-有哪些-API-可以用来选择DOM-节点"><a href="#不用-jQuery-有哪些-API-可以用来选择DOM-节点" class="headerlink" title="不用 jQuery, 有哪些 API 可以用来选择DOM 节点 ?"></a>不用 jQuery, 有哪些 API 可以用来选择DOM 节点 ?</h3><p>  <code>1. document.getElementById</code><br>  <code>2. document.getElementsByClassName</code><br>  <code>3. document.getElementsByName</code><br>  <code>4. document.getElementsByTagName</code><br>  <code>5. document.getElementsByTagNameNS 不支持 IE 浏览器</code><br>  <code>6. document.querySelector</code><br>  <code>7. document.querySelectorAll</code></p>
+<ul>
+<li><p><strong>Q:</strong> 创建, 添加, 移除, 移动, 复制节点呢?</p>
+</li>
+<li><p><strong>T:</strong></p>
+<p><code>1. document.createElement</code><br><code>2. document.createTextNode</code><br><code>3. appendChild</code><br><code>4. .remove, .removeChild</code><br><code>5. .cloneNode()/.cloneNode(true)</code></p>
+<ul>
+<li><p><strong>Q:</strong> 区别？</p>
+</li>
+<li><p><strong>T:</strong></p>
+<p><code>浅克隆与深克隆</code></p>
+</li>
+</ul>
+<p><code>6. .insertBefore</code></p>
+</li>
+</ul>
+<h2 id="移动端"><a href="#移动端" class="headerlink" title="移动端"></a>移动端</h2><h3 id="移动端事件"><a href="#移动端事件" class="headerlink" title="移动端事件"></a>移动端事件</h3><p>  <code>1. touchstart</code><br>  <code>2. touchmove</code><br>  <code>3. touchend</code><br>  <code>4. touchcancel</code></p>
+<h3 id="如何实现一个移动端”tap”事件"><a href="#如何实现一个移动端”tap”事件" class="headerlink" title="如何实现一个移动端”tap”事件?"></a>如何实现一个移动端”tap”事件?</h3><h3 id="移动端适配"><a href="#移动端适配" class="headerlink" title="移动端适配"></a>移动端适配</h3><h3 id="什么是点透"><a href="#什么是点透" class="headerlink" title="什么是点透?"></a>什么是点透?</h3><p>  <code>点击时触发非当前层的点击事件。</code></p>
+<ul>
+<li><strong>Q:</strong> 怎么处理？</li>
+</ul>
+<h3 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h3><h3 id="抓包"><a href="#抓包" class="headerlink" title="抓包"></a>抓包</h3><h3 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h3><hr>
+<h2 id="设计思路"><a href="#设计思路" class="headerlink" title="设计思路"></a>设计思路</h2><h3 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h3><ul>
+<li><strong>Q:</strong> 表格设计</li>
+<li><strong>Q:</strong> 如何设计一个 首行冻结 ?</li>
+</ul>
+<h3 id="Suggestion"><a href="#Suggestion" class="headerlink" title="Suggestion"></a>Suggestion</h3><ul>
+<li><strong>Q:</strong> suggestion插件</li>
+</ul>
+<h3 id="模态窗"><a href="#模态窗" class="headerlink" title="模态窗"></a>模态窗</h3><ul>
+<li><strong>Q:</strong> 全局模态框</li>
+</ul>
+<h3 id="拖拽"><a href="#拖拽" class="headerlink" title="拖拽"></a>拖拽</h3><ul>
+<li><strong>Q:</strong> js</li>
+<li><strong>Q:</strong> h5</li>
+</ul>
+<h3 id="版本管理工具"><a href="#版本管理工具" class="headerlink" title="版本管理工具"></a>版本管理工具</h3><ul>
+<li><p><strong>Q:</strong> 列举常用的 git 命令 ?</p>
+</li>
+<li><p><strong>T:</strong></p>
+<p><code>1. clone, commit, push, pull, remote 等</code><br><code>2. stash, cherry-pick, pop, rebase 等</code></p>
+</li>
+<li><p><strong>Q:</strong> svn和git的区别 (优劣势) ?</p>
+</li>
+<li><p><strong>T:</strong></p>
+<p><code>能理解基本区别 svn: 集中式版本管理, git: 分布式版本管理</code></p>
+<ul>
+<li><p>git的优势：</p>
+<p><code>1. git 本地也有历史记录, 检索快, 无网情况下的历史记录</code><br><code>2. 分支管理方便</code><br><code>3. 更好的多人协作 (分支, 本地记录, 本地提交与远端推送等)</code><br><code>4. 解决冲突更加的智能</code><br><code>5. 更多的协作开发流程</code></p>
+</li>
+<li><p>git的劣势：</p>
+<p><code>1. 大型项目分离模块无法按照文件夹进行</code><br><code>2. 无法按照文件夹粒度进行权限控制</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="团队协作"><a href="#团队协作" class="headerlink" title="团队协作"></a>团队协作</h3><ul>
+<li><p><strong>Q:</strong> 描述一下上一个项目, 你是如何和其他角色协作开发的?</p>
+</li>
+<li><p><strong>T:</strong> </p>
+<p><code>是否能说出一个项目开发流程中的角色 (注意, 有些小的项目是没有分的很细的角色, 答的跟我们不一样的话, 不应该扣分, 主要看对方有没有一些理解)</code></p>
+</li>
+</ul>
+<hr>
+<h2 id="框架相关"><a href="#框架相关" class="headerlink" title="框架相关"></a>框架相关</h2><h3 id="用过哪些框架，介绍下你最熟悉的框架，为什么用它"><a href="#用过哪些框架，介绍下你最熟悉的框架，为什么用它" class="headerlink" title="用过哪些框架，介绍下你最熟悉的框架，为什么用它?"></a>用过哪些框架，介绍下你最熟悉的框架，为什么用它?</h3><p>  <code>1. 用过流行框架 angularjs, react, vue, riot, avalon 等</code><br>  <code>2. 次之如 emberjs, backbonejs, marionette, kendo ui, bootstrap, knockoutjs 等</code><br>  <code>3. 再次之, 只能说出 jquery, jQuery ui 等</code><br>  <code>4. 但, 如果自己用原生语言开发过前端框架, 则另当别论</code></p>
+<h3 id="AngularJS"><a href="#AngularJS" class="headerlink" title="AngularJS"></a>AngularJS</h3><ul>
+<li><p><strong>Q:</strong> 列举常用的 指令 (directive)  </p>
+</li>
+<li><p><strong>T:</strong> </p>
+<p><code>如 ng-if ng-show ng-hide ng-list</code></p>
+</li>
+<li><p><strong>Q:</strong> 如何注册一个 controller</p>
+</li>
+<li><p><strong>T:</strong> </p>
+<p><code>app.controller(&quot;myController&quot;,myController);</code></p>
+</li>
+<li><p><strong>Q:</strong> 解释一下什么是一个 模块</p>
+</li>
+<li><p><strong>T:</strong> </p>
+<p><code>在Angular中，一个Module通常对应一个js文件，其中可以包括Controller、Service、Filter、Directive等。</code></p>
+</li>
+<li><p><strong>Q:</strong> 说出 ng-src 和使用 src 的区别</p>
+</li>
+<li><p><strong>T:</strong> </p>
+<p><code>如果使用 src 的话, 有可能会在模板加载时, 产生一个无效的请求</code></p>
+</li>
+<li><p><strong>Q:</strong> 说一下 setTimeout 和 $timeout 的区别</p>
+</li>
+<li><p><strong>T:</strong> </p>
+<p><code>1. $timeout 包装了 setTimeout, 并会在最后触发 $apply</code><br><code>2. $timeout 的返回是一个 promise, 你还能在 timeout 之后, 绑定后续动作, 或者取消一个 timeout</code><br><code>3. $timeout.cancel( promise ) 意义上等同于 clearTimeout</code><br>参考： <a href="https://coderwall.com/p/udpmtq/angularjs-use-timeout-not-settimeout" target="_blank" rel="noopener">https://coderwall.com/p/udpmtq/angularjs-use-timeout-not-settimeout</a></p>
+</li>
+</ul>
+<h3 id="ReactJS"><a href="#ReactJS" class="headerlink" title="ReactJS"></a>ReactJS</h3><ul>
+<li><p><strong>Q:</strong> react的生命周期  </p>
+</li>
+<li><p><strong>Q:</strong> 有关setState()  </p>
+<ul>
+<li><p><strong>Q:</strong> setState有哪些写法</p>
+<ul>
+<li><p><strong>T:</strong></p>
+<p><code>app.a = 1 , app.b =2; this.setState({app});</code> [这样写会有什么问题？]<br><code>this.setState({a: 1, b: 2})</code></p>
+</li>
+</ul>
+</li>
+<li><p><strong>Q:</strong> 直接 this.setState() 会触发渲染吗?    </p>
+</li>
+</ul>
+</li>
+<li><p><strong>Q:</strong> vdom</p>
+</li>
+<li><p><strong>Q:</strong> 纯 comp vs. comp</p>
+</li>
+<li><p><strong>Q:</strong> 纯组件</p>
+</li>
+<li><p><strong>Q:</strong> 高阶组件</p>
+</li>
+<li><p><strong>Q:</strong> Controlled vs. Uncontrolled</p>
+</li>
+<li><p><strong>Q:</strong> render</p>
+<ul>
+<li><p><strong>T:</strong></p>
+<p><code>setState 不能放里头</code><br><code>render 函数拆分</code></p>
+</li>
+</ul>
+</li>
+<li><p><strong>Q:</strong> 组件</p>
+<ul>
+<li><strong>Q:</strong> props</li>
+<li><strong>Q:</strong> 方法回调</li>
+<li><strong>Q:</strong> context</li>
+</ul>
+</li>
+<li><p><strong>Q:</strong> createClass, Class</p>
+<ul>
+<li><strong>Q:</strong> bind</li>
+<li><strong>Q:</strong> ES6</li>
+<li><strong>Q:</strong> API defaultProps … 等等</li>
+</ul>
+</li>
+</ul>
+<h3 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h3><ul>
+<li><p><strong>Q:</strong> react的生命周期</p>
+</li>
+<li><p><strong>T:</strong> </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">beforeCreate  // 在实例初始化之后，数据观测(data observer) 和 event/watcher 事件配置之前被调用</span><br><span class="line">created       // 实例已经创建完成之后被调用，$el 属性不可见</span><br><span class="line">beforeMount   // 在挂载开始之前被调用，相关的 render 函数首次被调用</span><br><span class="line">mounted       // el 被新创建的 vm.$el 替换，并挂载到实例上去之后</span><br><span class="line">beforeUpdate  // 数据更新时调用</span><br><span class="line">updated       // 数据更新后调用</span><br><span class="line">activated     // keep-alive 组件激活时调用</span><br><span class="line">deactivated   // keep-alive 组件停用时调用</span><br><span class="line">beforeDestroy // 实例销毁之前调用，实例仍然完全可用</span><br><span class="line">destroyed     // 实例销毁后调用</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Q:</strong> 常用指令</p>
+</li>
+<li><p><strong>T:</strong> </p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">v-text    // 更新元素的 textContent</span><br><span class="line">v-html    // 更新元素的 innerHTML</span><br><span class="line">v-show    // 切换元素的 display CSS 属性</span><br><span class="line">v-if      // 被绑定元素 / 组件的销毁或重建</span><br><span class="line">v-else    // 前一兄弟必须存在 v-if / v-else-if</span><br><span class="line">v-else-if // 2.1.0 add</span><br><span class="line">v-for     // alias in expression，key 用在 Vue 的 Virtual DOM 算法，在新旧 nodes 对比时辨识 VNodes</span><br><span class="line">v-on      // 绑定事件监听器</span><br><span class="line">v-bind    // 动态地绑定一个或多个特性，或一个组件 prop 到表达式</span><br><span class="line">v-model   // 在表单控件或者组件上创建双向绑定，$emit(&apos;input&apos;)</span><br><span class="line">v-pre     // 跳过这个元素和它的子元素的编译过程</span><br><span class="line">v-cloak   // 这个指令保持在元素上直到关联实例结束编译。和 CSS 规则如 [v-cloak] &#123; display: none &#125; 一起用时</span><br><span class="line">v-once    // 只渲染元素和组件一次</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Q:</strong> slots</p>
+</li>
+<li><p><strong>T:</strong> </p>
+<p>  <code>内容分发</code><br>  <code>混合 {父组件的内容} 与 {子组件自己的模板}</code></p>
+</li>
+<li><p><strong>Q:</strong> render</p>
+</li>
+<li><p><strong>T:</strong> </p>
+<p>  <code>createElement</code><br>  <code>Vue 选项中的 render 函数若存在，则 Vue 构造函数不会从 template 选项或通过 el 选项指定的挂载元素中提取出的 HTML 模板编译 render 函数</code></p>
+</li>
+<li><p><strong>Q:</strong> $nextTick 如何实现</p>
+</li>
+<li><p><strong>T:</strong> </p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">/* Promise.then / MutationObeserve / setTimeout 模拟 microtask */</span><br><span class="line">/* setTimeout 是 macrotask */</span><br><span class="line">if (promise supports) &#123;</span><br><span class="line">    Promise.resolve()</span><br><span class="line">        .then(callbacks)</span><br><span class="line">&#125; else if (MutationObserver supports) &#123;</span><br><span class="line">    /* MutationObserver has wider support, but it is seriously bugged in </span><br><span class="line">       UIWebView in iOS &gt;= 9.3.3 when triggered in touch event handlers */</span><br><span class="line">    var observer = new MutationObserver(callbacks)</span><br><span class="line">    observer.observe(textNode, &#123;</span><br><span class="line">        characterData: true</span><br><span class="line">    &#125;);</span><br><span class="line">    textNode.data = String</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    /* setTimeout 实际是 4ms 后执行 */</span><br><span class="line">    setTimeout(callbacks, 0)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>Q:</strong> Event Loop</p>
+</li>
+<li><p><strong>T:</strong></p>
+<ul>
+<li><p>task (MarcoTask):</p>
+<p><code>script, setTimeout, setInterval, setImmediate, I/O, UI rendering</code></p>
+</li>
+<li><p>jobs (MicroTask):</p>
+<p><code>process.nextTick, Promise, Object.observe(discarded), MutationObserver</code></p>
+</li>
+<li><p><strong>Q:</strong> 请描述输出结果  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'timeout1'</span>);</span><br><span class="line">&#125;)</span><br><span class="line">  </span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'promise1'</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line">        i == <span class="number">99</span> &amp;&amp; resolve();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'promise2'</span>);</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'then1'</span>);</span><br><span class="line">&#125;)</span><br><span class="line">  </span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'global1'</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>R:</strong></p>
+<p><code>script -&gt; settimeout -&gt; promise1 -&gt; resolve -&gt; promise2 -&gt; global1 -&gt; then1 -&gt; timeout1</code></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Q:</strong> modal component</p>
+</li>
+<li><p><strong>T:</strong> </p>
+<p><code>1. VueComponent</code><br><code>2. contructor = Vue.extend(VueComponent)</code><br><code>3. Vue.prototype.$modal = contructor.$mount()</code></p>
+</li>
+<li><p><strong>Q:</strong> vue-loader in webpack</p>
+</li>
+<li><p><strong>Q:</strong> v-if 和 v-for 优先级</p>
+</li>
+<li><p><strong>T:</strong> </p>
+</li>
+<li><p><strong>Q:</strong> 说下Vue数据双向绑定的原理</p>
+</li>
+<li><p><strong>T:</strong> </p>
+</li>
+<li><p><strong>Q:</strong> 说说Vuex的作用以及应用场景</p>
+</li>
+<li><p><strong>T:</strong> </p>
+</li>
+<li><p><strong>Q:</strong> 说说Vue组件的数据通信方式</p>
+</li>
+<li><p><strong>T:</strong> </p>
+</li>
+<li><p><strong>Q:</strong> 为什么说虚拟 dom会提高性能，解释一下它的工作原理</p>
+</li>
+<li><p><strong>T:</strong> </p>
+</li>
+<li><p><strong>Q:</strong> 请你详细介绍一些 package.json 里面的配置</p>
+</li>
+<li><p><strong>T:</strong> </p>
+</li>
+<li><p><strong>Q:</strong> 为什么说Vue是一套渐进式框架</p>
+</li>
+<li><p><strong>T:</strong> </p>
+</li>
+<li><p><strong>Q:</strong> vue-cli提供的几种脚手架模板有哪些，区别是什么</p>
+</li>
+<li><p><strong>T:</strong> </p>
+</li>
+<li><p><strong>Q:</strong> 计算属性的缓存和方法调用的区别</p>
+</li>
+<li><p><strong>T:</strong> </p>
+<blockquote>
+<p>两种方式的最终结果确实是完全相同,不同的是计算属性是基于它们的依赖进行缓存的。只在相关依赖发生改变时它们才会重新求值。相比之下，每当触发重新渲染时，调用方法将总会再次执行函数。</p>
+</blockquote>
+</li>
+<li><p><strong>Q:</strong> axios、fetch与ajax有什么区别</p>
+</li>
+<li><p><strong>T:</strong> </p>
+</li>
+<li><p><strong>Q:</strong> vue中央事件总线的使用</p>
+</li>
+<li><p><strong>T:</strong> </p>
+</li>
+<li><p><strong>Q:</strong> 你做过的Vue项目有哪些，用到了哪些核心知识点</p>
+</li>
+<li><p><strong>T:</strong> </p>
+</li>
+<li><p><strong>Q:</strong> 实现MVVM的思路分析</p>
+</li>
+<li><p><strong>T:</strong> </p>
+</li>
+<li><p><strong>Q:</strong> 批量异步更新策略及 nextTick 原理</p>
+</li>
+<li><p><strong>T:</strong> </p>
+</li>
+<li><p><strong>Q:</strong> 说说Vue开发命令 npm run dev 输入后的执行过程</p>
+</li>
+<li><p><strong>T:</strong> </p>
+</li>
+<li><p><strong>Q:</strong> vue-cli中常用到的加载器有哪些</p>
+</li>
+<li><p><strong>T:</strong> </p>
+</li>
+<li><p><strong>Q:</strong> Vue中如何利用 keep-alive 标签实现某个组件缓存功能</p>
+</li>
+<li><p><strong>T:</strong> </p>
+</li>
+<li><p><strong>Q:</strong> pc端页面刷新时如何实现vuex缓存</p>
+</li>
+<li><p><strong>T:</strong> </p>
+</li>
+<li><p><strong>Q:</strong> vue-router如何响应 路由参数 的变化</p>
+</li>
+<li><p><strong>T:</strong> </p>
+</li>
+<li><p><strong>Q:</strong> Vue 组件中 data 为什么必须是函数</p>
+</li>
+<li><p><strong>T:</strong> </p>
+</li>
+</ul>
+<h3 id="virtual-DOM"><a href="#virtual-DOM" class="headerlink" title="virtual DOM"></a>virtual DOM</h3><ul>
+<li><strong>Q:</strong> 概念</li>
+<li><strong>Q:</strong> 原理</li>
+</ul>
+<h3 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h3><hr>
+<h2 id="项目经验"><a href="#项目经验" class="headerlink" title="项目经验"></a>项目经验</h2><h3 id="性能优化-1"><a href="#性能优化-1" class="headerlink" title="性能优化"></a>性能优化</h3><hr>
+<h2 id="算法相关"><a href="#算法相关" class="headerlink" title="算法相关"></a>算法相关</h2><h3 id="数字显示屏"><a href="#数字显示屏" class="headerlink" title="数字显示屏"></a>数字显示屏</h3><p>  <code>bookmark</code> 有一个数字的电子显示屏, 两位数 已知这个显示屏有某个(某些)横杠 (或竖干) 坏掉, 但不知道具体是哪个, 现在输入提供一系列的读数</p>
+<p>  根据输入的读数, 计算得出可能的所有值序列, 如果无法推算出来, 则返回空</p>
+<p>  <img src="https://angusyang9.github.io/css/images/interview/number-screen.png" alt="number-screen"></p>
+<p>  输入读数例子 (无错误情况下) :</p>
+<p>  (环绕一圈, 短线亮起, 则为一, 最后一位是中间的横线)</p>
+<p>  [1, 1, 1, 1, 1, 1, 0] = 0 [0, 1, 1, 0, 0, 0, 0] = 1 [1, 1, 0, 1, 1, 0, 1] = 2 [1, 1, 1, 1, 0, 0, 1] = 3 … [1, 1, 1, 1, 1, 1, 1] = 8</p>
+<p>  可能的输入:</p>
+<p>  [ [[1, 1, 1, 1, 1, 1, 0], [0, 1, 1, 0, 0, 0, 0]], [[1, 1, 1, 1, 0, 1, 0], [0, 1, 1, 0, 0, 0, 0]], [[1, 1, 1, 0, 1, 1, 0], [0, 1, 1, 0, 0, 0, 0]], [[1, 1, 1, 1, 1, 1, 0], [0, 1, 0, 0, 0, 0, 0]], … ]</p>
+<hr>
+<h2 id="学习方法-amp-自驱力"><a href="#学习方法-amp-自驱力" class="headerlink" title="学习方法 &amp; 自驱力"></a>学习方法 &amp; 自驱力</h2><h3 id="平时遇到问题的解决步骤"><a href="#平时遇到问题的解决步骤" class="headerlink" title="平时遇到问题的解决步骤"></a>平时遇到问题的解决步骤</h3><h3 id="对前端领域之外的知识了解"><a href="#对前端领域之外的知识了解" class="headerlink" title="对前端领域之外的知识了解"></a>对前端领域之外的知识了解</h3><ul>
+<li><p><strong>Q:</strong> 能说出一些后端/移动端开发的知识, 加分</p>
+</li>
+<li><p><strong>T:</strong> </p>
+<p><code>1. 如, tomcat, jetty 等后端服务容器</code><br><code>2. ios - object-c 开发</code><br><code>3. JAVA, Php, C++ 等经验</code></p>
+</li>
+</ul>
+<h3 id="平时如何给自己充电"><a href="#平时如何给自己充电" class="headerlink" title="平时如何给自己充电?"></a>平时如何给自己充电?</h3><p>  <code>1. 订阅 weekly 邮件</code><br>  <code>2. 移动端的一些 APP, 如 掘金, 前端圈 之类</code><br>  <code>3. 逛 github, 是否有 github 帐号?</code><br>  <code>4. 看外网的一些网站, 如 hacker news</code><br>  <code>5. 懂得去读一些规范文档等</code></p>
+<hr>
+<h2 id="参考题目"><a href="#参考题目" class="headerlink" title="参考题目"></a>参考题目</h2><h3 id="原型链-amp-amp-闭包"><a href="#原型链-amp-amp-闭包" class="headerlink" title="原型链 &amp;&amp; 闭包"></a>原型链 &amp;&amp; 闭包</h3>  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Fn1 = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span>  a = <span class="number">10</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.a + a);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Fn2 = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span>  a = <span class="number">1</span>;</span><br><span class="line">    Fn1();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Fn2();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Fn3 = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">3</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.a);</span><br><span class="line">    Fn1.call(Fn3)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Fn3.prototype = &#123;</span><br><span class="line">    a: <span class="number">4</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Fn3()</span><br></pre></td></tr></table></figure>
+
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line">A.prototype.name = &#123;<span class="attr">first</span>: <span class="number">1</span>, <span class="attr">second</span>: <span class="number">2</span>&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(A.name.fisrt)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> A();</span><br><span class="line">b.name = &#123;<span class="attr">first</span>: <span class="string">'zhang'</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> c = <span class="keyword">new</span> A();</span><br><span class="line">c.name.first = <span class="string">'wang'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(b.name.first, c.name.first);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">　　　　<span class="keyword">var</span> n=<span class="number">999</span>;</span><br><span class="line">　　　　nAdd=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;n+=<span class="number">1</span>&#125;</span><br><span class="line">　　　　<span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">　　　　　　<span class="built_in">console</span>.log(n);</span><br><span class="line">　　　　&#125;</span><br><span class="line">　　　　<span class="keyword">return</span> f2;</span><br><span class="line">　　&#125;</span><br><span class="line"><span class="keyword">var</span> result1=f1();</span><br><span class="line"><span class="keyword">var</span> result2=f1();</span><br><span class="line">result1(); <span class="comment">/* 999 */</span></span><br><span class="line">result2();<span class="comment">/* 999 */</span></span><br><span class="line">nAdd();</span><br><span class="line">result1(); <span class="comment">/* 是999而不是1000，这是为何呢？*/</span></span><br><span class="line">result2(); <span class="comment">/* 1000 */</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="hasOwnProperty-NaN"><a href="#hasOwnProperty-NaN" class="headerlink" title="hasOwnProperty"></a>hasOwnProperty</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> sup = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.a = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sup.b = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.d = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line">sup.b();</span><br><span class="line"></span><br><span class="line">sup.prototype.c = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.e = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sup.prototype.f = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">1</span>, sup.hasOwnProperty(<span class="string">'a'</span>));</span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">2</span>, sup.hasOwnProperty(<span class="string">'b'</span>));</span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">3</span>, sup.hasOwnProperty(<span class="string">'c'</span>));</span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">4</span>, sup.hasOwnProperty(<span class="string">'d'</span>));</span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">5</span>, sup.prototype.hasOwnProperty(<span class="string">'c'</span>));</span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">6</span>, sup.prototype.hasOwnProperty(<span class="string">'e'</span>));</span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">7</span>, sup.prototype.hasOwnProperty(<span class="string">'f'</span>));</span><br></pre></td></tr></table></figure>
+
+<h3 id="promise-相关"><a href="#promise-相关" class="headerlink" title="promise 相关"></a>promise 相关</h3><p><a href="https://juejin.im/post/5a04066351882517c416715d?utm_medium=fe&amp;utm_source=weixinqun" target="_blank" rel="noopener">https://juejin.im/post/5a04066351882517c416715d?utm_medium=fe&amp;utm_source=weixinqun</a></p>
+<h3 id="继承-1"><a href="#继承-1" class="headerlink" title="继承"></a>继承</h3><h3 id="循环周期-amp-amp-event-loop"><a href="#循环周期-amp-amp-event-loop" class="headerlink" title="循环周期 &amp;&amp; event loop"></a>循环周期 &amp;&amp; event loop</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">        setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(i);</span><br><span class="line">        &#125;, <span class="number">0</span>)</span><br><span class="line">    &#125;    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'haha'</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="事件委托"><a href="#事件委托" class="headerlink" title="事件委托"></a>事件委托</h3><ul>
+<li><strong>Q:</strong> 点击li时取其innerHTML的具体实现? [都能说出来一些， 但是都会写么？]</li>
+<li><strong>T:</strong><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">    &lt;li&gt;<span class="keyword">this</span> is a li&lt;<span class="regexp">/li&gt;</span></span><br><span class="line"><span class="regexp">    &lt;li&gt;this is a too&lt;/</span>li&gt;</span><br><span class="line">    &lt;li&gt;<span class="keyword">this</span> is a three ^_^&lt;/li&gt;</span><br><span class="line">  ……</span><br><span class="line">&lt;<span class="regexp">/ul&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+
+  </article>
+</div>
+
+
+    
+<div class="container disqus-container">
+  <div id="disqus_thread"></div>
+</div>
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://github.provenr.cn/2018/09/25/interview/前端面试题汇总/";
+    this.page.identifier = 1537892976;
+  };
+
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://blog-provenr-cn.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <div class="clearfix">
+    <a href="http://github.provenr.cn" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2019 Provenr</li>
+      <li><a href="http://github.provenr.cn">Home</a></li>
+      
+      <li><a href="https://provenr.github.io/">Github</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+    </div>
+    
+  </footer>
+</div>
+
+
+
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+.side-container {
+  position: absolute;
+  top: 150px;
+  right: 10px;
+  width: 200px;
+  transition: top 0.2s;
+  padding: 0 20px;
+  margin-bottom: 1.5rem;
+  border-radius: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#toc {
+  color: color-link;
+}
+#toc .toc {
+  font-weight: 600;
+}
+#toc ol {
+  list-style-type: disc;
+  margin-left: -30px;
+}
+#toc .toc-child {
+  font-weight: lighter;
+}
+#toc .toc-item {
+  position: relative;
+  padding: 4px 0 4px 0;
+  white-space: nowrap;
+  overflow: visible;
+  text-overflow: ellipsis;
+}
+#toc .toc-item a {
+  color: #000;
+}

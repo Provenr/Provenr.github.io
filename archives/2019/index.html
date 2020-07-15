@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    Provenr
+  </title>
+  <meta name="description" content="没有比脚更长的路，走过去，前面是春天！">
+  
+  <meta name="author" content="Provenr">
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="theme-color" content="#1e2327">
+  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
+
+  <link rel="icon" type="image/x-icon" href="http://www.provenr.cn/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+  
+<script>
+  var _hmt = _hmt || [];
+  (function(){var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?e56a1706ae9d773852a4a03368b51f86";
+    var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script>
+
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+</head>
+
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/archives">Archives</a></li>
+        
+        
+        <li><a href="/categories">Categories</a></li>
+        
+        
+        <li><a href="/tags">Tags</a></li>
+        
+        
+        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="/avatar/provenr.jpg"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="main-container">
+  
+
+<div class="container-lg">
+  
+
+<div class="blog-intro">
+  <div class="blog-intro-user">
+    <img class="avatar" src="/avatar/provenr.jpg">
+    <div class="user-name">
+      <div class="blog-title">Provenr</div>
+      <div class="blog-author">Provenr</div>
+        <ul class="user-detail mobile-only">
+    
+    <li>
+      <i class="fa fa-map-marker"></i>
+      BeiJing,China
+    </li>
+    
+    <li>
+      <i class="fa fa-envelope-o"></i>
+      <a href="mailto:web_lyn@163.com">web_lyn@163.com</a>
+    </li>
+    
+    <li>
+      <i class="fa fa-link"></i>
+      <a href="http://github.provenr.cn">http://github.provenr.cn</a>
+    </li>
+  </ul>
+    </div>
+    <div class="blog-description">
+      没有比脚更长的路，走过去，前面是春天！
+    </div>
+  </div>
+
+  <ul class="user-detail desktop-only">
+    
+    <li>
+      <i class="fa fa-map-marker"></i>
+      BeiJing,China
+    </li>
+    
+    <li>
+      <i class="fa fa-envelope-o"></i>
+      <a href="mailto:web_lyn@163.com">web_lyn@163.com</a>
+    </li>
+    
+    <li>
+      <i class="fa fa-link"></i>
+      <a href="http://github.provenr.cn">http://github.provenr.cn</a>
+    </li>
+  </ul>
+
+  <div class="social-media desktop-only">
+    <h4>Social Media</h4>
+    <ul>
+      
+      <li class="social-media-item"><a href="https://provenr.github.io/" target="_blank"><i class="fa fa-github"></i></a></li>
+      
+    </ul>
+  </div>
+</div>
+
+
+  <div class="blog-detail">
+    
+<nav class="blog-detail-nav desktop-only">
+  <ul class="clearfix">
+    <li class="">
+      <a href="/">Overview</a></li>
+    <li class="selected">
+      <a href="/archives">Posts <span class="counter">26</span></a>
+    </li>
+    <li class="">
+      <a href="/categories">Categories <span
+                class="counter">13</span></a></li>
+    <li class="">
+      <a href="/tags">Tags <span class="counter">36</span></a></li>
+  </ul>
+</nav>
+
+    <div class="body-secondary">
+      <ul class="archive-list">
+        
+        <li class="archive-list-item">
+          <h2><a href="/2019/09/25/css/Flex &amp;&amp; Grid/">flex &amp;&amp; grid 布局</a></h2>
+          <p>
+               
+   引言  Flex 是一维布局方式，我们需要不断嵌套 Div 才能形成复杂结构，一旦布局产生了变化时难以维护，代码就需要重构，Grid是二维布局，即便布局方式做了翻天覆地的调整，也仅需少量修改就能适配。详细理解参考后面例子 
+   概述    flex 局限性  
+  Flex 在复杂页...
+          </p>
+          <ul class="tag-list clearfix">
+            
+            <li class="tag-list-item"><a href="/tags/flex/">flex</a></li>
+            
+            <li class="tag-list-item"><a href="/tags/grid/">grid</a></li>
+            
+          </ul>
+          <div class="post-info">
+            <span>
+              
+              <a class="category-link" href="/categories/css/"><i class="fa fa-folder-open"></i> css</a>
+              
+            </span>
+            <span><i class="fa fa-tag"></i> 2 </span>
+            <span>Published {{moment(1569369600000).fromNow()}}</span>
+          </div>
+        </li>
+        
+        <li class="archive-list-item">
+          <h2><a href="/2019/07/25/javascript/javascript 常见核心原理/">javascript 常见核心原理</a></h2>
+          <p>
+             [TOC] 
+   javascript 常见核心原理    1. 实现一个 call()、apply()、bind()  
+    实现一个 call()       1   2   3         function  (  )  &amp;#123;        return   false  ...
+          </p>
+          <ul class="tag-list clearfix">
+            
+            <li class="tag-list-item"><a href="/tags/jaascript/">jaascript</a></li>
+            
+          </ul>
+          <div class="post-info">
+            <span>
+              
+              <i class="fa fa-folder-open"></i> Uncategorized
+              
+            </span>
+            <span><i class="fa fa-tag"></i> 1 </span>
+            <span>Published {{moment(1564066621000).fromNow()}}</span>
+          </div>
+        </li>
+        
+        <li class="archive-list-item">
+          <h2><a href="/2019/07/04/javascript/js-生成[min-max]范围的-随机数/">js 生成[min,max]范围的 随机数</a></h2>
+          <p>
+             [TOC] 
+   预备知识  
+ 随机数生成 利用 Math.random() 
+ 
+ 
+  Math.random();  //0.0 ~ 1.0 之间的一个伪随机数。【包含0不包含1】 
+ 
+  Math.ceil();  //向上取整。 
+ 
+  Math.floor();  //向下取整...
+          </p>
+          <ul class="tag-list clearfix">
+            
+            <li class="tag-list-item"><a href="/tags/随机数/">随机数</a></li>
+            
+            <li class="tag-list-item"><a href="/tags/javaScript/">javaScript</a></li>
+            
+          </ul>
+          <div class="post-info">
+            <span>
+              
+              <i class="fa fa-folder-open"></i> Uncategorized
+              
+            </span>
+            <span><i class="fa fa-tag"></i> 2 </span>
+            <span>Published {{moment(1562283739000).fromNow()}}</span>
+          </div>
+        </li>
+        
+        <li class="archive-list-item">
+          <h2><a href="/2019/07/04/Python/python-环境配置/">python 环境配置</a></h2>
+          <p>
+             Windows 环境安装 
+ 一、Anaconda 的下载及安装 
+ 
+ Anaconda 是什么 Anaconda 是 Python 的包管理器和环境管理器。 
+ 安装了 Anaconda 还需要安装 Python 吗? 不需要，原因有以下几点: 1) Anaconda 提供了一个编译好的环境可...
+          </p>
+          <ul class="tag-list clearfix">
+            
+            <li class="tag-list-item"><a href="/tags/python/">python</a></li>
+            
+            <li class="tag-list-item"><a href="/tags/Anaconda/">Anaconda</a></li>
+            
+          </ul>
+          <div class="post-info">
+            <span>
+              
+              <a class="category-link" href="/categories/python/"><i class="fa fa-folder-open"></i> python</a>
+              
+            </span>
+            <span><i class="fa fa-tag"></i> 2 </span>
+            <span>Published {{moment(1562283504000).fromNow()}}</span>
+          </div>
+        </li>
+        
+        <li class="archive-list-item">
+          <h2><a href="/2019/06/21/Docker/docker-部署-Nginx/">docker 部署 Nginx</a></h2>
+          <p>
+             [TOC] 
+   docker 部署 nginx    一、macOS 安装 Docker,windows安装Docker参见 Windows Docker 安装     Homebrew 安装       1       brew cask install docker       
+
+   ...
+          </p>
+          <ul class="tag-list clearfix">
+            
+            <li class="tag-list-item"><a href="/tags/docker/">docker</a></li>
+            
+            <li class="tag-list-item"><a href="/tags/Nginx/">Nginx</a></li>
+            
+          </ul>
+          <div class="post-info">
+            <span>
+              
+              <a class="category-link" href="/categories/docker/"><i class="fa fa-folder-open"></i> docker</a>
+              
+            </span>
+            <span><i class="fa fa-tag"></i> 2 </span>
+            <span>Published {{moment(1561116555000).fromNow()}}</span>
+          </div>
+        </li>
+        
+        <li class="archive-list-item">
+          <h2><a href="/2019/06/16/javascript/js-滑屏操作反弹原理/">js 滑屏操作反弹原理</a></h2>
+          <p>
+             [toc] 
+   移动端事件  
+  touchstart事件 ：当手指触摸屏幕时候触发，即使已经有一个手指放在屏幕上也会触发。 
+  touchmove事件 ：当手指在屏幕上滑动的时候连续地触发。在这个事件发生期间，调用preventDefault()事件可以阻止滚动。 
+  touchend...
+          </p>
+          <ul class="tag-list clearfix">
+            
+            <li class="tag-list-item"><a href="/tags/javascript/">javascript</a></li>
+            
+            <li class="tag-list-item"><a href="/tags/touch/">touch</a></li>
+            
+          </ul>
+          <div class="post-info">
+            <span>
+              
+              <i class="fa fa-folder-open"></i> Uncategorized
+              
+            </span>
+            <span><i class="fa fa-tag"></i> 2 </span>
+            <span>Published {{moment(1560729208000).fromNow()}}</span>
+          </div>
+        </li>
+        
+        <li class="archive-list-item">
+          <h2><a href="/2019/06/16/Vue/vue-mock服务/">vue mock服务</a></h2>
+          <p>
+             使用mockjs的有两种方式 
+   1. 在项目入口文件中直接引入配置好的mock文件  
+ 需要在项目内引入mock并创建相关配置文件 
+ 直接拦截请求，NetWork看不到请求 
+ 调用真实接口时，需要删除相关配置文件。 
+ 
+ 第一步：安装mockjs 
+      1   2      ...
+          </p>
+          <ul class="tag-list clearfix">
+            
+            <li class="tag-list-item"><a href="/tags/vue/">vue</a></li>
+            
+            <li class="tag-list-item"><a href="/tags/mock/">mock</a></li>
+            
+          </ul>
+          <div class="post-info">
+            <span>
+              
+              <a class="category-link" href="/categories/Vue/"><i class="fa fa-folder-open"></i> Vue</a>
+              
+            </span>
+            <span><i class="fa fa-tag"></i> 2 </span>
+            <span>Published {{moment(1560712965000).fromNow()}}</span>
+          </div>
+        </li>
+        
+        <li class="archive-list-item">
+          <h2><a href="/2019/06/16/javascript/js-获取鼠标坐标详解/">JS来获取鼠标坐标详解</a></h2>
+          <p>
+               js 获取鼠标坐标方法：  
+  e.clientX/Y 
+ 
+  e.pageX/Y 
+ 
+  e.offsetX/Y 
+ 
+  e.layerX/Y 
+ 
+  e.screenX/Y 
+ 
+   clientX/clientY  
+   获取到的是触发点相对浏览器可视区域左上角距离，不随页...
+          </p>
+          <ul class="tag-list clearfix">
+            
+            <li class="tag-list-item"><a href="/tags/javascript/">javascript</a></li>
+            
+          </ul>
+          <div class="post-info">
+            <span>
+              
+              <i class="fa fa-folder-open"></i> Uncategorized
+              
+            </span>
+            <span><i class="fa fa-tag"></i> 1 </span>
+            <span>Published {{moment(1560708737000).fromNow()}}</span>
+          </div>
+        </li>
+        
+        <li class="archive-list-item">
+          <h2><a href="/2019/06/16/seo/SEO/">SEO</a></h2>
+          <p>
+               SEO 工作的目的  是为了让网站更利于让各大搜索引擎抓取和收录，增加产品的曝光率 
+   SEO 注意事项    1. 网站 TDK 标签的设置  title,description,keywords 
+      1   2   3       &amp;lt;title&amp;gt;淘宝网 - 淘！我...
+          </p>
+          <ul class="tag-list clearfix">
+            
+            <li class="tag-list-item"><a href="/tags/seo/">seo</a></li>
+            
+          </ul>
+          <div class="post-info">
+            <span>
+              
+              <a class="category-link" href="/categories/seo/"><i class="fa fa-folder-open"></i> seo</a>
+              
+            </span>
+            <span><i class="fa fa-tag"></i> 1 </span>
+            <span>Published {{moment(1560706120000).fromNow()}}</span>
+          </div>
+        </li>
+        
+        <li class="archive-list-item">
+          <h2><a href="/2019/06/11/git/基于fork的git常规操作/">基于fork的git常规操作</a></h2>
+          <p>
+               
+   一、fork是什么  我们在多人协同开发项目的过程中，git是必不可少的代码托管工具。但是繁琐的操作命令、抽象的文件状态就需要花费我们大量的时间。 
+ 
+  fork 拥有可视化界面的项目版本控制软件，适用于git项目管理。 
+ 
+ 现在很多人都在用sourcetree，至于你问我为什...
+          </p>
+          <ul class="tag-list clearfix">
+            
+            <li class="tag-list-item"><a href="/tags/git/">git</a></li>
+            
+            <li class="tag-list-item"><a href="/tags/fork/">fork</a></li>
+            
+          </ul>
+          <div class="post-info">
+            <span>
+              
+              <a class="category-link" href="/categories/git/"><i class="fa fa-folder-open"></i> git</a>
+              
+            </span>
+            <span><i class="fa fa-tag"></i> 2 </span>
+            <span>Published {{moment(1560283341000).fromNow()}}</span>
+          </div>
+        </li>
+        
+        <li class="archive-list-item">
+          <h2><a href="/2019/05/31/Tool/命令行交互录制生成SVG动图/">命令行交互录制生成SVG动图</a></h2>
+          <p>
+               前言  配置服务器时，操作命令比较多，复杂，为了完整记录你在终端中执行的操作，将其保存以供后续参考学习，发现一个神器 asciinema  将终端会话录制成 SVG 动画 
+   1.  asciinema的使用    asciinema的安装  因为使用的Mac系统 安装使用brew，安装命...
+          </p>
+          <ul class="tag-list clearfix">
+            
+            <li class="tag-list-item"><a href="/tags/asciinema/">asciinema</a></li>
+            
+            <li class="tag-list-item"><a href="/tags/命令行录制/">命令行录制</a></li>
+            
+          </ul>
+          <div class="post-info">
+            <span>
+              
+              <a class="category-link" href="/categories/tool/"><i class="fa fa-folder-open"></i> tool</a>
+              
+            </span>
+            <span><i class="fa fa-tag"></i> 2 </span>
+            <span>Published {{moment(1559318746000).fromNow()}}</span>
+          </div>
+        </li>
+        
+        <li class="archive-list-item">
+          <h2><a href="/2019/05/31/移动端/移动端开发小技巧/">移动端开发小技巧</a></h2>
+          <p>
+             [doc] 
+   mobileTech  A useful tools or tips list for mobile web application developing 
+ 这个项目收集移动端开发所需要的一些资源与小技巧 
+   移动端统计 (from BiosSun)   可基于下方所列出...
+          </p>
+          <ul class="tag-list clearfix">
+            
+            <li class="tag-list-item"><a href="/tags/移动端/">移动端</a></li>
+            
+            <li class="tag-list-item"><a href="/tags/H5/">H5</a></li>
+            
+          </ul>
+          <div class="post-info">
+            <span>
+              
+              <a class="category-link" href="/categories/移动端/"><i class="fa fa-folder-open"></i> 移动端</a>
+              
+            </span>
+            <span><i class="fa fa-tag"></i> 2 </span>
+            <span>Published {{moment(1559318567000).fromNow()}}</span>
+          </div>
+        </li>
+        
+        <li class="archive-list-item">
+          <h2><a href="/2019/05/15/git/git切换分支保存修改的代码的方法/">git切换分支保存修改的代码的方法</a></h2>
+          <p>
+               
+ 最近在一个原有的项目上做一次非常大的改版，底层的数据库做了很大的变化，跟现在的版本无法兼容。现在的工作除了开发最新的版本之外还要对原来的版本做例行的维护，修修补补。于是有了在两个分支之间游走切换的问题，最新改版的代码在分支new上，旧版本的代码在分支old上，我在new上开发了一半，忽然有...
+          </p>
+          <ul class="tag-list clearfix">
+            
+            <li class="tag-list-item"><a href="/tags/git/">git</a></li>
+            
+            <li class="tag-list-item"><a href="/tags/git-stash/">git stash</a></li>
+            
+          </ul>
+          <div class="post-info">
+            <span>
+              
+              <a class="category-link" href="/categories/git/"><i class="fa fa-folder-open"></i> git</a>
+              
+            </span>
+            <span><i class="fa fa-tag"></i> 2 </span>
+            <span>Published {{moment(1557952166000).fromNow()}}</span>
+          </div>
+        </li>
+        
+        <li class="archive-list-item">
+          <h2><a href="/2019/05/10/正则表达式/js-正则表达式/">Js正则表达式</a></h2>
+          <p>
+             [TOC] 
+ 
+   JavaScript 正则表达式    
+ 
+  正则表达式 （Regular Expression），在代码中常简写为 regex 、 regexp 或 RE ），使用单个字符串来描述、匹配一系列符合某个句法规则的字符串搜索模式。可用于所有 文本搜索 和 文本替换 的操作...
+          </p>
+          <ul class="tag-list clearfix">
+            
+            <li class="tag-list-item"><a href="/tags/javascript/">javascript</a></li>
+            
+          </ul>
+          <div class="post-info">
+            <span>
+              
+              <a class="category-link" href="/categories/正则表达式/"><i class="fa fa-folder-open"></i> 正则表达式</a>
+              
+            </span>
+            <span><i class="fa fa-tag"></i> 1 </span>
+            <span>Published {{moment(1557508870000).fromNow()}}</span>
+          </div>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <div class="clearfix">
+    <a href="http://github.provenr.cn" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2019 Provenr</li>
+      <li><a href="http://github.provenr.cn">Home</a></li>
+      
+      <li><a href="https://provenr.github.io/">Github</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+    </div>
+    
+  </footer>
+</div>
+
+
+
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>

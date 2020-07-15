@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    git commit 工作流的标准姿势以及 release note 自动生成 | Provenr
+  </title>
+  <meta name="description" content="没有比脚更长的路，走过去，前面是春天！">
+  
+  <meta name="keywords" content="
+  git
+  ">
+  
+  <meta name="author" content="Provenr">
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="theme-color" content="#1e2327">
+  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
+
+  <link rel="icon" type="image/x-icon" href="http://www.provenr.cn/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+  
+<script>
+  var _hmt = _hmt || [];
+  (function(){var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?e56a1706ae9d773852a4a03368b51f86";
+    var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script>
+
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+</head>
+
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/archives">Archives</a></li>
+        
+        
+        <li><a href="/categories">Categories</a></li>
+        
+        
+        <li><a href="/tags">Tags</a></li>
+        
+        
+        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="/avatar/provenr.jpg"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/archives" class="header-toolbar-left"><i
+                  class="fa fa-file-text"></i> Posts </a>
+        <a href="/archives"
+           class="header-toolbar-right"> 26 </a>
+      </li>
+      <li>
+        <a href="/tags" class="header-toolbar-left"><i
+                  class="fa fa-tags"></i> Tags </a>
+        <a href="/tags"
+           class="header-toolbar-right"> 36 </a>
+      </li>
+      <li>
+        <a href="/categories" class="header-toolbar-left"><i
+                  class="fa fa-folder-open"></i> Categories </a>
+        <a href="/categories"
+           class="header-toolbar-right"> 13 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/">Provenr</a>
+      
+      
+    </h2>
+  </div>
+
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
+
+<aside class="side-container desktop-only">
+    
+        <div id="toc">
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#规范标准-commit"><span class="toc-text">规范标准(commit)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用commitizen代替commit"><span class="toc-text">使用commitizen代替commit</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#规范化commit-msg-commitlint"><span class="toc-text">规范化commit-msg / commitlint</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#关于git-hooks"><span class="toc-text">关于git hooks</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#生成-Change-log"><span class="toc-text">生成 Change log</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#相关"><span class="toc-text">相关</span></a></li></ol>
+        </div>
+    
+</aside>
+
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    Provenr
+
+    <span class="post-date float-right" title="{{moment(1537797320000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      <i class="fa fa-pencil-square-o"></i>
+<!--      {{moment(1537797320000).fromNow()}}-->
+      last modified: {{moment(1537797320000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>git commit 工作流的标准姿势以及 release note 自动生成</h1>
+    <p>一个项目除了前期的开发任务以外，还有后期的功能迭代维护，面对较为频繁的功能上线和一些繁杂的事情，于是有条不紊地管理我们的 release notes 是一门学问。</p>
+<p>之前项目功能迭代上线，版本通过时间戳，更新内容更是通过人力去维护，时间跨度一大这种人力维护 release notes 变得混乱。</p>
+<p>于是考虑通过规范的 commit message 来自动生成 release notes。</p>
+<h3 id="规范标准-commit"><a href="#规范标准-commit" class="headerlink" title="规范标准(commit)"></a>规范标准(commit)</h3><p>主流的 commit message 规范为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;footer&gt;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p><strong>标准类别(type):</strong><br>用于声明此次commit的主要目的类别：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">feat：feature、发布新功能</span><br><span class="line">fix：修复bug </span><br><span class="line">docs：更新文档</span><br><span class="line">style： 代码格式 </span><br><span class="line">refactor：代码重构 </span><br><span class="line">test：增加测试 </span><br><span class="line">chore：构建过程或辅助工具的变动</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>范围(scope):</strong><br>用于说明commit影响的范围；如数据层(model)，视图层(view)，控制层（controller）等。</p>
+</li>
+<li><p><strong>描述(subject):</strong><br>commit的主题描述，少于50个字。</p>
+</li>
+<li><p><strong>body/footer:</strong><br>用于详细描述和关闭issue的补充。(skipped)</p>
+</li>
+</ol>
+<hr>
+<h3 id="使用commitizen代替commit"><a href="#使用commitizen代替commit" class="headerlink" title="使用commitizen代替commit"></a>使用commitizen代替commit</h3><p><a href="https://github.com/commitizen/cz-cli" target="_blank" rel="noopener">Commitizen</a>是一个撰写合格 Commit message 的工具。</p>
+<p>安装命令如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g commitizen</span><br></pre></td></tr></table></figure>
+
+<p>然后，在项目目录里，运行下面的命令，使其支持 Angular 的 Commit message 格式:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">commitizen init cz-conventional-changelog --save --save-exact</span><br></pre></td></tr></table></figure>
+
+<p>以后，凡是用到git commit命令，一律改为使用git cz。这时，就会出现选项，用来生成符合格式的 Commit message。</p>
+<p><img src="https://github.com/AngusYang9/image/blob/master/blog/git%20commit%20%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%9A%84%E6%A0%87%E5%87%86%E5%A7%BF%E5%8A%BF%E4%BB%A5%E5%8F%8A%20release%20note%20%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90/githubImage%20%5B~:Documents:angus:githubImage%5D%20-%20...:package.json%20%5BgithubImage%5D%202019-01-29%2014-37-08.png?raw=true" alt="gitcz"></p>
+<hr>
+<h3 id="规范化commit-msg-commitlint"><a href="#规范化commit-msg-commitlint" class="headerlink" title="规范化commit-msg / commitlint"></a>规范化commit-msg / commitlint</h3><p>这里我们使用另一个git hooks：commitmsg，我们来安装validate-commit-msg检查 Commit message 是否符合格式。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yarn add husky // git hooks</span><br><span class="line">yarn add validate-commit-msg</span><br></pre></td></tr></table></figure>
+
+<p>在package.json中配置：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">"config": &#123;</span><br><span class="line">    "commitizen": &#123;</span><br><span class="line">      "path": "./node_modules/cz-conventional-changelog"</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果要进行自定义配置，我们可以自建一个文件.vcmrc:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"types"</span>: [<span class="string">"feat"</span>, <span class="string">"fix"</span>, <span class="string">"docs"</span>, <span class="string">"style"</span>, <span class="string">"refactor"</span>, <span class="string">"perf"</span>, <span class="string">"test"</span>, <span class="string">"build"</span>, <span class="string">"ci"</span>, <span class="string">"chore"</span>, <span class="string">"revert"</span>,<span class="string">":art"</span>],</span><br><span class="line">  <span class="attr">"scope"</span>: &#123;</span><br><span class="line">    <span class="attr">"required"</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">"allowed"</span>: [<span class="string">"*"</span>],</span><br><span class="line">    <span class="attr">"validate"</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">"multiple"</span>: <span class="literal">false</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"warnOnFail"</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">"maxSubjectLength"</span>: <span class="number">100</span>,</span><br><span class="line">  <span class="attr">"helpMessage"</span>: <span class="string">""</span>,</span><br><span class="line">  <span class="attr">"autoFix"</span>: <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<h4 id="关于git-hooks"><a href="#关于git-hooks" class="headerlink" title="关于git hooks"></a>关于git hooks</h4><p>提到“hooks”这个词我们应该并不陌生，比如vue和react都有自己的lifecycle hooks，在git中分为客户端hooks和服务端hooks。在commit阶段中涉及到的是客户端hooks，其中客户端hooks包含：</p>
+</blockquote>
+<blockquote>
+<p> <code>pre-commit</code>钩子在键入提交信息前运行。 它用于检查即将提交的快照，例如，检查是否有所遗漏，确保测试运行，以及核查代码。 如果该钩子以非零值退出，Git 将放弃此次提交，不过你可以用 git commit –no-verify 来绕过这个环节。 你可以利用该钩子，来检查代码风格是否一致（运行类似 lint 的程序）、尾随空白字符是否存在（自带的钩子就是这么做的），或新方法的文档是否适当。</p>
+</blockquote>
+<blockquote>
+<p><code>prepare-commit-msg</code> 钩子在启动提交信息编辑器之前，默认信息被创建之后运行。 它允许你编辑提交者所看到的默认信息。 该钩子接收一些选项：存有当前提交信息的文件的路径、提交类型和修补提交的提交的 SHA-1 校验。 它对一般的提交来说并没有什么用；然而对那些会自动产生默认信息的提交，如提交信息模板、合并提交、压缩提交和修订提交等非常实用。 你可以结合提交模板来使用它，动态地插入信息。</p>
+</blockquote>
+<blockquote>
+<p><code>commit-msg</code> 钩子接收一个参数，此参数即上文提到的，存有当前提交信息的临时文件的路径。 如果该钩子脚本以非零值退出，Git 将放弃提交，因此，可以用来在提交通过前验证项目状态或提交信息。</p>
+</blockquote>
+<blockquote>
+<p><code>post-commit</code> 钩子在整个提交过程完成后运行。 它不接收任何参数，但你可以很容易地通过运行 git log -1 HEAD 来获得最后一次的提交信息。 该钩子一般用于通知之类的事情。 </p>
+</blockquote>
+<hr>
+<h3 id="生成-Change-log"><a href="#生成-Change-log" class="headerlink" title="生成 Change log"></a>生成 Change log</h3><p>如果你的所有 Commit 都符合 Angular 格式，那么发布新版本时， Change log 就可以用脚本自动生成。</p>
+<p>生成的文档包括以下三个部分:</p>
+<blockquote>
+<ul>
+<li>New features</li>
+<li>Bug fixes</li>
+<li>Breaking changes</li>
+</ul>
+</blockquote>
+<p>每个部分都会罗列相关的 commit ，并且有指向这些 commit 的链接。当然，生成的文档允许手动修改，所以发布前，你还可以添加其他内容。</p>
+<p><a href="https://github.com/ajoslin/conventional-changelog" target="_blank" rel="noopener">conventional-changelog</a> 就是生成 Change log 的工具，运行下面的命令即可:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g conventional-changelog</span><br></pre></td></tr></table></figure>
+
+<p>上面命令不会覆盖以前的 Change log，只会在CHANGELOG.md的头部加上自从上次发布以来的变动。</p>
+<p>如果你想生成所有发布的 Change log，要改为运行下面的命令:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conventional-changelog -p angular -i CHANGELOG.md -w -r 0</span><br></pre></td></tr></table></figure>
+
+<p>为了方便使用，可以将其写入package.json的scripts字段</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"scripts"</span>: &#123;</span><br><span class="line">    ... ...</span><br><span class="line">    // 按类别排序 只包含Angular格式</span><br><span class="line">    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -w -s -r 0 &amp;&amp; git add CHANGELOG.md"</span><br><span class="line">    // 按提交时间排序</span><br><span class="line">    "changelog": "conventional-changelog -p -i CHANGELOG.md -w -s -r 0 &amp;&amp; git add CHANGELOG.md"</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以后，直接运行下面的命令即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run changelog</span><br></pre></td></tr></table></figure>
+
+<p>有时出现command not found，以为是conventional-changelog没有安装，通过命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm ls -g -depth=0</span><br></pre></td></tr></table></figure>
+
+<p>打印出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/lib</span><br><span class="line">├── commitizen@2.9.6</span><br><span class="line">├── conventional-changelog@1.1.0</span><br><span class="line">├── cz-conventional-changelog@2.0.0</span><br><span class="line">└── npm@4.3.0</span><br></pre></td></tr></table></figure>
+
+<p>明明是有的，苦思不得其解，最后在这篇文章<a href="https://link.jianshu.com?t=https://cattail.me/tech/2016/06/06/git-commit-message-and-branching-model.html" target="_blank" rel="noopener">Git 提交记录和分支模型</a>中发现Commitizen就依据conventional message，创建起一个生态：</p>
+<ul>
+<li><code>conventional-changelog-cli</code>: 通过提交记录生成 CHANGELOG.md</li>
+<li><code>conventional-github-releaser</code>: 通过提交记录生成 github release 中的变更描述</li>
+<li><code>conventional-recommended-bump</code>: 根据提交记录判断需要升级 Semantic Versioning 哪一位版本号</li>
+<li><code>validate-commit-msg</code>: 检查提交记录是否符合约定</li>
+</ul>
+<p>于是就改用了conventional-changelog-cli：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install -g conventional-changelog-cli</span><br><span class="line">cd #project</span><br><span class="line">conventional-changelog -p angular -i CHANGELOG.md -s</span><br></pre></td></tr></table></figure>
+
+<p>通过以上命令你就会发现在项目中多了个CHANGELOG.md文件，表示生成 Change log成功了。</p>
+<hr>
+<p>** <code>changelog 支持中英文</code>**</p>
+<p>在 package.json 中配置</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"lang"</span>: <span class="string">"zh"</span> // 'zh' | 'cn'</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>样例:<br><img src="https://angusyang9.github.io/css/images/git/changelog.png" alt="gitcz"></p>
+<h3 id="相关"><a href="#相关" class="headerlink" title="相关"></a>相关</h3><ul>
+<li><a href="https://github.com/conventional-changelog/conventional-changelog" target="_blank" rel="noopener">conventional-changelog</a> : 根据 commit message 生成 changelog</li>
+<li><a href="https://github.com/marionebl/commitlint" target="_blank" rel="noopener">commitlint</a> : Lint commit messages</li>
+<li><a href="http://gitlab.baidu.com/be-fe/conventional-changelog-befe" target="_blank" rel="noopener">@baidu/conventional-changelog-befe</a> : conventional-changelog BEFE 预设</li>
+<li><a href="http://gitlab.baidu.com/be-fe/commitlint-config-befe" target="_blank" rel="noopener">@baidu/commitlint-config-befe</a> : commitlint lint BEFE 预设</li>
+</ul>
+
+  </article>
+</div>
+
+
+    
+<div class="container disqus-container">
+  <div id="disqus_thread"></div>
+</div>
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://github.provenr.cn/2018/09/24/git/git-commit工作流的标准姿势以及release-note自动生成/";
+    this.page.identifier = 1537797320;
+  };
+
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://blog-provenr-cn.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <div class="clearfix">
+    <a href="http://github.provenr.cn" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2019 Provenr</li>
+      <li><a href="http://github.provenr.cn">Home</a></li>
+      
+      <li><a href="https://provenr.github.io/">Github</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+    </div>
+    
+  </footer>
+</div>
+
+
+
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>

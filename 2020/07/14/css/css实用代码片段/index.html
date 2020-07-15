@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    css实用代码片段 | Provenr
+  </title>
+  <meta name="description" content="没有比脚更长的路，走过去，前面是春天！">
+  
+  <meta name="keywords" content="
+  fragment
+  ">
+  
+  <meta name="author" content="Provenr">
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="theme-color" content="#1e2327">
+  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
+
+  <link rel="icon" type="image/x-icon" href="http://www.provenr.cn/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+  
+<script>
+  var _hmt = _hmt || [];
+  (function(){var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?e56a1706ae9d773852a4a03368b51f86";
+    var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script>
+
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+</head>
+
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/archives">Archives</a></li>
+        
+        
+        <li><a href="/categories">Categories</a></li>
+        
+        
+        <li><a href="/tags">Tags</a></li>
+        
+        
+        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="/avatar/provenr.jpg"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/archives" class="header-toolbar-left"><i
+                  class="fa fa-file-text"></i> Posts </a>
+        <a href="/archives"
+           class="header-toolbar-right"> 26 </a>
+      </li>
+      <li>
+        <a href="/tags" class="header-toolbar-left"><i
+                  class="fa fa-tags"></i> Tags </a>
+        <a href="/tags"
+           class="header-toolbar-right"> 36 </a>
+      </li>
+      <li>
+        <a href="/categories" class="header-toolbar-left"><i
+                  class="fa fa-folder-open"></i> Categories </a>
+        <a href="/categories"
+           class="header-toolbar-right"> 13 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/">Provenr</a>
+      
+      
+    </h2>
+  </div>
+
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
+
+<aside class="side-container desktop-only">
+    
+        <div id="toc">
+            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#ios-滑动卡顿"><span class="toc-text">ios 滑动卡顿</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进行抗锯齿渲染"><span class="toc-text">进行抗锯齿渲染</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#禁止长按选择复制"><span class="toc-text">禁止长按选择复制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1px-线"><span class="toc-text">1px 线</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取url-参数"><span class="toc-text">获取url 参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#axios-请求"><span class="toc-text">axios 请求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mete标签使用"><span class="toc-text">mete标签使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#移动端-忽略滚动条"><span class="toc-text">移动端 忽略滚动条</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#placeholder元素样式的修改"><span class="toc-text">placeholder元素样式的修改</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用图片时，触发baseline-会发现图片下的空白"><span class="toc-text">使用图片时，触发baseline 会发现图片下的空白</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#设置宽度为100-设置padding-margin-超出屏幕"><span class="toc-text">设置宽度为100% 设置padding  margin 超出屏幕</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#解决移动端-click-300ms-延迟"><span class="toc-text">解决移动端 click 300ms 延迟</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#浏览器判断-NPM安装"><span class="toc-text">浏览器判断 NPM安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#移动端布局"><span class="toc-text">移动端布局</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#文本截取"><span class="toc-text">文本截取</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#修改chrome记住密码后自动填充表单的黄色背景-？"><span class="toc-text">修改chrome记住密码后自动填充表单的黄色背景 ？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#响应式布局"><span class="toc-text">响应式布局</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#loadmore"><span class="toc-text">loadmore</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#divider-分割线"><span class="toc-text">divider 分割线</span></a></li></ol>
+        </div>
+    
+</aside>
+
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    Provenr
+
+    <span class="post-date float-right" title="{{moment(1594743183000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      <i class="fa fa-pencil-square-o"></i>
+<!--      {{moment(1594743183000).fromNow()}}-->
+      last modified: {{moment(1594743183000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>css实用代码片段</h1>
+    <h4 id="ios-滑动卡顿"><a href="#ios-滑动卡顿" class="headerlink" title="ios 滑动卡顿"></a>ios 滑动卡顿</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">*&#123;</span><br><span class="line">  -webkit-overflow-scrolling: touch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="进行抗锯齿渲染"><a href="#进行抗锯齿渲染" class="headerlink" title="进行抗锯齿渲染"></a>进行抗锯齿渲染</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">-webkit-font-smoothing: antialiased; /*chrome、safari*/</span><br><span class="line"></span><br><span class="line">-moz-osx-font-smoothing: grayscale;/*firefox*/”</span><br></pre></td></tr></table></figure>
+
+<h4 id="禁止长按选择复制"><a href="#禁止长按选择复制" class="headerlink" title="禁止长按选择复制"></a>禁止长按选择复制</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* &#123;</span><br><span class="line">	user-select:none;</span><br><span class="line">	-webkit-touch-callout:none;</span><br><span class="line">	-webkit-user-select:none;</span><br><span class="line">	-khtml-user-select:none;</span><br><span class="line">	-moz-user-select:none;</span><br><span class="line">	-ms-user-select:none;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="1px-线"><a href="#1px-线" class="headerlink" title="1px 线"></a>1px 线</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">.weui-cell:before &#123;</span><br><span class="line">    content: &quot; &quot;;</span><br><span class="line">    position: absolute;</span><br><span class="line">    left: 0;</span><br><span class="line">    top: 0;</span><br><span class="line">    right: 0;</span><br><span class="line">    height: 1px;</span><br><span class="line">    border-top: 1px solid #D9D9D9;</span><br><span class="line">    color: #D9D9D9;</span><br><span class="line">    -webkit-transform-origin: 0 0;</span><br><span class="line">    transform-origin: 0 0;</span><br><span class="line">    -webkit-transform: scaleY(0.5); // 0.5缩放</span><br><span class="line">    transform: scaleY(0.5);</span><br><span class="line">    left: 15px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取url-参数"><a href="#获取url-参数" class="headerlink" title="获取url 参数"></a>获取url 参数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function getQuery(pa) &#123;</span><br><span class="line">    var url = window.location.href.replace(/#+.*$/, &apos; &apos;);</span><br><span class="line">    url = decodeURI(url)</span><br><span class="line">    var params = url.substring(url.indexOf(&quot;?&quot;) + 1, url.length).split(&quot;&amp;&quot;),</span><br><span class="line">    	param = &#123;&#125;;</span><br><span class="line">    for (var i = 0; i &lt; params.length; i++) &#123;</span><br><span class="line">    	var pos = params[i].indexOf(&apos;=&apos;), //查找name=value</span><br><span class="line">    		key = params[i].substring(0, pos),</span><br><span class="line">    		val = params[i].substring(pos + 1); //提取value</span><br><span class="line">    	param[key] = val;</span><br><span class="line">    &#125;</span><br><span class="line">    			return (typeof(param[pa]) == &quot;undefined&quot;) ? &quot;&quot; : param[pa];</span><br><span class="line">    // return param;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="axios-请求"><a href="#axios-请求" class="headerlink" title="axios 请求"></a>axios 请求</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">1. 利用node qs 转化</span><br><span class="line"></span><br><span class="line">import qs from &apos;qs&apos;;</span><br><span class="line">transformRequest:[(data) =&gt; &#123;</span><br><span class="line">  return qs.stringify(data)</span><br><span class="line">&#125;]</span><br><span class="line"></span><br><span class="line">2. 函数将data对象拼接为字符串 </span><br><span class="line">axios.post(&apos;https://apiv1&apos;, </span><br><span class="line">&#123;</span><br><span class="line">    token: localStorage.getItem(&apos;token&apos;),</span><br><span class="line">    id: orderid,</span><br><span class="line">&#125;, </span><br><span class="line">&#123;</span><br><span class="line">transformRequest: [function (data) &#123;</span><br><span class="line">    // 对 data 进行任意转换处理</span><br><span class="line">    let ret = &apos;&apos;;</span><br><span class="line">    for (let it in data) &#123;</span><br><span class="line">        ret += encodeURIComponent(it) + &apos;=&apos; + encodeURIComponent(data[</span><br><span class="line">            it]) + &apos;&amp;&apos;</span><br><span class="line">    &#125;</span><br><span class="line">    return ret</span><br><span class="line">&#125;],</span><br><span class="line">headers: &#123;</span><br><span class="line">    &quot;Content-Type&quot;: &apos;application/x-www-form-urlencoded;charset=UTF-8&apos;</span><br><span class="line">&#125;</span><br><span class="line">&#125;).then(function (response) &#123;</span><br><span class="line">    </span><br><span class="line">&#125;)</span><br><span class="line">.catch(function (error) &#123;</span><br><span class="line">    </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="mete标签使用"><a href="#mete标签使用" class="headerlink" title="mete标签使用"></a>mete标签使用</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 禁止缩放</span><br><span class="line">&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1,user-scalable=no&quot;/&gt;</span><br><span class="line"></span><br><span class="line">// 忽略将数字变为电话号码</span><br><span class="line">&lt;meta content=&quot;telephone=no&quot; name=&quot;format-detection&quot;&gt; </span><br><span class="line"></span><br><span class="line">// 忽略识别email</span><br><span class="line">&lt;meta content=&quot;email=no&quot; name=&quot;format-detection&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="移动端-忽略滚动条"><a href="#移动端-忽略滚动条" class="headerlink" title="移动端 忽略滚动条"></a>移动端 忽略滚动条</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">element::-webkit-scrollbar&#123;</span><br><span class="line"></span><br><span class="line">    display: none;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="placeholder元素样式的修改"><a href="#placeholder元素样式的修改" class="headerlink" title="placeholder元素样式的修改"></a>placeholder元素样式的修改</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">input::-webkit-input-placeholder&#123;color:red;&#125;</span><br><span class="line"></span><br><span class="line">input:focus::-webkit-input-placeholder&#123;color:green;&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用图片时，触发baseline-会发现图片下的空白"><a href="#使用图片时，触发baseline-会发现图片下的空白" class="headerlink" title="使用图片时，触发baseline 会发现图片下的空白"></a>使用图片时，触发baseline 会发现图片下的空白</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">img&#123;display:block&#125;；</span><br><span class="line"></span><br><span class="line">img&#123;vertical-align:top&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="设置宽度为100-设置padding-margin-超出屏幕"><a href="#设置宽度为100-设置padding-margin-超出屏幕" class="headerlink" title="设置宽度为100% 设置padding  margin 超出屏幕"></a>设置宽度为100% 设置padding  margin 超出屏幕</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">box-sizing:border-box</span><br></pre></td></tr></table></figure>
+
+<h4 id="解决移动端-click-300ms-延迟"><a href="#解决移动端-click-300ms-延迟" class="headerlink" title="解决移动端 click 300ms 延迟"></a>解决移动端 click 300ms 延迟</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> fastclick.js</span><br><span class="line"> </span><br><span class="line"> import FastClick from &apos;FastClick&apos;</span><br><span class="line"> /**</span><br><span class="line"> * 点击延迟</span><br><span class="line"> */</span><br><span class="line">FastClick.attach(document.body)</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> zepto.js里的 tap事件。</span><br></pre></td></tr></table></figure>
+
+<h4 id="浏览器判断-NPM安装"><a href="#浏览器判断-NPM安装" class="headerlink" title="浏览器判断 NPM安装"></a>浏览器判断 <a href="https://www.npmjs.com/package/device" target="_blank" rel="noopener">NPM安装</a></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">可使用 Device.js 库</span><br><span class="line">var ua = navigator.userAgent.toLowerCase();</span><br></pre></td></tr></table></figure>
+
+<h4 id="移动端布局"><a href="#移动端布局" class="headerlink" title="移动端布局"></a>移动端布局</h4><ol>
+<li><p>长列表<br> 页面的地址栏会随着 body 的滚动隐藏起来</p>
+</li>
+<li><p>伪元素使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">.elem&#123;</span><br><span class="line">    color: #333;</span><br><span class="line">    font-size: .26rem;</span><br><span class="line">    text-align: center;</span><br><span class="line">    display: flex;</span><br><span class="line">    align-items: center;</span><br><span class="line">    justify-content: center;</span><br><span class="line">&#125;</span><br><span class="line">.elem:after, .elem:before &#123;</span><br><span class="line">content: &quot;&quot;;</span><br><span class="line">height: 1px;</span><br><span class="line">display: block;</span><br><span class="line">background: #888;</span><br><span class="line">width: .5rem;</span><br><span class="line">&#125;</span><br><span class="line">.elem:after&#123;</span><br><span class="line">  margin-left: .3rem;    </span><br><span class="line">&#125;</span><br><span class="line">.elem:before&#123;</span><br><span class="line">  margin-right: .3rem;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h4 id="文本截取"><a href="#文本截取" class="headerlink" title="文本截取"></a>文本截取</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">单行文本</span><br><span class="line"></span><br><span class="line">width:300px;     </span><br><span class="line">overflow: hidden;     </span><br><span class="line">text-overflow:ellipsis;     </span><br><span class="line">white-space: nowrap;   </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">多行文本</span><br><span class="line"></span><br><span class="line">display:-webkit-box;  </span><br><span class="line">overflow:hidden;  </span><br><span class="line">text-overflow:ellipsis;  </span><br><span class="line">-webkit-line-clamp:2;  </span><br><span class="line">-webkit-box-orient:vertical;</span><br></pre></td></tr></table></figure>
+
+<h4 id="修改chrome记住密码后自动填充表单的黄色背景-？"><a href="#修改chrome记住密码后自动填充表单的黄色背景-？" class="headerlink" title="修改chrome记住密码后自动填充表单的黄色背景 ？"></a>修改chrome记住密码后自动填充表单的黄色背景 ？</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill &#123;</span><br><span class="line">  background-color: rgb(250, 255, 189); /* #FAFFBD; */</span><br><span class="line">  background-image: none;</span><br><span class="line">  color: rgb(0, 0, 0);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="响应式布局"><a href="#响应式布局" class="headerlink" title="响应式布局"></a><strong>响应式布局</strong></h4><p>1、通过媒体查询方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">/*默认为20px*/</span><br><span class="line">html &#123;    </span><br><span class="line">    font-size : 20px;</span><br><span class="line">&#125;</span><br><span class="line">/*判断宽度设置不同的html font-size值去覆盖默认值*/</span><br><span class="line">@media only screen and (min-width: 320px)&#123;    </span><br><span class="line">    html &#123;        </span><br><span class="line">        font-size: 10px;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">@media only screen and (min-width: 375)&#123;    </span><br><span class="line">    html &#123;        </span><br><span class="line">        font-size: 16; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">@media only screen and (min-width: 414px)&#123;    </span><br><span class="line">    html &#123;        </span><br><span class="line">        font-size: 20px; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="loadmore"><a href="#loadmore" class="headerlink" title="loadmore"></a>loadmore</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"> &lt;div class=&quot;loadmore&quot;&gt;</span><br><span class="line">    &lt;i class=&quot;loading&quot;&gt;&lt;/i&gt;</span><br><span class="line">    &lt;span class=&quot;loadmore__tips&quot;&gt;正在加载&lt;/span&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  .loadmore &#123;</span><br><span class="line">  width: 65%;</span><br><span class="line">  margin: 1.5em auto;</span><br><span class="line">  line-height: 1.6em;</span><br><span class="line">  font-size: 14px;</span><br><span class="line">  text-align: center;</span><br><span class="line">  .loading&#123;</span><br><span class="line">    width:20px;</span><br><span class="line">    height:20px;</span><br><span class="line">    display:inline-block;</span><br><span class="line">    vertical-align:middle;</span><br><span class="line">    -webkit-animation:weuiLoading 1s steps(12, end) infinite;</span><br><span class="line">            animation:weuiLoading 1s steps(12, end) infinite;</span><br><span class="line">    background:transparent url(&quot;data:image/svg+xml;charset=utf8, %3Csvg xmlns=&apos;http://www.w3.org/2000/svg&apos; width=&apos;120&apos; height=&apos;120&apos; viewBox=&apos;0 0 100 100&apos;%3E%3Cpath fill=&apos;none&apos; d=&apos;M0 0h100v100H0z&apos;/%3E%3Crect width=&apos;7&apos; height=&apos;20&apos; x=&apos;46.5&apos; y=&apos;40&apos; fill=&apos;%23E9E9E9&apos; rx=&apos;5&apos; ry=&apos;5&apos; transform=&apos;translate(0 -30)&apos;/%3E%3Crect width=&apos;7&apos; height=&apos;20&apos; x=&apos;46.5&apos; y=&apos;40&apos; fill=&apos;%23989697&apos; rx=&apos;5&apos; ry=&apos;5&apos; transform=&apos;rotate(30 105.98 65)&apos;/%3E%3Crect width=&apos;7&apos; height=&apos;20&apos; x=&apos;46.5&apos; y=&apos;40&apos; fill=&apos;%239B999A&apos; rx=&apos;5&apos; ry=&apos;5&apos; transform=&apos;rotate(60 75.98 65)&apos;/%3E%3Crect width=&apos;7&apos; height=&apos;20&apos; x=&apos;46.5&apos; y=&apos;40&apos; fill=&apos;%23A3A1A2&apos; rx=&apos;5&apos; ry=&apos;5&apos; transform=&apos;rotate(90 65 65)&apos;/%3E%3Crect width=&apos;7&apos; height=&apos;20&apos; x=&apos;46.5&apos; y=&apos;40&apos; fill=&apos;%23ABA9AA&apos; rx=&apos;5&apos; ry=&apos;5&apos; transform=&apos;rotate(120 58.66 65)&apos;/%3E%3Crect width=&apos;7&apos; height=&apos;20&apos; x=&apos;46.5&apos; y=&apos;40&apos; fill=&apos;%23B2B2B2&apos; rx=&apos;5&apos; ry=&apos;5&apos; transform=&apos;rotate(150 54.02 65)&apos;/%3E%3Crect width=&apos;7&apos; height=&apos;20&apos; x=&apos;46.5&apos; y=&apos;40&apos; fill=&apos;%23BAB8B9&apos; rx=&apos;5&apos; ry=&apos;5&apos; transform=&apos;rotate(180 50 65)&apos;/%3E%3Crect width=&apos;7&apos; height=&apos;20&apos; x=&apos;46.5&apos; y=&apos;40&apos; fill=&apos;%23C2C0C1&apos; rx=&apos;5&apos; ry=&apos;5&apos; transform=&apos;rotate(-150 45.98 65)&apos;/%3E%3Crect width=&apos;7&apos; height=&apos;20&apos; x=&apos;46.5&apos; y=&apos;40&apos; fill=&apos;%23CBCBCB&apos; rx=&apos;5&apos; ry=&apos;5&apos; transform=&apos;rotate(-120 41.34 65)&apos;/%3E%3Crect width=&apos;7&apos; height=&apos;20&apos; x=&apos;46.5&apos; y=&apos;40&apos; fill=&apos;%23D2D2D2&apos; rx=&apos;5&apos; ry=&apos;5&apos; transform=&apos;rotate(-90 35 65)&apos;/%3E%3Crect width=&apos;7&apos; height=&apos;20&apos; x=&apos;46.5&apos; y=&apos;40&apos; fill=&apos;%23DADADA&apos; rx=&apos;5&apos; ry=&apos;5&apos; transform=&apos;rotate(-60 24.02 65)&apos;/%3E%3Crect width=&apos;7&apos; height=&apos;20&apos; x=&apos;46.5&apos; y=&apos;40&apos; fill=&apos;%23E2E2E2&apos; rx=&apos;5&apos; ry=&apos;5&apos; transform=&apos;rotate(-30 -5.98 65)&apos;/%3E%3C/svg%3E&quot;) no-repeat;</span><br><span class="line">    background-size:100%;</span><br><span class="line">  &#125;</span><br><span class="line">  .loadmore__tips &#123;</span><br><span class="line">    display: inline-block;</span><br><span class="line">    vertical-align: middle;</span><br><span class="line">    color: rgba(0, 0, 0, 0.9);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="divider-分割线"><a href="#divider-分割线" class="headerlink" title="divider 分割线"></a>divider 分割线</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"> &lt;div class=&quot;divider divider--hairline divider--content-center&quot;&gt;</span><br><span class="line">    &lt;span&gt;暂无数据&lt;/span&gt;</span><br><span class="line"> &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;style lang=&quot;less&quot; scoped&gt;</span><br><span class="line">.divider&#123;</span><br><span class="line">    display: flex;</span><br><span class="line">    align-items: center;</span><br><span class="line">    margin: 16px 0;</span><br><span class="line">    color: #969799;</span><br><span class="line">    font-size: 14px;</span><br><span class="line">    line-height: 24px;</span><br><span class="line">    border-color: #999;</span><br><span class="line">    border-style: solid;</span><br><span class="line">    border-width: 0;</span><br><span class="line">    &amp;::before,</span><br><span class="line">    &amp;::after &#123;</span><br><span class="line">        display: block;</span><br><span class="line">        flex: 1;</span><br><span class="line">        box-sizing: border-box;</span><br><span class="line">        height: 1px;</span><br><span class="line">        border-color: inherit;</span><br><span class="line">        border-style: inherit;</span><br><span class="line">        border-width: 1px 0 0;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &amp;::before &#123;</span><br><span class="line">        content: &apos;&apos;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &amp;--hairline &#123;</span><br><span class="line">        &amp;::before,</span><br><span class="line">        &amp;::after &#123;</span><br><span class="line">            transform: scaleY(.5);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &amp;--dashed &#123;</span><br><span class="line">        border-style: dashed;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &amp;--content-center,</span><br><span class="line">    &amp;--content-left,</span><br><span class="line">    &amp;--content-right &#123;</span><br><span class="line">        &amp;::before &#123;</span><br><span class="line">            margin-right: 16px;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        &amp;::after &#123;</span><br><span class="line">            margin-left: 16px;</span><br><span class="line">            content: &apos;&apos;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &amp;--content-left &#123;</span><br><span class="line">        &amp;::before &#123;</span><br><span class="line">            max-width:20%;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &amp;--content-right &#123;</span><br><span class="line">        &amp;::after &#123;</span><br><span class="line">            max-width: 20%;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+  </article>
+</div>
+
+
+    
+<div class="container disqus-container">
+  <div id="disqus_thread"></div>
+</div>
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://github.provenr.cn/2020/07/14/css/css实用代码片段/";
+    this.page.identifier = 1594743183;
+  };
+
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://blog-provenr-cn.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <div class="clearfix">
+    <a href="http://github.provenr.cn" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2019 Provenr</li>
+      <li><a href="http://github.provenr.cn">Home</a></li>
+      
+      <li><a href="https://provenr.github.io/">Github</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+    </div>
+    
+  </footer>
+</div>
+
+
+
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>

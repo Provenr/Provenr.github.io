@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    babel 扫盲 | Provenr
+  </title>
+  <meta name="description" content="没有比脚更长的路，走过去，前面是春天！">
+  
+  <meta name="keywords" content="
+  babel,JavaScript
+  ">
+  
+  <meta name="author" content="Provenr">
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="theme-color" content="#1e2327">
+  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
+
+  <link rel="icon" type="image/x-icon" href="http://www.provenr.cn/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+  
+<script>
+  var _hmt = _hmt || [];
+  (function(){var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?e56a1706ae9d773852a4a03368b51f86";
+    var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script>
+
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+</head>
+
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/archives">Archives</a></li>
+        
+        
+        <li><a href="/categories">Categories</a></li>
+        
+        
+        <li><a href="/tags">Tags</a></li>
+        
+        
+        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="/avatar/provenr.jpg"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/archives" class="header-toolbar-left"><i
+                  class="fa fa-file-text"></i> Posts </a>
+        <a href="/archives"
+           class="header-toolbar-right"> 26 </a>
+      </li>
+      <li>
+        <a href="/tags" class="header-toolbar-left"><i
+                  class="fa fa-tags"></i> Tags </a>
+        <a href="/tags"
+           class="header-toolbar-right"> 36 </a>
+      </li>
+      <li>
+        <a href="/categories" class="header-toolbar-left"><i
+                  class="fa fa-folder-open"></i> Categories </a>
+        <a href="/categories"
+           class="header-toolbar-right"> 13 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/">Provenr</a>
+      
+      
+    </h2>
+  </div>
+
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
+
+<aside class="side-container desktop-only">
+    
+        <div id="toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#☆-babel是什么"><span class="toc-text">☆ babel是什么</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、babel的核心库-——-babel-core"><span class="toc-text">1、babel的核心库 —— @babel/core</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、Babel做了什么"><span class="toc-text">2、Babel做了什么:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#☆-Babel-的使用和配置"><span class="toc-text">☆ Babel 的使用和配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#（一）项目根目录下新建-babelrc-文件"><span class="toc-text">（一）项目根目录下新建 .babelrc 文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（二）babel-config-js"><span class="toc-text">（二）babel.config.js</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（三）package-json"><span class="toc-text">（三）package.json</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（四）-babelrc-js"><span class="toc-text">（四）.babelrc.js</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#☆-Babel-的插件-和-预设（presets）"><span class="toc-text">☆ Babel 的插件 和 预设（presets）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、Babel-的插件"><span class="toc-text">1、Babel 的插件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#插件的使用"><span class="toc-text">插件的使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#插件的参数"><span class="toc-text">插件的参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#插件的短名称"><span class="toc-text">插件的短名称</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、预设"><span class="toc-text">2、预设</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#babel-preset-env"><span class="toc-text">@babel/preset-env</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#☆-Polyfill、-babel-plugin-transform-runtime、-babel-runtim-关系"><span class="toc-text">☆ Polyfill、@babel/plugin-transform-runtime、@babel/runtim 关系</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Polyfill"><span class="toc-text">Polyfill</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#补充知识"><span class="toc-text">补充知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文档"><span class="toc-text">参考文档</span></a></li></ol>
+        </div>
+    
+</aside>
+
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    Provenr
+
+    <span class="post-date float-right" title="{{moment(1584980501000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      <i class="fa fa-pencil-square-o"></i>
+<!--      {{moment(1584980501000).fromNow()}}-->
+      last modified: {{moment(1584980501000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>babel 扫盲</h1>
+    <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本篇文章的目的:</p>
+<ol>
+<li>了解Babel 是什么</li>
+<li>babel使用和配置</li>
+<li>@babel/runtime，@babel/polyfill，@babel/plugin-transform-runtime 之间的关系</li>
+<li>了解插件和预设</li>
+</ol>
+<h2 id="☆-babel是什么"><a href="#☆-babel是什么" class="headerlink" title="☆ babel是什么"></a>☆ babel是什么</h2><blockquote>
+<p>Babel 是一个 JS 编译器（ES6 to ES5单纯的语法转换工具），为了解决了在老版本浏览器使用新语法的问题</p>
+</blockquote>
+<h3 id="1、babel的核心库-——-babel-core"><a href="#1、babel的核心库-——-babel-core" class="headerlink" title="1、babel的核心库 —— @babel/core"></a>1、babel的核心库 —— @babel/core</h3><p>Babel 的核心功能包含在 @babel/core 模块中。想要在项目中使用 babel 进行编译，必须安装 @babel/core，否则会报错。</p>
+<h3 id="2、Babel做了什么"><a href="#2、Babel做了什么" class="headerlink" title="2、Babel做了什么:"></a>2、Babel做了什么:</h3><p>Babel = syntax + polyfill</p>
+<ul>
+<li>syntax: ==语法转译==  （箭头函数）</li>
+<li>polyfill(@babel/polyfill模块): ==在目标环境中添加缺失的API== （Set、Map)</li>
+</ul>
+<h2 id="☆-Babel-的使用和配置"><a href="#☆-Babel-的使用和配置" class="headerlink" title="☆ Babel 的使用和配置"></a>☆ Babel 的使用和配置</h2><blockquote>
+<p> Babel 虽然开箱即用，但是什么动作也不做，如果想要 Babel 做一些实际的工作，就需要为其添加「插件」(plugin)。babel支持多种格式的配置文件</p>
+</blockquote>
+<h4 id="（一）项目根目录下新建-babelrc-文件"><a href="#（一）项目根目录下新建-babelrc-文件" class="headerlink" title="（一）项目根目录下新建 .babelrc 文件"></a>（一）项目根目录下新建 <a href="https://www.babeljs.cn/docs/config-files#file-relative-configuration" target="_blank" rel="noopener">.babelrc 文件</a></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//.babelrc</span><br><span class="line">&#123;</span><br><span class="line">    &quot;presets&quot;: [</span><br><span class="line">        &quot;@babel/preset-env&quot;, </span><br><span class="line">        &quot;@babel/preset-react&quot;</span><br><span class="line">    ],</span><br><span class="line">    &quot;plugins&quot;: [</span><br><span class="line">        &quot;@babel/plugin-proposal-class-properties&quot;,</span><br><span class="line">        &quot;@babel/plugin-syntax-dynamic-import&quot;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="（二）babel-config-js"><a href="#（二）babel-config-js" class="headerlink" title="（二）babel.config.js"></a>（二）babel.config.js</h4><blockquote>
+<p>希望以编程的方式创建配置文件 或者 希望编译 node_modules 目录下的模块，使用<a href="https://www.babeljs.cn/docs/config-files#project-wide-configuration" target="_blank" rel="noopener">babel.config.js</a>。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// babel.config.js</span><br><span class="line">module.exports = function(api) &#123;</span><br><span class="line">  api.cache(true);</span><br><span class="line">  const presets = [...];</span><br><span class="line">  const plugins = [...];</span><br><span class="line">  return &#123;</span><br><span class="line">      presets,</span><br><span class="line">      plugins</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>更多配置参考<a href="https://www.babeljs.cn/docs/config-files#file-relative-configuration" target="_blank" rel="noopener">babelrc 文档</a></p>
+<h4 id="（三）package-json"><a href="#（三）package-json" class="headerlink" title="（三）package.json"></a>（三）package.json</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;name&quot;: &quot;my-package&quot;,</span><br><span class="line">    // .babelrc 中的配置信息</span><br><span class="line">    &quot;babel&quot;: &#123;</span><br><span class="line">        &quot;presets&quot;: [],</span><br><span class="line">        &quot;plugins&quot;: []</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="（四）-babelrc-js"><a href="#（四）-babelrc-js" class="headerlink" title="（四）.babelrc.js"></a>（四）.babelrc.js</h4><blockquote>
+<p>与 .babelrc 配置相同，但是可以使用JS编写。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//可以在其中调用 Node.js 的API</span><br><span class="line">const presets = [];</span><br><span class="line">const plugins = [];</span><br><span class="line"></span><br><span class="line">module.exports = &#123; presets, plugins &#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="☆-Babel-的插件-和-预设（presets）"><a href="#☆-Babel-的插件-和-预设（presets）" class="headerlink" title="☆ Babel 的插件 和 预设（presets）"></a>☆ Babel 的插件 和 预设（presets）</h2><h3 id="1、Babel-的插件"><a href="#1、Babel-的插件" class="headerlink" title="1、Babel 的插件"></a>1、Babel 的插件</h3><h4 id="插件的使用"><a href="#插件的使用" class="headerlink" title="插件的使用"></a>插件的使用</h4><blockquote>
+<p>插件的排列顺序很重要！！！</p>
+</blockquote>
+<ul>
+<li>插件在 Presets 前运行。</li>
+<li>插件顺序从前往后排列，先执行 @babel/plugin-proposal-class-properties，后执行 @babel/plugin-syntax-dynamic-import</li>
+<li>preset 的执行顺序是颠倒的(从后往前)，先执行 @babel/preset-react， 后执行 @babel/preset-env。</li>
+</ul>
+<h4 id="插件的参数"><a href="#插件的参数" class="headerlink" title="插件的参数"></a>插件的参数</h4><p>插件和 preset 都可以接受参数，参数由插件名和参数对象组成一个数组。preset 设置参数也是这种格式。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;plugins&quot;: [</span><br><span class="line">    [</span><br><span class="line">      &quot;@babel/plugin-transform-runtime&quot;,</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;corejs&quot;: 3</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="插件的短名称"><a href="#插件的短名称" class="headerlink" title="插件的短名称"></a>插件的短名称</h4><p>如果插件名称为 @babel/plugin-XXX，可以使用短名称@babel/XXX :</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;plugins&quot;:</span><br><span class="line">        [</span><br><span class="line">            &quot;@babel/transform-arrow-functions&quot; //同&quot;@babel/plugin-transform-arrow-functions&quot;</span><br><span class="line">        ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果插件名称为 babel-plugin-XXX，可以使用短名称 XXX:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;plugins&quot;: [</span><br><span class="line">    &quot;newPlugin&quot;, //同 &quot;babel-plugin-newPlugin&quot;  </span><br><span class="line">    &quot;@scp/myPlugin&quot; //同&quot;@scp/babel-plugin-myPlugin&quot;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、预设"><a href="#2、预设" class="headerlink" title="2、预设"></a>2、预设</h3><blockquote>
+<p>理解为一堆plugin（插件）的集合</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 常用预设</span><br><span class="line">@babel/preset-env</span><br><span class="line">@babel/preset-flow</span><br><span class="line">@babel/preset-react</span><br><span class="line">@babel/preset-typescript</span><br></pre></td></tr></table></figure>
+
+<h4 id="babel-preset-env"><a href="#babel-preset-env" class="headerlink" title="@babel/preset-env"></a>@babel/preset-env</h4><blockquote>
+<p>对我们所使用的并且目标浏览器中缺失的功能进行「代码转换」和「加载 polyfill」，@babel/preset-env包含的插件将支持所有最新的JS特性(ES2015,ES2016等，不包含 stage 阶段)</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//.babelrc</span><br><span class="line">&#123;</span><br><span class="line">    &quot;presets&quot;: [&quot;@babel/preset-env&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>@babel/preset-env 会根据你配置的目标环境，生成插件列表来编译。基于浏览器或 Electron 的项目，官方推荐使用 .browserslistrc 文件来指定目标环境</p>
+<h2 id="☆-Polyfill、-babel-plugin-transform-runtime、-babel-runtim-关系"><a href="#☆-Polyfill、-babel-plugin-transform-runtime、-babel-runtim-关系" class="headerlink" title="☆ Polyfill、@babel/plugin-transform-runtime、@babel/runtim 关系"></a>☆ Polyfill、@babel/plugin-transform-runtime、@babel/runtim 关系</h2><h4 id="Polyfill"><a href="#Polyfill" class="headerlink" title="Polyfill"></a>Polyfill</h4><blockquote>
+<p>Polyfill = core-js  +  @babel/plugin-transform-regenerator</p>
+</blockquote>
+<p>==@babel/polyfill== 模块包括 ==core-js== 和一个自定义的 ==regenerator runtim==e 模块，可以模拟完整的 ES2015+ 环境</p>
+<p>1、安装 @babel/polyfill</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">npm install --save @babel/polyfill</span><br><span class="line">// 不使用 --save-dev，因为这是一个需要在源码之前运行的垫片</span><br><span class="line"></span><br><span class="line">// 需要在其它代码之前引入</span><br><span class="line">app.js</span><br><span class="line">import &quot;@babel/polyfill&quot;;</span><br><span class="line"></span><br><span class="line">``` </span><br><span class="line">&gt; #### 补充说明 (2020/01/07)：V7.4.0 版本开始，@babel/polyfill 已经被废弃(前端发展日新月异)，需单独安装 core-js 和 regenerator-runtime 模块。因为@babel/polyfill只包含core-js 2.0的版本，但是core-js@2.0的版本已经在一年半之前冻结，所有的新特性只会添加到3.0的分支中</span><br></pre></td></tr></table></figure>
+
+<p>@babel/polyfill  替代方式</p>
+<p>npm install –save core-js@3</p>
+<p>// 单独引入<br>import “core-js/stable”;<br>import “regenerator-runtime/runtime”; // 需要使用 generator 函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2、按需加载polyfill, 仅仅把需要的 polyfill 包含进来。</span><br><span class="line"></span><br><span class="line">我们未必需要完整的 @babel/polyfill（89k v7.7.0）,@babel/preset-env 提供了一个 useBuiltIns 参数，设置值为 usage 时,配置此参数的值为 usage ，必须要同时设置 corejs, 推荐使用core-js@3</span><br><span class="line"></span><br><span class="line">&gt; [core-js (点击了解更多)](https://github.com/zloirock/core-js) : JavaScript 的模块化标准库，包含 Promise、Symbol、Iterator和许多其他的特性，它可以让你仅加载必需的功能</span><br><span class="line"></span><br><span class="line">配合 @babel/preset-env  一起使用：</span><br></pre></td></tr></table></figure>
+
+<p>//.babelrc<br>const presets = [
+    [<br>        “@babel/env”,<br>        {<br>            “useBuiltIns”: “usage”,<br>            “corejs”: 3,<br>            targets: {<br>                browsers: [“last 2 versions”, “not ie &lt;= 10”]<br>            }<br>        }<br>    ]<br>]</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">推荐 【按需引入】 或者 【使用 useBuiltIns】</span><br><span class="line">- useBuiltIns 的参数为 &apos;usage&apos;, 仅为每个文件添加其使用的polyfill</span><br><span class="line">&gt; 入口处不需要手动导入 corejs | regenerator-runtime</span><br><span class="line">- useBuiltIns 的参数为 &apos;entry&apos;，替换（或打散）为适配目标环境的各个引用</span><br><span class="line">&gt; 入口处需要手动导入 corejs | regenerator-runtime，</span><br><span class="line">- useBuiltIns 未设置 或者 值为false，在入口文件引入的 polyfill 不做任何处理</span><br><span class="line"></span><br><span class="line">#### @babel/plugin-transform-runtime</span><br><span class="line">&gt; polyfill 的另一种方式。</span><br><span class="line"></span><br><span class="line">引入了 corejs、regenerator-runtime 这样的 polyfill 会有一定的副作用，比如：</span><br><span class="line"></span><br><span class="line">- 引入了新的全局对象：比如Promise、WeakMap等。</span><br><span class="line">- 修改现有的全局对象：比如修改了Array、String的原型链等。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">在应用开发中, 直接引入了 corejs、regenerator-runtime 这样的 polyfill 是可以的。 但如果在库、工具的开发中推荐使用 @babel/transform-runtime 它将开发者依赖的全局内置对象等，抽取成单独的模块，并通过模块导入的方式引入，避免了对全局作用域的修改（污染）。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">另外，==@babel/plugin-transform-runtime== 需要和 ==@babel/runtime== 配合使用。</span><br></pre></td></tr></table></figure>
+
+<p>npm install –save-dev @babel/plugin-transform-runtime // 开发时使用<br>npm install @babel/runtime-corejs3<br>npm install –save @babel/runtime // 生产依赖</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>//.babelrc<br>{
+    “plugins”: [<br>        [<br>            “@babel/plugin-transform-runtime”,<br>            {<br>                corejs: 3,<br>            }<br>        ]<br>    ]<br>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">##### -对ECMAScript提案的API进行模拟</span><br></pre></td></tr></table></figure>
+
+<p>//.babelrc<br>{
+    “plugins”: [<br>        [<br>            “@babel/plugin-transform-runtime”,<br>            {<br>               corejs: { version: 3, proposals: true },<br>            }<br>        ]<br>    ]<br>}</p>
+<p>```</p>
+<h2 id="补充知识"><a href="#补充知识" class="headerlink" title="补充知识"></a>补充知识</h2><p>monorepos 包的拆分</p>
+<p>core-js@2一个最常见的问题就是包的体积太大(~2M)，并且有很多重复的文件被引用。基于这个原因，core-js@3对包进行拆分，三个核心的包分别是</p>
+<ul>
+<li><a href="https://www.npmjs.com/package/core-js" target="_blank" rel="noopener">core-js</a>：定义全局的polyfill（~500k, 40k minified and gzipped）</li>
+<li><a href="https://www.npmjs.com/package/core-js-pure" target="_blank" rel="noopener">core-js-pure</a>：提供不污染全局环境的polyfill，等价于core-js@2/library（~440k）</li>
+<li>[core]-js-compat](<a href="https://github.com/zloirock/core-js/tree/master/packages/core-js-compat)：包含了core-js模块和API必要的数据，通过browserslist来生成所需要的core-js模块的列表" target="_blank" rel="noopener">https://github.com/zloirock/core-js/tree/master/packages/core-js-compat)：包含了core-js模块和API必要的数据，通过browserslist来生成所需要的core-js模块的列表</a></li>
+</ul>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p>【1】<a href="https://juejin.im/post/5ddff3abe51d4502d56bd143" target="_blank" rel="noopener">https://juejin.im/post/5ddff3abe51d4502d56bd143</a></p>
+<p>【2】<a href="https://juejin.im/post/5ce693b45188252db303ff23#heading-10" target="_blank" rel="noopener">致我们学前端的小时光—corejs与env、runtime的不解之缘</a></p>
+
+  </article>
+</div>
+
+
+    
+<div class="container disqus-container">
+  <div id="disqus_thread"></div>
+</div>
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://github.provenr.cn/2020/03/23/babel/babel 扫盲/";
+    this.page.identifier = 1584980501;
+  };
+
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://blog-provenr-cn.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <div class="clearfix">
+    <a href="http://github.provenr.cn" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2019 Provenr</li>
+      <li><a href="http://github.provenr.cn">Home</a></li>
+      
+      <li><a href="https://provenr.github.io/">Github</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+    </div>
+    
+  </footer>
+</div>
+
+
+
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>

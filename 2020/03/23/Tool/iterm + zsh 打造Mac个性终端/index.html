@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    iterm + zsh 打造Mac个性终端 | Provenr
+  </title>
+  <meta name="description" content="没有比脚更长的路，走过去，前面是春天！">
+  
+  <meta name="keywords" content="
+  iterm2,终端
+  ">
+  
+  <meta name="author" content="Provenr">
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="theme-color" content="#1e2327">
+  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
+
+  <link rel="icon" type="image/x-icon" href="http://www.provenr.cn/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+  
+<script>
+  var _hmt = _hmt || [];
+  (function(){var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?e56a1706ae9d773852a4a03368b51f86";
+    var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script>
+
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+</head>
+
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/archives">Archives</a></li>
+        
+        
+        <li><a href="/categories">Categories</a></li>
+        
+        
+        <li><a href="/tags">Tags</a></li>
+        
+        
+        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="/avatar/provenr.jpg"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/archives" class="header-toolbar-left"><i
+                  class="fa fa-file-text"></i> Posts </a>
+        <a href="/archives"
+           class="header-toolbar-right"> 26 </a>
+      </li>
+      <li>
+        <a href="/tags" class="header-toolbar-left"><i
+                  class="fa fa-tags"></i> Tags </a>
+        <a href="/tags"
+           class="header-toolbar-right"> 36 </a>
+      </li>
+      <li>
+        <a href="/categories" class="header-toolbar-left"><i
+                  class="fa fa-folder-open"></i> Categories </a>
+        <a href="/categories"
+           class="header-toolbar-right"> 13 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/">Provenr</a>
+      
+      
+    </h2>
+  </div>
+
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
+
+<aside class="side-container desktop-only">
+    
+        <div id="toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#iterm2-安装"><span class="toc-text">iterm2 安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#zsh-bash"><span class="toc-text">zsh bash</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置主题"><span class="toc-text">配置主题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注意，agnoster主题能否设置成功，还依赖于以下东西："><span class="toc-text">注意，agnoster主题能否设置成功，还依赖于以下东西：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最终效果"><span class="toc-text">最终效果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#番外篇"><span class="toc-text">番外篇</span></a></li></ol>
+        </div>
+    
+</aside>
+
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    Provenr
+
+    <span class="post-date float-right" title="{{moment(1584995921000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      <i class="fa fa-pencil-square-o"></i>
+<!--      {{moment(1584995921000).fromNow()}}-->
+      last modified: {{moment(1584995921000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>iterm + zsh 打造Mac个性终端</h1>
+    <h2 id="iterm2-安装"><a href="#iterm2-安装" class="headerlink" title="iterm2 安装"></a>iterm2 安装</h2><p>iTerm2官方下载地址 <a href="https://www.iterm2.com/downloads.html" target="_blank" rel="noopener">http://www.iterm2.com/downloads.html</a></p>
+<h2 id="zsh-bash"><a href="#zsh-bash" class="headerlink" title="zsh bash"></a>zsh bash</h2><ol>
+<li>通过 ==cat /etc/shells== 命令可以查看当前系统可以使用哪些shell；</li>
+<li>通过 ==echo $SHELL== 命令可以查看我们当前正在使用的shell；</li>
+<li>通过==chsh -s /bin/zsh==命令可以将shell切换为shell之zsh，终端重启之后即可生效。</li>
+<li>4.将shell切换为zsh之后，我们就可以安装Oh My ZSH了<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh -c &quot;$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&quot;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="配置主题"><a href="#配置主题" class="headerlink" title="配置主题"></a>配置主题</h2><p>安装成功之后，我们可以通过vi ~/.zshrc，设置ZSH_THEME=”agnoster”对主题进行修改。<br>主题在线预览<a href="https://github.com/robbyrussell/oh-my-zsh/wiki/Themes" target="_blank" rel="noopener">https://github.com/robbyrussell/oh-my-zsh/wiki/Themes</a></p>
+<h2 id="注意，agnoster主题能否设置成功，还依赖于以下东西："><a href="#注意，agnoster主题能否设置成功，还依赖于以下东西：" class="headerlink" title="注意，agnoster主题能否设置成功，还依赖于以下东西："></a>注意，agnoster主题能否设置成功，还依赖于以下东西：</h2><ol>
+<li><a href="http://ethanschoonover.com/solarized" target="_blank" rel="noopener">Solarized Dark配色方案</a></li>
+</ol>
+<p>下载完成之后解压，在iTerm2的Preferences——Profiles——colors——Load Presets——Solarized Dark即可设置终端配色<br><img src="https://note.youdao.com/yws/public/resource/80719707d48b241ad1ae34ab7e29ff67/xmlnote/E46041C9B1D646C9A24B10173C9868D8/5293" alt="image"></p>
+<ol start="2">
+<li><a href="https://github.com/powerline/fonts" target="_blank" rel="noopener">特殊字体安装</a><br>将以下命令在你的终端中执行：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># clone</span><br><span class="line">git clone https://github.com/powerline/fonts.git --depth=1</span><br><span class="line"># install</span><br><span class="line">cd fonts</span><br><span class="line">./install.sh</span><br><span class="line"># clean-up a bit</span><br><span class="line">cd ..</span><br><span class="line">rm -rf fonts</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>下载完成之后解压，执行其中的install.sh文件，在iTerm2的Preferences——Profiles——Text中同时将Regular Font和Non—ASCII Font设置为Meslo LG M DZ Regular for Powerline即可<br><img src="https://note.youdao.com/yws/public/resource/80719707d48b241ad1ae34ab7e29ff67/xmlnote/DB05875C2B49454E9EB3AB93DBF4794E/5295" alt="image"></p>
+<ol start="3">
+<li><p>也支持背景图替换<br>打开路径:iterm2 -&gt; Preferences -&gt; Profiles -&gt; window -&gt; Background Image<br>选择一张自己喜欢的壁纸即可<br>可以通过Blending调节壁纸的透明度: 透明度为0的时候,背景变为纯色(黑色)</p>
+</li>
+<li><p>安装语法高亮插件<br>这是oh my zsh的一个插件，安装方式与theme大同小异：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~/.oh-my-zsh/custom/plugins/</span><br><span class="line">git clone https://github.com/zsh-users/zsh-syntax-highlighting.git</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>打开zshrc文件进行编辑</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi ~/.zshrc</span><br></pre></td></tr></table></figure>
+
+<p>找到plugins，此时plugins中应该已经有了git，我们需要把高亮插件也加上,请务必保证插件顺序，zsh-syntax-highlighting必须在最后一个<br>然后在文件的最后一行添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh</span><br></pre></td></tr></table></figure>
+
+<p>按一下esc调出vi命令，输入:wq保存并退出vi模式</p>
+<p>执行命令使刚才的修改生效：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.zshrc</span><br></pre></td></tr></table></figure>
+
+<h2 id="最终效果"><a href="#最终效果" class="headerlink" title="最终效果"></a>最终效果</h2><p><img src="https://note.youdao.com/yws/public/resource/80719707d48b241ad1ae34ab7e29ff67/xmlnote/3566337D36E749DCB38C6100460D0311/5321" alt="image"></p>
+<h2 id="番外篇"><a href="#番外篇" class="headerlink" title="番外篇"></a>番外篇</h2><p>利用cdto 小工具 在Finder中自定义工具栏，在终端中打开当前目录。<br><a href="https://github.com/jbtule/cdto" target="_blank" rel="noopener">cdto下载链接</a></p>
+<ol>
+<li>解压缩文件，找到当前符合的cdto app，使用了iterm选择iterm下的cdto.app，默认终端选择terminal下的cdto.app<br><img src="https://note.youdao.com/yws/public/resource/80719707d48b241ad1ae34ab7e29ff67/xmlnote/E37BF972597C4F2B8A84470A8DFD8C6D/5319" alt="image"></li>
+<li>将cdto.app 拖拽到Application中</li>
+<li>在Application中 找到cdto.app, 按住 Command 键的同时将项目拖到工具栏中直至看到绿色加号。<br><img src="https://note.youdao.com/yws/public/resource/80719707d48b241ad1ae34ab7e29ff67/xmlnote/67A4506410A2441E8D2960D78D0D2C9C/5337" alt="image"></li>
+<li>利用 Alfred 启动 配置  terminal 启动iterm <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">on alfred_script(q)</span><br><span class="line"> tell application &quot;System Events&quot;</span><br><span class="line">  get name of every process whose name is &quot;iTerm&quot;</span><br><span class="line">  tell application &quot;iTerm&quot;</span><br><span class="line">   set newWindow to (create window with default profile)</span><br><span class="line">   tell current session of newWindow</span><br><span class="line">    write text q</span><br><span class="line">   end tell</span><br><span class="line">  end tell</span><br><span class="line"> end tell</span><br><span class="line">end alfred_script</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+  </article>
+</div>
+
+
+    
+<div class="container disqus-container">
+  <div id="disqus_thread"></div>
+</div>
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://github.provenr.cn/2020/03/23/Tool/iterm + zsh 打造Mac个性终端/";
+    this.page.identifier = 1584995921;
+  };
+
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://blog-provenr-cn.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <div class="clearfix">
+    <a href="http://github.provenr.cn" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2019 Provenr</li>
+      <li><a href="http://github.provenr.cn">Home</a></li>
+      
+      <li><a href="https://provenr.github.io/">Github</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+    </div>
+    
+  </footer>
+</div>
+
+
+
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>
